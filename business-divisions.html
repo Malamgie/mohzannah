@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Divisions | MOH ZANNAH GROUP LIMITED</title>
+    <meta name="description" content="Explore the diverse business divisions of MOH ZANNAH GROUP LIMITED, delivering value across multiple sectors.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#030305',
+                            darker: '#010101',
+                            card: '#0a0a0e',
+                            gold: '#D4AF37',
+                            goldLight: '#F3E5AB',
+                            goldDark: '#997a00',
+                            blue: '#0033A0',
+                            green: '#00805A',
+                            textMuted: '#8a8a93'
+                        }
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                        'hero-glow': 'radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.15), transparent 50%)',
+                        'gold-gradient': 'linear-gradient(135deg, #F3E5AB 0%, #D4AF37 50%, #997a00 100%)',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delayed': 'float 6s ease-in-out 3s infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'spin-slow': 'spin 20s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .glass {
+                @apply bg-white/[0.03] backdrop-blur-xl border border-white/[0.08];
+            }
+            .glass-hover {
+                @apply hover:bg-white/[0.06] hover:border-brand-gold/40 hover:-translate-y-2 transition-all duration-500 ease-out hover:shadow-[0_15px_40px_-10px_rgba(212,175,55,0.1)];
+            }
+            .text-gradient {
+                @apply bg-clip-text text-transparent bg-gold-gradient;
+            }
+            .reveal {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #030305;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D4AF37;
+        }
+
+        body {
+            background-color: #030305;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .noise-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+        
+        /* Infographic Orbit Lines */
+        .orbit-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            z-index: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-gold selection:text-brand-dark">
+
+    <div class="noise-bg"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6 px-6 lg:px-12">
+        <div class="max-w-7xl mx-auto flex items-center justify-between glass rounded-full px-6 py-3">
+            <div class="flex items-center gap-3 cursor-pointer">
+                <!-- Logo -->
+                <div class="h-10 flex items-center">
+                    <img src="logo.png" alt="MOH ZANNAH GROUP LIMITED Logo" class="h-full object-contain">
+                </div>
+            </div>
+
+            <!-- Desktop Menu -->
+            <div class="hidden xl:flex items-center gap-6">
+                <a href="index.html" class="text-sm font-medium text-white/80 hover:text-brand-gold transition-colors">Home</a>
+                <a href="index.html#about" class="text-sm font-medium text-white/80 hover:text-brand-gold transition-colors">About</a>
+                <a href="business-divisions.html" class="text-sm font-medium text-brand-gold transition-colors">Business Divisions</a>
+                <a href="#partnership" class="text-sm font-medium text-white/80 hover:text-brand-gold transition-colors">Partnership</a>
+                <a href="#investments" class="text-sm font-medium text-white/80 hover:text-brand-gold transition-colors">Investments</a>
+                <a href="#news" class="text-sm font-medium text-white/80 hover:text-brand-gold transition-colors">News</a>
+                <a href="#careers" class="text-sm font-medium text-white/80 hover:text-brand-gold transition-colors">Careers</a>
+                <a href="#contact" class="text-sm font-medium text-white/80 hover:text-brand-gold transition-colors">Contact</a>
+            </div>
+
+            <!-- CTA -->
+            <div class="hidden lg:flex">
+                <a href="#consultation" class="group relative px-6 py-2.5 rounded-full bg-white/5 border border-white/10 hover:border-brand-gold/50 overflow-hidden transition-all duration-300">
+                    <div class="absolute inset-0 bg-brand-gold opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+                    <span class="relative text-sm font-semibold tracking-wide text-brand-gold">Request Consultation</span>
+                </a>
+            </div>
+
+            <!-- Mobile Toggle -->
+            <button id="mobile-menu-btn" class="xl:hidden text-white focus:outline-none">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="fixed inset-0 bg-brand-dark/95 backdrop-blur-xl z-40 flex flex-col items-center justify-center gap-6 opacity-0 pointer-events-none transition-all duration-500 overflow-y-auto py-10">
+            <button id="close-menu-btn" class="absolute top-8 right-8 text-white focus:outline-none">
+                <i class="fas fa-times text-3xl hover:text-brand-gold transition-colors"></i>
+            </button>
+            <a href="index.html" class="mobile-link text-2xl font-serif text-white hover:text-brand-gold">Home</a>
+            <a href="index.html#about" class="mobile-link text-2xl font-serif text-white hover:text-brand-gold">About</a>
+            <a href="business-divisions.html" class="mobile-link text-2xl font-serif text-brand-gold">Business Divisions</a>
+            <a href="#partnership" class="mobile-link text-2xl font-serif text-white hover:text-brand-gold">Partnership</a>
+            <a href="#investments" class="mobile-link text-2xl font-serif text-white hover:text-brand-gold">Investments</a>
+            <a href="#news" class="mobile-link text-2xl font-serif text-white hover:text-brand-gold">News</a>
+            <a href="#careers" class="mobile-link text-2xl font-serif text-white hover:text-brand-gold">Careers</a>
+            <a href="#contact" class="mobile-link text-2xl font-serif text-white hover:text-brand-gold">Contact</a>
+            <a href="#consultation" class="mt-4 px-8 py-3 rounded-full bg-brand-gold text-brand-dark font-semibold">Request Consultation</a>
+        </div>
+    </nav>
+
+    <!-- Premium Hero -->
+    <section class="relative pt-40 pb-20 lg:pt-52 lg:pb-32 overflow-hidden flex flex-col items-center text-center">
+        <!-- Background Elements -->
+        <div class="absolute inset-0 bg-hero-glow z-0"></div>
+        <div class="absolute top-1/4 -right-40 w-96 h-96 bg-brand-gold/10 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute bottom-1/4 -left-40 w-96 h-96 bg-brand-blue/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+        <!-- Floating Shapes -->
+        <div class="absolute top-32 left-[10%] w-24 h-24 border border-brand-gold/20 rounded-full animate-float opacity-50"></div>
+        <div class="absolute bottom-20 right-[15%] w-16 h-16 border border-brand-blue/20 rotate-45 animate-float-delayed opacity-50"></div>
+        <div class="absolute top-40 right-[20%] w-3 h-3 bg-brand-green/50 rounded-full animate-pulse-slow"></div>
+
+        <div class="container mx-auto px-6 relative z-10 max-w-4xl">
+            <div class="hero-anim inline-block mb-6 px-5 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm">
+                <span class="text-brand-gold text-xs font-bold tracking-widest uppercase">Our Expertise</span>
+            </div>
+            
+            <h1 class="hero-anim text-5xl md:text-7xl font-serif font-bold tracking-tight leading-[1.1] mb-8">
+                Business <span class="text-gradient">Divisions</span>
+            </h1>
+            
+            <p class="hero-anim text-lg md:text-xl text-brand-textMuted font-light leading-relaxed max-w-3xl mx-auto">
+                Delivering value across multiple sectors through professionalism, innovation and strategic partnerships. We operate a diversified multi-sector model engineered for sustainable growth.
+            </p>
+        </div>
+    </section>
+
+    <!-- Business Division Grid -->
+    <section class="py-20 relative z-10 bg-brand-darker border-t border-white/5">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                
+                <!-- Division 1: Real Estate -->
+                <div class="glass glass-hover rounded-3xl p-8 md:p-10 reveal group flex flex-col h-full relative overflow-hidden">
+                    <!-- Glow effect on hover -->
+                    <div class="absolute -inset-2 bg-gradient-to-r from-brand-gold/0 via-brand-gold/10 to-brand-gold/0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-xl"></div>
+                    
+                    <div class="relative z-10 flex flex-col h-full">
+                        <div class="flex items-center justify-between mb-8">
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#1a1a24] to-[#0d0d14] border border-white/10 flex items-center justify-center text-brand-gold text-2xl group-hover:scale-110 transition-transform duration-500 shadow-lg">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <span class="text-white/20 text-4xl font-serif font-bold italic group-hover:text-brand-gold/20 transition-colors duration-500">01</span>
+                        </div>
+                        
+                        <h3 class="text-2xl md:text-3xl font-serif font-bold mb-4">Real Estate & Property Mediation</h3>
+                        <p class="text-brand-textMuted text-sm md:text-base leading-relaxed mb-8 flex-grow">
+                            Comprehensive real estate solutions designed to connect property owners, buyers, investors, and developers through strategic transaction coordination.
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-10">
+                            <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">Property sourcing</span>
+                            <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">Property sales</span>
+                            <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">Investment advisory</span>
+                            <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">Property management</span>
+                            <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">Leasing</span>
+                        </div>
+                        
+                        <a href="real-estate.html" class="inline-flex items-center justify-center gap-2 w-full py-4 rounded-xl border border-white/10 bg-white/5 text-sm font-bold hover:bg-brand-gold hover:text-brand-dark hover:border-brand-gold transition-all duration-300">
+                            Explore Division <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Division 2: Vehicle Management -->
+                <div class="glass glass-hover rounded-3xl p-8 md:p-10 reveal group flex flex-col h-full relative overflow-hidden" style="transition-delay: 100ms;">
+                    <div class="absolute -inset-2 bg-gradient-to-r from-brand-blue/0 via-brand-blue/10 to-brand-blue/0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-xl"></div>
+                    
+                    <div class="relative z-10 flex flex-col h-full">
+                        <div class="flex items-center justify-between mb-8">
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#1a1a24] to-[#0d0d14] border border-white/10 flex items-center justify-center text-brand-blue text-2xl group-hover:scale-110 transition-transform duration-500 shadow-lg">
+                                <i class="fas fa-car-side"></i>
+                            </div>
+                            <span class="text-white/20 text-4xl font-serif font-bold italic group-hover:text-brand-blue/20 transition-colors duration-500">02</span>
+                        </div>
+                        
+                        <h3 class="text-2xl md:text-3xl font-serif font-bold mb-4">Vehicle Management & Dealership</h3>
+                        <p class="text-brand-textMuted text-sm md:text-base leading-relaxed mb-8 flex-grow">
+                            Premium automobile services encompassing acquisition, professional dealership operations, and strategic fleet management for corporate and private clients.
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-10">
+                            <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">Vehicle sourcing</span>
+                            <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">Fleet management</span>
+                            <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">Vehicle sales</span>
+                            <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">Automobile advisory</span>
+                            <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">Vehicle acquisition</span>
+                        </div>
+                        
+                        <a href="automobile.html" class="inline-flex items-center justify-center gap-2 w-full py-4 rounded-xl border border-white/10 bg-white/5 text-sm font-bold hover:bg-brand-blue hover:text-white hover:border-brand-blue transition-all duration-300">
+                            Explore Division <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Division 3: Cleaning -->
+                <div class="glass glass-hover rounded-3xl p-8 md:p-10 reveal group flex flex-col h-full relative overflow-hidden" style="transition-delay: 0ms;">
+                    <div class="absolute -inset-2 bg-gradient-to-r from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-xl"></div>
+                    
+                    <div class="relative z-10 flex flex-col h-full">
+                        <div class="flex items-center justify-between mb-8">
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#1a1a24] to-[#0d0d14] border border-white/10 flex items-center justify-center text-gray-300 text-2xl group-hover:scale-110 transition-transform duration-500 shadow-lg">
+                                <i class="fas fa-broom"></i>
+                            </div>
+                            <span class="text-white/20 text-4xl font-serif font-bold italic group-hover:text-gray-300/20 transition-colors duration-500">03</span>
+                        </div>
+                        
+                        <h3 class="text-2xl md:text-3xl font-serif font-bold mb-4">Professional Cleaning</h3>
+                        <p class="text-brand-textMuted text-sm md:text-base leading-relaxed mb-8 flex-grow">
+                            Industry-leading sanitation and facility maintenance services utilizing advanced techniques to ensure hygienic, spotless, and sustainable environments.
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-10">
+                            <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">Residential</span>
+                            <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">Commercial</span>
+                            <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">Industrial</span>
+                            <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">Facility management</span>
+                            <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">Post construction</span>
+                        </div>
+                        
+                        <a href="cleaning.html" class="inline-flex items-center justify-center gap-2 w-full py-4 rounded-xl border border-white/10 bg-white/5 text-sm font-bold hover:bg-gray-100 hover:text-brand-dark hover:border-gray-100 transition-all duration-300">
+                            Explore Division <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Division 4: Mineral Resources -->
+                <div class="glass glass-hover rounded-3xl p-8 md:p-10 reveal group flex flex-col h-full relative overflow-hidden" style="transition-delay: 100ms;">
+                    <div class="absolute -inset-2 bg-gradient-to-r from-brand-green/0 via-brand-green/10 to-brand-green/0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-xl"></div>
+                    
+                    <div class="relative z-10 flex flex-col h-full">
+                        <div class="flex items-center justify-between mb-8">
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#1a1a24] to-[#0d0d14] border border-white/10 flex items-center justify-center text-brand-green text-2xl group-hover:scale-110 transition-transform duration-500 shadow-lg">
+                                <i class="fas fa-gem"></i>
+                            </div>
+                            <span class="text-white/20 text-4xl font-serif font-bold italic group-hover:text-brand-green/20 transition-colors duration-500">04</span>
+                        </div>
+                        
+                        <h3 class="text-2xl md:text-3xl font-serif font-bold mb-4">Mineral Resources</h3>
+                        <p class="text-brand-textMuted text-sm md:text-base leading-relaxed mb-8 flex-grow">
+                            Legitimate opportunity facilitation, strategic management support, and business coordination within the extractive and mineral resource sectors.
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-10">
+                            <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">Opportunity facilitation</span>
+                            <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">Investor connections</span>
+                            <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">Business coordination</span>
+                            <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">Resource management</span>
+                            <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">Strategic partnerships</span>
+                        </div>
+                        
+                        <a href="minerals.html" class="inline-flex items-center justify-center gap-2 w-full py-4 rounded-xl border border-white/10 bg-white/5 text-sm font-bold hover:bg-brand-green hover:text-white hover:border-brand-green transition-all duration-300">
+                            Explore Division <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Division 5: Consultancy -->
+                <div class="glass glass-hover rounded-3xl p-8 md:p-10 reveal group flex flex-col h-full relative overflow-hidden" style="transition-delay: 0ms;">
+                    <div class="absolute -inset-2 bg-gradient-to-r from-purple-500/0 via-purple-500/10 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-xl"></div>
+                    
+                    <div class="relative z-10 flex flex-col h-full">
+                        <div class="flex items-center justify-between mb-8">
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#1a1a24] to-[#0d0d14] border border-white/10 flex items-center justify-center text-purple-400 text-2xl group-hover:scale-110 transition-transform duration-500 shadow-lg">
+                                <i class="fas fa-chart-pie"></i>
+                            </div>
+                            <span class="text-white/20 text-4xl font-serif font-bold italic group-hover:text-purple-400/20 transition-colors duration-500">05</span>
+                        </div>
+                        
+                        <h3 class="text-2xl md:text-3xl font-serif font-bold mb-4">Consultancy & Business Dev.</h3>
+                        <p class="text-brand-textMuted text-sm md:text-base leading-relaxed mb-8 flex-grow">
+                            Expert advisory services providing strategic direction, project development support, and operational blueprints for enterprise growth.
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-10">
+                            <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">Business strategy</span>
+                            <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">Corporate advisory</span>
+                            <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">Project development</span>
+                            <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">Investment support</span>
+                            <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">Networking</span>
+                        </div>
+                        
+                        <a href="consultancy.html" class="inline-flex items-center justify-center gap-2 w-full py-4 rounded-xl border border-white/10 bg-white/5 text-sm font-bold hover:bg-purple-600 hover:text-white hover:border-purple-600 transition-all duration-300">
+                            Explore Division <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Division 6: Agriculture -->
+                <div class="glass glass-hover rounded-3xl p-8 md:p-10 reveal group flex flex-col h-full relative overflow-hidden" style="transition-delay: 100ms;">
+                    <div class="absolute -inset-2 bg-gradient-to-r from-yellow-500/0 via-yellow-500/10 to-yellow-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-xl"></div>
+                    
+                    <div class="relative z-10 flex flex-col h-full">
+                        <div class="flex items-center justify-between mb-8">
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#1a1a24] to-[#0d0d14] border border-white/10 flex items-center justify-center text-yellow-500 text-2xl group-hover:scale-110 transition-transform duration-500 shadow-lg">
+                                <i class="fas fa-seedling"></i>
+                            </div>
+                            <span class="text-white/20 text-4xl font-serif font-bold italic group-hover:text-yellow-500/20 transition-colors duration-500">06</span>
+                        </div>
+                        
+                        <h3 class="text-2xl md:text-3xl font-serif font-bold mb-4">Agriculture & Animal Prod.</h3>
+                        <p class="text-brand-textMuted text-sm md:text-base leading-relaxed mb-8 flex-grow">
+                            Sustainable agribusiness operations encompassing modern farming practices, livestock management, and agricultural value-chain enhancement.
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-10">
+                            <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">Crop farming</span>
+                            <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">Livestock</span>
+                            <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">Poultry</span>
+                            <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">Agribusiness</span>
+                            <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">Food production</span>
+                        </div>
+                        
+                        <a href="agriculture.html" class="inline-flex items-center justify-center gap-2 w-full py-4 rounded-xl border border-white/10 bg-white/5 text-sm font-bold hover:bg-yellow-500 hover:text-brand-dark hover:border-yellow-500 transition-all duration-300">
+                            Explore Division <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Division 7: Packaged Water -->
+                <div class="glass glass-hover rounded-3xl p-8 md:p-10 reveal group flex flex-col h-full relative overflow-hidden" style="transition-delay: 0ms;">
+                    <div class="absolute -inset-2 bg-gradient-to-r from-cyan-400/0 via-cyan-400/10 to-cyan-400/0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-xl"></div>
+                    
+                    <div class="relative z-10 flex flex-col h-full">
+                        <div class="flex items-center justify-between mb-8">
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#1a1a24] to-[#0d0d14] border border-white/10 flex items-center justify-center text-cyan-400 text-2xl group-hover:scale-110 transition-transform duration-500 shadow-lg">
+                                <i class="fas fa-tint"></i>
+                            </div>
+                            <span class="text-white/20 text-4xl font-serif font-bold italic group-hover:text-cyan-400/20 transition-colors duration-500">07</span>
+                        </div>
+                        
+                        <h3 class="text-2xl md:text-3xl font-serif font-bold mb-4">Packaged Drinking Water</h3>
+                        <p class="text-brand-textMuted text-sm md:text-base leading-relaxed mb-8 flex-grow">
+                            Production and distribution of premium, purified drinking water, adhering strictly to the highest standards of hygiene and quality assurance.
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-10">
+                            <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">Production</span>
+                            <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">Distribution</span>
+                            <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">Quality assurance</span>
+                            <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">Wholesale</span>
+                            <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">Retail</span>
+                        </div>
+                        
+                        <a href="water.html" class="inline-flex items-center justify-center gap-2 w-full py-4 rounded-xl border border-white/10 bg-white/5 text-sm font-bold hover:bg-cyan-500 hover:text-brand-dark hover:border-cyan-500 transition-all duration-300">
+                            Explore Division <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Division 8: Logistics -->
+                <div class="glass glass-hover rounded-3xl p-8 md:p-10 reveal group flex flex-col h-full relative overflow-hidden" style="transition-delay: 100ms;">
+                    <div class="absolute -inset-2 bg-gradient-to-r from-orange-500/0 via-orange-500/10 to-orange-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-xl"></div>
+                    
+                    <div class="relative z-10 flex flex-col h-full">
+                        <div class="flex items-center justify-between mb-8">
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#1a1a24] to-[#0d0d14] border border-white/10 flex items-center justify-center text-orange-500 text-2xl group-hover:scale-110 transition-transform duration-500 shadow-lg">
+                                <i class="fas fa-globe-africa"></i>
+                            </div>
+                            <span class="text-white/20 text-4xl font-serif font-bold italic group-hover:text-orange-500/20 transition-colors duration-500">08</span>
+                        </div>
+                        
+                        <h3 class="text-2xl md:text-3xl font-serif font-bold mb-4">Logistics, Import & Export</h3>
+                        <p class="text-brand-textMuted text-sm md:text-base leading-relaxed mb-8 flex-grow">
+                            End-to-end supply chain solutions facilitating seamless domestic delivery, international trade, and coordinated global shipments.
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-10">
+                            <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">Transportation</span>
+                            <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">Supply chain</span>
+                            <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">Import</span>
+                            <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">Export</span>
+                            <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/80">International trade</span>
+                        </div>
+                        
+                        <a href="logistics.html" class="inline-flex items-center justify-center gap-2 w-full py-4 rounded-xl border border-white/10 bg-white/5 text-sm font-bold hover:bg-orange-500 hover:text-white hover:border-orange-500 transition-all duration-300">
+                            Explore Division <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Section: Our Integrated Business Model -->
+    <section class="py-24 relative z-10 overflow-hidden">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="text-center mb-16 reveal">
+                <span class="text-brand-gold text-xs font-bold tracking-widest uppercase mb-4 block">Ecosystem</span>
+                <h2 class="text-3xl md:text-5xl font-serif font-bold mb-4">Our Integrated Business Model</h2>
+                <p class="text-brand-textMuted max-w-2xl mx-auto">A unified network of divisions working synergistically to create robust value chains and comprehensive solutions.</p>
+            </div>
+
+            <!-- Infographic Diagram -->
+            <div class="relative w-full max-w-4xl mx-auto min-h-[600px] lg:min-h-[800px] flex items-center justify-center reveal">
+                
+                <!-- Central Hub -->
+                <div class="absolute z-20 w-40 h-40 md:w-56 md:h-56 rounded-full glass bg-[#0a0a0e]/90 flex flex-col items-center justify-center p-4 text-center shadow-[0_0_50px_rgba(212,175,55,0.15)] animate-pulse-slow border-brand-gold/30">
+                    <img src="logo.png" alt="Icon" class="h-8 md:h-12 mb-3 object-contain opacity-80">
+                    <span class="text-xs md:text-sm font-bold text-white tracking-widest leading-tight">MOH ZANNAH<br>GROUP LIMITED</span>
+                </div>
+
+                <!-- Orbit Rings -->
+                <div class="orbit-circle w-[280px] h-[280px] md:w-[450px] md:h-[450px]"></div>
+                <div class="orbit-circle w-[380px] h-[380px] md:w-[650px] md:h-[650px] border-dashed border-white/5 animate-spin-slow"></div>
+
+                <!-- Satellites (Desktop absolute positioning, responsive via flex on mobile) -->
+                <!-- We use a grid for mobile and absolute positioning for desktop to ensure the "hub and spoke" look -->
+                <div class="hidden lg:block absolute inset-0 z-10">
+                    <!-- Top -->
+                    <div class="absolute top-[5%] left-1/2 -translate-x-1/2 flex flex-col items-center node-anim">
+                        <div class="w-12 h-12 rounded-full glass bg-white/5 flex items-center justify-center text-brand-gold mb-2"><i class="fas fa-building"></i></div>
+                        <span class="text-xs font-bold text-white/80 whitespace-nowrap">Real Estate</span>
+                    </div>
+                    <!-- Top Right -->
+                    <div class="absolute top-[20%] right-[15%] flex flex-col items-center node-anim" style="transition-delay: 100ms;">
+                        <div class="w-12 h-12 rounded-full glass bg-white/5 flex items-center justify-center text-brand-blue mb-2"><i class="fas fa-car-side"></i></div>
+                        <span class="text-xs font-bold text-white/80 whitespace-nowrap">Vehicle Mgt.</span>
+                    </div>
+                    <!-- Right -->
+                    <div class="absolute top-1/2 right-[5%] -translate-y-1/2 flex flex-col items-center node-anim" style="transition-delay: 200ms;">
+                        <div class="w-12 h-12 rounded-full glass bg-white/5 flex items-center justify-center text-gray-300 mb-2"><i class="fas fa-broom"></i></div>
+                        <span class="text-xs font-bold text-white/80 whitespace-nowrap">Cleaning</span>
+                    </div>
+                    <!-- Bottom Right -->
+                    <div class="absolute bottom-[20%] right-[15%] flex flex-col items-center node-anim" style="transition-delay: 300ms;">
+                        <div class="w-12 h-12 rounded-full glass bg-white/5 flex items-center justify-center text-brand-green mb-2"><i class="fas fa-gem"></i></div>
+                        <span class="text-xs font-bold text-white/80 whitespace-nowrap">Minerals</span>
+                    </div>
+                    <!-- Bottom -->
+                    <div class="absolute bottom-[5%] left-1/2 -translate-x-1/2 flex flex-col items-center node-anim" style="transition-delay: 400ms;">
+                        <div class="w-12 h-12 rounded-full glass bg-white/5 flex items-center justify-center text-purple-400 mb-2"><i class="fas fa-chart-pie"></i></div>
+                        <span class="text-xs font-bold text-white/80 whitespace-nowrap">Consultancy</span>
+                    </div>
+                    <!-- Bottom Left -->
+                    <div class="absolute bottom-[20%] left-[15%] flex flex-col items-center node-anim" style="transition-delay: 500ms;">
+                        <div class="w-12 h-12 rounded-full glass bg-white/5 flex items-center justify-center text-yellow-500 mb-2"><i class="fas fa-seedling"></i></div>
+                        <span class="text-xs font-bold text-white/80 whitespace-nowrap">Agriculture</span>
+                    </div>
+                    <!-- Left -->
+                    <div class="absolute top-1/2 left-[5%] -translate-y-1/2 flex flex-col items-center node-anim" style="transition-delay: 600ms;">
+                        <div class="w-12 h-12 rounded-full glass bg-white/5 flex items-center justify-center text-cyan-400 mb-2"><i class="fas fa-tint"></i></div>
+                        <span class="text-xs font-bold text-white/80 whitespace-nowrap">Water</span>
+                    </div>
+                    <!-- Top Left -->
+                    <div class="absolute top-[20%] left-[15%] flex flex-col items-center node-anim" style="transition-delay: 700ms;">
+                        <div class="w-12 h-12 rounded-full glass bg-white/5 flex items-center justify-center text-orange-500 mb-2"><i class="fas fa-globe-africa"></i></div>
+                        <span class="text-xs font-bold text-white/80 whitespace-nowrap">Logistics</span>
+                    </div>
+                </div>
+
+                <!-- Mobile List Fallback for Infographic elements -->
+                <div class="lg:hidden absolute inset-0 z-10 pointer-events-none">
+                    <!-- Invisible wrapper to maintain height on mobile -->
+                </div>
+            </div>
+            
+            <!-- Mobile visual nodes (Shown only on smaller screens for layout flow) -->
+            <div class="lg:hidden grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8">
+                 <div class="glass p-4 rounded-2xl flex flex-col items-center text-center">
+                    <i class="fas fa-building text-brand-gold text-xl mb-2"></i>
+                    <span class="text-[10px] font-bold text-white/80 uppercase">Real Estate</span>
+                </div>
+                 <div class="glass p-4 rounded-2xl flex flex-col items-center text-center">
+                    <i class="fas fa-car-side text-brand-blue text-xl mb-2"></i>
+                    <span class="text-[10px] font-bold text-white/80 uppercase">Vehicle Mgt.</span>
+                </div>
+                <div class="glass p-4 rounded-2xl flex flex-col items-center text-center">
+                    <i class="fas fa-broom text-gray-300 text-xl mb-2"></i>
+                    <span class="text-[10px] font-bold text-white/80 uppercase">Cleaning</span>
+                </div>
+                <div class="glass p-4 rounded-2xl flex flex-col items-center text-center">
+                    <i class="fas fa-gem text-brand-green text-xl mb-2"></i>
+                    <span class="text-[10px] font-bold text-white/80 uppercase">Minerals</span>
+                </div>
+                <div class="glass p-4 rounded-2xl flex flex-col items-center text-center">
+                    <i class="fas fa-chart-pie text-purple-400 text-xl mb-2"></i>
+                    <span class="text-[10px] font-bold text-white/80 uppercase">Consultancy</span>
+                </div>
+                <div class="glass p-4 rounded-2xl flex flex-col items-center text-center">
+                    <i class="fas fa-seedling text-yellow-500 text-xl mb-2"></i>
+                    <span class="text-[10px] font-bold text-white/80 uppercase">Agriculture</span>
+                </div>
+                <div class="glass p-4 rounded-2xl flex flex-col items-center text-center">
+                    <i class="fas fa-tint text-cyan-400 text-xl mb-2"></i>
+                    <span class="text-[10px] font-bold text-white/80 uppercase">Water</span>
+                </div>
+                <div class="glass p-4 rounded-2xl flex flex-col items-center text-center">
+                    <i class="fas fa-globe-africa text-orange-500 text-xl mb-2"></i>
+                    <span class="text-[10px] font-bold text-white/80 uppercase">Logistics</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advantages Section -->
+    <section class="py-24 relative z-10 bg-brand-darker border-y border-white/5">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal">
+                <div class="max-w-2xl">
+                    <h2 class="text-3xl md:text-5xl font-serif font-bold mb-4">Why Our Diversified <br/><span class="text-brand-gold">Structure Works</span></h2>
+                </div>
+                <div class="mt-4 md:mt-0">
+                    <p class="text-brand-textMuted text-sm max-w-sm">A calculated approach to enterprise architecture that guarantees stability and premium service delivery.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Advantage 1 -->
+                <div class="glass p-8 rounded-3xl reveal group hover:-translate-y-2 transition-transform duration-300">
+                    <div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white mb-6">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3 group-hover:text-brand-gold transition-colors">Reduced Risk</h4>
+                    <p class="text-brand-textMuted text-sm leading-relaxed">Diversification across varied sectors ensures operational resilience and financial stability regardless of isolated market fluctuations.</p>
+                </div>
+
+                <!-- Advantage 2 -->
+                <div class="glass p-8 rounded-3xl reveal group hover:-translate-y-2 transition-transform duration-300" style="transition-delay: 50ms;">
+                    <div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white mb-6">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3 group-hover:text-brand-gold transition-colors">Cross-industry Expertise</h4>
+                    <p class="text-brand-textMuted text-sm leading-relaxed">Knowledge and insights gained in one sector naturally elevate our strategic approach and problem-solving capabilities in others.</p>
+                </div>
+
+                <!-- Advantage 3 -->
+                <div class="glass p-8 rounded-3xl reveal group hover:-translate-y-2 transition-transform duration-300" style="transition-delay: 100ms;">
+                    <div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white mb-6">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3 group-hover:text-brand-gold transition-colors">Shared Standards</h4>
+                    <p class="text-brand-textMuted text-sm leading-relaxed">A unified corporate culture ensures that our commitment to professionalism and excellence remains consistent across every division.</p>
+                </div>
+
+                <!-- Advantage 4 -->
+                <div class="glass p-8 rounded-3xl reveal group hover:-translate-y-2 transition-transform duration-300" style="transition-delay: 150ms;">
+                    <div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white mb-6">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3 group-hover:text-brand-gold transition-colors">Innovation</h4>
+                    <p class="text-brand-textMuted text-sm leading-relaxed">Operating at multiple intersections of the economy allows us to identify unique opportunities and pioneer unconventional solutions.</p>
+                </div>
+
+                <!-- Advantage 5 -->
+                <div class="glass p-8 rounded-3xl reveal group hover:-translate-y-2 transition-transform duration-300" style="transition-delay: 200ms;">
+                    <div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white mb-6">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3 group-hover:text-brand-gold transition-colors">Scalability</h4>
+                    <p class="text-brand-textMuted text-sm leading-relaxed">Our centralized management structure allows us to deploy resources efficiently and scale operations rapidly when opportunities arise.</p>
+                </div>
+
+                <!-- Advantage 6 -->
+                <div class="glass p-8 rounded-3xl reveal group hover:-translate-y-2 transition-transform duration-300" style="transition-delay: 250ms;">
+                    <div class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white mb-6">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3 group-hover:text-brand-gold transition-colors">Sustainability</h4>
+                    <p class="text-brand-textMuted text-sm leading-relaxed">By creating complementary business units, we establish a self-sustaining ecosystem that generates enduring value for all stakeholders.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Process Timeline -->
+    <section class="py-24 relative z-10">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <div class="text-center mb-20 reveal">
+                <span class="text-brand-gold text-xs font-bold tracking-widest uppercase mb-4 block">The Workflow</span>
+                <h2 class="text-3xl md:text-5xl font-serif font-bold">Business Process</h2>
+            </div>
+
+            <div class="relative wrap overflow-hidden p-4 lg:p-0">
+                <!-- Vertical Line -->
+                <div class="absolute h-full w-[2px] bg-gradient-to-b from-brand-gold via-white/10 to-brand-gold left-8 lg:left-1/2 lg:-translate-x-1/2 rounded-full process-line origin-top transform scale-y-0"></div>
+                
+                <div class="space-y-12 relative z-10">
+                    
+                    <!-- Step 1: Client -->
+                    <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between w-full reveal pl-16 lg:pl-0">
+                        <div class="hidden lg:block w-5/12"></div>
+                        <div class="absolute left-8 lg:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-brand-dark border-[4px] border-brand-gold z-20 shadow-[0_0_15px_rgba(212,175,55,0.5)]"></div>
+                        <div class="w-full lg:w-5/12 glass p-6 rounded-2xl">
+                            <h4 class="text-lg font-bold text-white mb-2 flex items-center gap-3">
+                                <i class="fas fa-user-tie text-brand-gold"></i> Client
+                            </h4>
+                            <p class="text-sm text-brand-textMuted">Initiation of contact and expression of specific business requirements or investment interests.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Consultation -->
+                    <div class="flex flex-col lg:flex-row-reverse items-start lg:items-center justify-between w-full reveal pl-16 lg:pl-0">
+                        <div class="hidden lg:block w-5/12"></div>
+                        <div class="absolute left-8 lg:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-brand-dark border-[4px] border-white/40 z-20"></div>
+                        <div class="w-full lg:w-5/12 glass p-6 rounded-2xl text-left lg:text-right">
+                            <h4 class="text-lg font-bold text-white mb-2 flex items-center lg:justify-end gap-3 lg:flex-row-reverse">
+                                <i class="fas fa-comments text-brand-blue"></i> Consultation
+                            </h4>
+                            <p class="text-sm text-brand-textMuted">In-depth discussion to understand objectives, evaluate feasibility, and align expectations.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Planning -->
+                    <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between w-full reveal pl-16 lg:pl-0">
+                        <div class="hidden lg:block w-5/12"></div>
+                        <div class="absolute left-8 lg:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-brand-dark border-[4px] border-white/40 z-20"></div>
+                        <div class="w-full lg:w-5/12 glass p-6 rounded-2xl">
+                            <h4 class="text-lg font-bold text-white mb-2 flex items-center gap-3">
+                                <i class="fas fa-project-diagram text-brand-green"></i> Planning
+                            </h4>
+                            <p class="text-sm text-brand-textMuted">Strategic blueprinting, resource allocation, and development of a professional execution roadmap.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Execution -->
+                    <div class="flex flex-col lg:flex-row-reverse items-start lg:items-center justify-between w-full reveal pl-16 lg:pl-0">
+                        <div class="hidden lg:block w-5/12"></div>
+                        <div class="absolute left-8 lg:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-brand-dark border-[4px] border-white/40 z-20"></div>
+                        <div class="w-full lg:w-5/12 glass p-6 rounded-2xl text-left lg:text-right">
+                            <h4 class="text-lg font-bold text-white mb-2 flex items-center lg:justify-end gap-3 lg:flex-row-reverse">
+                                <i class="fas fa-cogs text-purple-400"></i> Execution
+                            </h4>
+                            <p class="text-sm text-brand-textMuted">Diligent implementation of agreed strategies utilizing our specialized division networks.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 5: Delivery -->
+                    <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between w-full reveal pl-16 lg:pl-0">
+                        <div class="hidden lg:block w-5/12"></div>
+                        <div class="absolute left-8 lg:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-brand-dark border-[4px] border-white/40 z-20"></div>
+                        <div class="w-full lg:w-5/12 glass p-6 rounded-2xl">
+                            <h4 class="text-lg font-bold text-white mb-2 flex items-center gap-3">
+                                <i class="fas fa-check-circle text-cyan-400"></i> Delivery
+                            </h4>
+                            <p class="text-sm text-brand-textMuted">Final handover of professional solutions, products, or finalized transaction documentation.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 6: Long-term Partnership -->
+                    <div class="flex flex-col lg:flex-row-reverse items-start lg:items-center justify-between w-full reveal pl-16 lg:pl-0">
+                        <div class="hidden lg:block w-5/12"></div>
+                        <div class="absolute left-8 lg:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-brand-dark border-[4px] border-brand-gold z-20 shadow-[0_0_15px_rgba(212,175,55,0.5)]"></div>
+                        <div class="w-full lg:w-5/12 glass p-6 rounded-2xl text-left lg:text-right border-brand-gold/30 bg-brand-gold/5">
+                            <h4 class="text-lg font-bold text-brand-gold mb-2 flex items-center lg:justify-end gap-3 lg:flex-row-reverse">
+                                <i class="fas fa-handshake text-brand-gold"></i> Long-term Partnership
+                            </h4>
+                            <p class="text-sm text-white/90">Ongoing support, value creation, and cultivation of a lasting mutually beneficial relationship.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call To Action -->
+    <section id="consultation" class="py-24 relative z-10 bg-brand-darker border-t border-white/5">
+        <div class="container mx-auto px-6 max-w-5xl">
+            <div class="glass rounded-[3rem] p-10 md:p-20 text-center relative overflow-hidden group border-brand-gold/20">
+                <div class="absolute inset-0 bg-gradient-to-b from-brand-gold/5 to-transparent z-0"></div>
+                
+                <div class="relative z-10 reveal">
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold mb-6">Need the Right <span class="text-brand-gold">Business Solution?</span></h2>
+                    <p class="text-brand-textMuted max-w-2xl mx-auto mb-10 text-lg">
+                        Connect with our experts across any of our diverse business divisions to discuss how we can create value for your enterprise.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <a href="mailto:mohzannahgroup@gmail.com" class="w-full sm:w-auto px-8 py-4 rounded-full bg-brand-gold text-brand-dark font-bold hover:shadow-[0_0_30px_rgba(212,175,55,0.3)] hover:scale-105 transition-all duration-300">
+                            Request Consultation
+                        </a>
+                        <a href="#partnership" class="w-full sm:w-auto px-8 py-4 rounded-full glass glass-hover text-white font-semibold flex items-center justify-center gap-2 group">
+                            Become A Partner <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-darker border-t border-white/5 pt-20 pb-10 relative z-10">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                
+                <!-- Brand Info -->
+                <div class="lg:col-span-1">
+                    <img src="logo.png" alt="MOH ZANNAH Logo" class="h-12 object-contain mb-6">
+                    <p class="text-sm text-brand-textMuted mb-6 leading-relaxed">
+                        A BRIDGE TO YOUR SATISFACTION.<br>
+                        One Group. Multiple Sectors. Shared Standards. Lasting Value.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-brand-gold hover:text-brand-dark transition-colors"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-brand-gold hover:text-brand-dark transition-colors"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-brand-gold hover:text-brand-dark transition-colors"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-white font-bold mb-6">Company</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html#about" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">Corporate Identity</a></li>
+                        <li><a href="index.html#philosophy" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">Operating Philosophy</a></li>
+                        <li><a href="#" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">Leadership</a></li>
+                        <li><a href="#" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">Corporate Responsibility</a></li>
+                    </ul>
+                </div>
+
+                <!-- Divisions -->
+                <div>
+                    <h4 class="text-white font-bold mb-6">Key Divisions</h4>
+                    <ul class="space-y-3">
+                        <li><a href="real-estate.html" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">Real Estate & Property</a></li>
+                        <li><a href="automobile.html" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">Vehicle Management</a></li>
+                        <li><a href="minerals.html" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">Mineral Resources</a></li>
+                        <li><a href="consultancy.html" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">Consultancy & Dev</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="text-white font-bold mb-6">Headquarters</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-map-marker-alt text-brand-gold mt-1"></i>
+                            <span class="text-sm text-brand-textMuted leading-relaxed">HD Plaza, Near Bauchi Club Roundabout, Old GRA, Bauchi, Bauchi State, Nigeria</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-envelope text-brand-gold"></i>
+                            <a href="mailto:mohzannahgroup@gmail.com" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">mohzannahgroup@gmail.com</a>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-phone-alt text-brand-gold mt-1"></i>
+                            <div class="flex flex-col gap-1">
+                                <a href="tel:+2348067151369" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">+234 806 715 1369</a>
+                                <a href="tel:+2348087518737" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">+234 808 751 8737</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-xs text-brand-textMuted">&copy; <span id="year"></span> MOH ZANNAH GROUP LIMITED. All Rights Reserved.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="text-xs text-brand-textMuted hover:text-brand-gold">Privacy Policy</a>
+                    <a href="#" class="text-xs text-brand-textMuted hover:text-brand-gold">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <script>
+        // Set current year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const closeMenuBtn = document.getElementById('close-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        function toggleMenu() {
+            if (mobileMenu.classList.contains('opacity-0')) {
+                mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
+                document.body.style.overflow = 'hidden';
+            } else {
+                mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMenu);
+        closeMenuBtn.addEventListener('click', toggleMenu);
+        mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-4');
+                navbar.classList.remove('py-6');
+                navbar.querySelector('.max-w-7xl').classList.add('bg-brand-dark/80', 'border-white/10');
+                navbar.querySelector('.max-w-7xl').classList.remove('bg-white/[0.03]');
+            } else {
+                navbar.classList.add('py-6');
+                navbar.classList.remove('py-4');
+                navbar.querySelector('.max-w-7xl').classList.add('bg-white/[0.03]');
+                navbar.querySelector('.max-w-7xl').classList.remove('bg-brand-dark/80', 'border-white/10');
+            }
+        });
+
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero Animations
+        const tl = gsap.timeline();
+        tl.from(".hero-anim", {
+            y: 30,
+            opacity: 0,
+            duration: 1,
+            stagger: 0.15,
+            ease: "power3.out",
+            delay: 0.2
+        });
+
+        // Scroll Reveals for general elements
+        gsap.utils.toArray('.reveal').forEach(function(elem) {
+            ScrollTrigger.create({
+                trigger: elem,
+                start: "top 85%",
+                onEnter: function() { 
+                    gsap.to(elem, {
+                        y: 0, 
+                        opacity: 1, 
+                        duration: 1, 
+                        ease: "power3.out"
+                    }) 
+                },
+                once: true
+            });
+        });
+
+        // Timeline Line Animation
+        ScrollTrigger.create({
+            trigger: ".process-line",
+            start: "top 70%",
+            end: "bottom 30%",
+            onEnter: function() {
+                gsap.to(".process-line", {
+                    scaleY: 1,
+                    duration: 2.5,
+                    ease: "power2.inOut"
+                });
+            },
+            once: true
+        });
+
+        // Infographic Nodes Animation
+        ScrollTrigger.create({
+            trigger: ".orbit-circle",
+            start: "top 80%",
+            onEnter: function() {
+                gsap.fromTo(".node-anim", 
+                    { scale: 0, opacity: 0 },
+                    { scale: 1, opacity: 1, duration: 0.6, stagger: 0.1, ease: "back.out(1.7)" }
+                );
+            },
+            once: true
+        });
+    </script>
+</body>
+</html>
+
