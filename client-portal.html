@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Portal | MOH ZANNAH GROUP</title>
+    <meta name="description" content="Premium client workspace for MOH ZANNAH GROUP LIMITED.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#030305',
+                            darker: '#010101',
+                            card: '#0a0a0e',
+                            gold: '#D4AF37',
+                            goldLight: '#F3E5AB',
+                            goldDark: '#997a00',
+                            blue: '#0033A0',
+                            green: '#00805A',
+                            textMuted: '#8a8a93',
+                            border: 'rgba(255,255,255,0.08)'
+                        }
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                        'hero-glow': 'radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.15), transparent 60%)',
+                        'gold-gradient': 'linear-gradient(135deg, #F3E5AB 0%, #D4AF37 50%, #997a00 100%)',
+                        'blue-gradient': 'linear-gradient(135deg, #4da6ff 0%, #0033A0 50%, #001a4d 100%)',
+                        'mesh': 'radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .glass {
+                @apply bg-white/[0.03] backdrop-blur-xl border border-brand-border;
+            }
+            .glass-panel {
+                @apply bg-[#0a0a0e]/80 backdrop-blur-2xl border border-brand-border;
+            }
+            .glass-hover {
+                @apply hover:bg-white/[0.06] hover:border-brand-gold/40 hover:-translate-y-1 transition-all duration-300 ease-out hover:shadow-[0_10px_30px_-10px_rgba(212,175,55,0.15)];
+            }
+            .text-gradient {
+                @apply bg-clip-text text-transparent bg-gold-gradient;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #030305;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D4AF37;
+        }
+
+        body {
+            background-color: #030305;
+            color: #ffffff;
+            overflow: hidden; /* App-like feel */
+        }
+
+        .noise-bg {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Form Inputs */
+        input[type="text"], input[type="email"], input[type="password"], select, textarea {
+            @apply w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold transition-colors duration-300;
+        }
+        
+        .input-float {
+            position: relative;
+        }
+        .input-float input, .input-float textarea {
+            @apply pt-6 pb-2;
+        }
+        .floating-label {
+            @apply absolute left-4 top-4 text-brand-textMuted text-sm transition-all duration-300 pointer-events-none;
+        }
+        .input-float input:focus ~ .floating-label,
+        .input-float input:not(:placeholder-shown) ~ .floating-label,
+        .input-float textarea:focus ~ .floating-label,
+        .input-float textarea:not(:placeholder-shown) ~ .floating-label {
+            @apply text-xs top-2 text-brand-gold;
+        }
+
+        /* Nav Link Active State */
+        .nav-link.active {
+            @apply bg-brand-gold/10 text-brand-gold border-r-2 border-brand-gold;
+        }
+        .nav-link.active i {
+            @apply text-brand-gold;
+        }
+
+        /* Status Badges */
+        .status-active { @apply bg-brand-green/20 text-brand-green border border-brand-green/30; }
+        .status-pending { @apply bg-orange-500/20 text-orange-400 border border-orange-500/30; }
+        .status-completed { @apply bg-brand-blue/20 text-blue-400 border border-brand-blue/30; }
+
+        /* Loader */
+        .loader {
+            border: 3px solid rgba(212, 175, 55, 0.2);
+            border-left-color: #D4AF37;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        
+        /* Layout specific overrides */
+        #app-layout {
+            height: 100vh;
+            width: 100vw;
+        }
+        .main-scroll {
+            height: calc(100vh - 80px);
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-gold selection:text-brand-dark">
+
+    <div class="noise-bg"></div>
+    
+    <!-- Background Gradients -->
+    <div class="fixed inset-0 pointer-events-none z-0">
+        <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-brand-blue/10 rounded-full blur-[120px]"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-brand-gold/10 rounded-full blur-[120px]"></div>
+        <div class="absolute inset-0 bg-mesh opacity-20" style="background-size: 30px 30px;"></div>
+    </div>
+
+    <!-- ================= LOGIN SCREEN ================= -->
+    <div id="login-screen" class="fixed inset-0 z-50 flex items-center justify-center bg-brand-dark/80 backdrop-blur-md transition-opacity duration-700">
+        <div class="glass p-10 md:p-12 rounded-[2rem] w-[90%] max-w-md relative overflow-hidden shadow-[0_0_50px_rgba(212,175,55,0.1)]">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-brand-gold/10 rounded-full blur-3xl"></div>
+            
+            <div class="text-center mb-10 relative z-10">
+                <img src="logo.png" alt="MOH ZANNAH Logo" class="h-12 object-contain mx-auto mb-6">
+                <h1 class="text-2xl font-serif font-bold text-white mb-2">Client Portal</h1>
+                <p class="text-sm text-brand-textMuted">Sign in to your corporate workspace.</p>
+            </div>
+
+            <form id="login-form" class="space-y-5 relative z-10">
+                <div class="input-float">
+                    <input type="email" id="login-email" class="peer placeholder-transparent" placeholder="Email" value="client@example.com" required />
+                    <label for="login-email" class="floating-label peer-placeholder-shown:top-4 peer-placeholder-shown:text-base">Corporate Email</label>
+                </div>
+                
+                <div class="input-float">
+                    <input type="password" id="login-password" class="peer placeholder-transparent" placeholder="Password" value="password123" required />
+                    <label for="login-password" class="floating-label peer-placeholder-shown:top-4 peer-placeholder-shown:text-base">Password</label>
+                </div>
+
+                <div class="flex items-center justify-between text-sm">
+                    <label class="flex items-center gap-2 cursor-pointer text-brand-textMuted hover:text-white transition-colors">
+                        <input type="checkbox" class="rounded border-white/20 bg-white/5 text-brand-gold focus:ring-brand-gold" checked>
+                        <span>Remember me</span>
+                    </label>
+                    <a href="#" class="text-brand-gold hover:text-white transition-colors">Forgot Password?</a>
+                </div>
+
+                <button type="submit" id="login-btn" class="w-full py-3.5 mt-4 rounded-xl bg-brand-gold text-brand-dark font-bold hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-all duration-300 flex justify-center items-center gap-2">
+                    <span>Sign In</span>
+                    <div id="login-loader" class="loader hidden border-brand-dark border-left-transparent"></div>
+                </button>
+                
+                <button type="button" id="guest-btn" class="w-full py-3.5 rounded-xl glass text-white font-semibold hover:border-brand-gold/50 transition-all duration-300">
+                    Continue as Guest
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ================= APP LAYOUT ================= -->
+    <div id="app-layout" class="relative z-10 flex opacity-0 pointer-events-none transition-opacity duration-700">
+        
+        <!-- LEFT SIDEBAR -->
+        <aside id="sidebar" class="w-64 h-full glass-panel flex-shrink-0 flex flex-col transition-all duration-300 transform -translate-x-full md:translate-x-0 fixed md:relative z-40">
+            <div class="h-20 flex items-center px-6 border-b border-white/5">
+                <img src="logo.png" alt="Logo" class="h-8 object-contain">
+            </div>
+            
+            <div class="flex-1 overflow-y-auto py-6 px-3 space-y-1 custom-scrollbar">
+                <div class="text-[10px] font-bold text-brand-textMuted uppercase tracking-widest px-3 mb-2 mt-4">Workspace</div>
+                
+                <a href="#" onclick="switchTab('dashboard')" class="nav-link active flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-colors group">
+                    <i class="fas fa-home w-5 text-center text-white/50 group-hover:text-brand-gold transition-colors"></i>
+                    <span class="text-sm font-medium">Dashboard</span>
+                </a>
+                <a href="#" onclick="switchTab('projects')" class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-colors group">
+                    <i class="fas fa-briefcase w-5 text-center text-white/50 group-hover:text-brand-gold transition-colors"></i>
+                    <span class="text-sm font-medium">My Projects</span>
+                </a>
+                <a href="#" onclick="switchTab('requests')" class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-colors group">
+                    <i class="fas fa-clipboard-list w-5 text-center text-white/50 group-hover:text-brand-gold transition-colors"></i>
+                    <span class="text-sm font-medium">Service Requests</span>
+                </a>
+                
+                <div class="text-[10px] font-bold text-brand-textMuted uppercase tracking-widest px-3 mb-2 mt-6">Finance</div>
+                
+                <a href="#" onclick="switchTab('quotations')" class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-colors group">
+                    <i class="fas fa-file-invoice-dollar w-5 text-center text-white/50 group-hover:text-brand-gold transition-colors"></i>
+                    <span class="text-sm font-medium">Quotations</span>
+                    <span class="ml-auto bg-orange-500/20 text-orange-400 text-[10px] py-0.5 px-2 rounded-full font-bold">1</span>
+                </a>
+                <a href="#" onclick="switchTab('invoices')" class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-colors group">
+                    <i class="fas fa-receipt w-5 text-center text-white/50 group-hover:text-brand-gold transition-colors"></i>
+                    <span class="text-sm font-medium">Invoices</span>
+                </a>
+                
+                <div class="text-[10px] font-bold text-brand-textMuted uppercase tracking-widest px-3 mb-2 mt-6">Communication</div>
+                
+                <a href="#" onclick="switchTab('messages')" class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-colors group relative">
+                    <i class="fas fa-comments w-5 text-center text-white/50 group-hover:text-brand-gold transition-colors"></i>
+                    <span class="text-sm font-medium">Messages</span>
+                    <span class="absolute top-3 left-6 w-2 h-2 bg-brand-gold rounded-full"></span>
+                </a>
+                <a href="#" onclick="switchTab('appointments')" class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-colors group">
+                    <i class="fas fa-calendar-alt w-5 text-center text-white/50 group-hover:text-brand-gold transition-colors"></i>
+                    <span class="text-sm font-medium">Appointments</span>
+                </a>
+                <a href="#" onclick="switchTab('documents')" class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-colors group">
+                    <i class="fas fa-folder-open w-5 text-center text-white/50 group-hover:text-brand-gold transition-colors"></i>
+                    <span class="text-sm font-medium">Document Center</span>
+                </a>
+                
+                <div class="text-[10px] font-bold text-brand-textMuted uppercase tracking-widest px-3 mb-2 mt-6">Account</div>
+                
+                <a href="#" onclick="switchTab('profile')" class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-colors group">
+                    <i class="fas fa-user w-5 text-center text-white/50 group-hover:text-brand-gold transition-colors"></i>
+                    <span class="text-sm font-medium">Profile</span>
+                </a>
+                <a href="#" onclick="switchTab('settings')" class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-colors group">
+                    <i class="fas fa-cog w-5 text-center text-white/50 group-hover:text-brand-gold transition-colors"></i>
+                    <span class="text-sm font-medium">Settings</span>
+                </a>
+            </div>
+
+            <div class="p-4 border-t border-white/5">
+                <a href="#" id="logout-btn" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-red-400 hover:bg-red-400/10 transition-colors group">
+                    <i class="fas fa-sign-out-alt w-5 text-center group-hover:text-red-300"></i>
+                    <span class="text-sm font-medium">Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT AREA -->
+        <main class="flex-1 flex flex-col min-w-0 relative">
+            
+            <!-- TOP BAR -->
+            <header class="h-20 glass-panel flex items-center justify-between px-6 z-30">
+                <div class="flex items-center gap-4">
+                    <button id="sidebar-toggle" class="md:hidden text-white/70 hover:text-white">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                    
+                    <div class="hidden sm:flex relative w-64 lg:w-96">
+                        <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-white/40 text-sm"></i>
+                        <input type="text" placeholder="Search projects, invoices, documents..." class="w-full bg-white/5 border border-white/10 rounded-full pl-10 pr-4 py-2 text-sm text-white focus:outline-none focus:border-brand-gold transition-colors">
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3 sm:gap-5">
+                    <button class="w-10 h-10 rounded-full glass flex items-center justify-center text-white/70 hover:text-brand-gold hover:border-brand-gold/30 transition-colors relative">
+                        <i class="fas fa-bell"></i>
+                        <span class="absolute top-2 right-2 w-2 h-2 bg-brand-gold rounded-full shadow-[0_0_5px_#D4AF37]"></span>
+                    </button>
+                    
+                    <div class="h-6 w-px bg-white/10 mx-1"></div>
+                    
+                    <div class="flex items-center gap-3 cursor-pointer group">
+                        <div class="text-right hidden sm:block">
+                            <p class="text-sm font-bold text-white leading-tight">John Doe</p>
+                            <p class="text-[10px] text-brand-textMuted uppercase tracking-wider">Premium Client</p>
+                        </div>
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-brand-gold to-brand-goldDark flex items-center justify-center text-brand-dark font-bold border-2 border-transparent group-hover:border-white/20 transition-all">
+                            JD
+                        </div>
+                        <i class="fas fa-chevron-down text-xs text-white/50 group-hover:text-white transition-colors"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- TAB CONTENT CONTAINER -->
+            <div class="main-scroll p-6 lg:p-8 custom-scrollbar relative">
+                
+                <!-- ================= DASHBOARD TAB ================= -->
+                <div id="dashboard" class="tab-content block animate-entry">
+                    
+                    <!-- Dashboard Hero -->
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
+                        <div>
+                            <h2 class="text-3xl font-serif font-bold text-white mb-1">Welcome back, John.</h2>
+                            <p id="current-date" class="text-brand-textMuted text-sm"></p>
+                        </div>
+                        <button onclick="switchTab('requests')" class="px-5 py-2.5 rounded-lg bg-brand-gold text-brand-dark text-sm font-bold hover:shadow-[0_0_20px_rgba(212,175,55,0.3)] transition-all">
+                            <i class="fas fa-plus mr-2"></i> New Request
+                        </button>
+                    </div>
+
+                    <!-- Statistics Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8">
+                        <div class="glass p-5 rounded-2xl flex flex-col justify-between group hover:border-brand-gold/30 transition-colors">
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="w-10 h-10 rounded-full bg-brand-gold/10 flex items-center justify-center text-brand-gold group-hover:scale-110 transition-transform"><i class="fas fa-briefcase"></i></div>
+                                <span class="status-active text-xs px-2 py-0.5 rounded-md"><i class="fas fa-arrow-up mr-1"></i>2</span>
+                            </div>
+                            <div>
+                                <h3 class="text-3xl font-bold text-white mb-1">4</h3>
+                                <p class="text-xs text-brand-textMuted uppercase tracking-wider font-bold">Active Projects</p>
+                            </div>
+                        </div>
+                        
+                        <div class="glass p-5 rounded-2xl flex flex-col justify-between group hover:border-brand-blue/30 transition-colors">
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="w-10 h-10 rounded-full bg-brand-blue/10 flex items-center justify-center text-brand-blue group-hover:scale-110 transition-transform"><i class="fas fa-clipboard-list"></i></div>
+                                <span class="status-pending text-xs px-2 py-0.5 rounded-md">Action Req</span>
+                            </div>
+                            <div>
+                                <h3 class="text-3xl font-bold text-white mb-1">2</h3>
+                                <p class="text-xs text-brand-textMuted uppercase tracking-wider font-bold">Pending Requests</p>
+                            </div>
+                        </div>
+                        
+                        <div class="glass p-5 rounded-2xl flex flex-col justify-between group hover:border-brand-green/30 transition-colors">
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="w-10 h-10 rounded-full bg-brand-green/10 flex items-center justify-center text-brand-green group-hover:scale-110 transition-transform"><i class="fas fa-file-invoice-dollar"></i></div>
+                            </div>
+                            <div>
+                                <h3 class="text-3xl font-bold text-white mb-1">$45.2k</h3>
+                                <p class="text-xs text-brand-textMuted uppercase tracking-wider font-bold">Total Invoiced YTD</p>
+                            </div>
+                        </div>
+                        
+                        <div class="glass p-5 rounded-2xl flex flex-col justify-between group hover:border-purple-500/30 transition-colors">
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="w-10 h-10 rounded-full bg-purple-500/10 flex items-center justify-center text-purple-400 group-hover:scale-110 transition-transform"><i class="fas fa-comments"></i></div>
+                                <span class="bg-red-500/20 text-red-400 border border-red-500/30 text-xs px-2 py-0.5 rounded-md">New</span>
+                            </div>
+                            <div>
+                                <h3 class="text-3xl font-bold text-white mb-1">3</h3>
+                                <p class="text-xs text-brand-textMuted uppercase tracking-wider font-bold">Unread Messages</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Main Grid Area -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        
+                        <!-- Chart Section -->
+                        <div class="lg:col-span-2 glass rounded-2xl p-6 flex flex-col">
+                            <div class="flex justify-between items-center mb-6">
+                                <h3 class="font-bold text-lg">Project Expenditure & Value</h3>
+                                <select class="bg-white/5 border border-white/10 text-xs text-brand-textMuted rounded-lg px-2 py-1 outline-none">
+                                    <option>2026</option>
+                                    <option>2025</option>
+                                </select>
+                            </div>
+                            <div class="flex-1 w-full relative min-h-[250px]">
+                                <canvas id="dashboardChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Right Panel (Recent Activity) -->
+                        <div class="glass rounded-2xl p-6 flex flex-col">
+                            <div class="flex justify-between items-center mb-6">
+                                <h3 class="font-bold text-lg">Recent Activity</h3>
+                                <button class="text-xs text-brand-gold hover:underline">View All</button>
+                            </div>
+                            
+                            <div class="space-y-6 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-white/10 before:to-transparent flex-1 overflow-y-auto pr-2 custom-scrollbar">
+                                
+                                <!-- Activity Item -->
+                                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                                    <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-[#0a0a0e] bg-brand-blue/20 text-brand-blue shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+                                        <i class="fas fa-file-invoice text-xs"></i>
+                                    </div>
+                                    <div class="w-[calc(100%-3rem)] md:w-[calc(50%-2.5rem)] glass p-3 rounded-xl">
+                                        <div class="flex items-center justify-between mb-1">
+                                            <h4 class="font-bold text-sm text-white">Invoice #INV-204</h4>
+                                            <span class="text-[10px] text-brand-textMuted">2 hrs ago</span>
+                                        </div>
+                                        <p class="text-xs text-brand-textMuted">New invoice generated for Logistics Division transport.</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Activity Item -->
+                                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                                    <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-[#0a0a0e] bg-brand-gold/20 text-brand-gold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                    <div class="w-[calc(100%-3rem)] md:w-[calc(50%-2.5rem)] glass p-3 rounded-xl">
+                                        <div class="flex items-center justify-between mb-1">
+                                            <h4 class="font-bold text-sm text-white">Project Approved</h4>
+                                            <span class="text-[10px] text-brand-textMuted">Yesterday</span>
+                                        </div>
+                                        <p class="text-xs text-brand-textMuted">Real Estate acquisition request marked as approved.</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Activity Item -->
+                                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                                    <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-[#0a0a0e] bg-brand-green/20 text-brand-green shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+                                        <i class="fas fa-calendar-alt text-xs"></i>
+                                    </div>
+                                    <div class="w-[calc(100%-3rem)] md:w-[calc(50%-2.5rem)] glass p-3 rounded-xl">
+                                        <div class="flex items-center justify-between mb-1">
+                                            <h4 class="font-bold text-sm text-white">Meeting Scheduled</h4>
+                                            <span class="text-[10px] text-brand-textMuted">Jul 18</span>
+                                        </div>
+                                        <p class="text-xs text-brand-textMuted">Virtual consultation scheduled with Agribusiness team.</p>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Projects Table -->
+                    <div class="mt-6 glass rounded-2xl overflow-hidden">
+                        <div class="p-6 border-b border-white/5 flex justify-between items-center">
+                            <h3 class="font-bold text-lg">Active Projects</h3>
+                            <button onclick="switchTab('projects')" class="text-xs text-brand-gold hover:underline">View All</button>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="bg-white/[0.02] text-xs uppercase tracking-wider text-brand-textMuted border-b border-white/5">
+                                        <th class="p-4 font-semibold">Project Name</th>
+                                        <th class="p-4 font-semibold">Division</th>
+                                        <th class="p-4 font-semibold">Status</th>
+                                        <th class="p-4 font-semibold">Progress</th>
+                                        <th class="p-4 font-semibold text-right">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-sm divide-y divide-white/5">
+                                    <tr class="hover:bg-white/[0.02] transition-colors">
+                                        <td class="p-4 font-medium text-white">Abuja Commercial Complex Acq.</td>
+                                        <td class="p-4 text-brand-textMuted"><i class="fas fa-building text-brand-gold mr-2 w-4 text-center"></i>Real Estate</td>
+                                        <td class="p-4"><span class="status-active text-[10px] px-2 py-1 rounded-md uppercase font-bold tracking-wider">In Progress</span></td>
+                                        <td class="p-4">
+                                            <div class="flex items-center gap-2">
+                                                <div class="w-full bg-white/10 rounded-full h-1.5"><div class="bg-brand-gold h-1.5 rounded-full" style="width: 65%"></div></div>
+                                                <span class="text-xs text-brand-textMuted">65%</span>
+                                            </div>
+                                        </td>
+                                        <td class="p-4 text-right"><button class="text-brand-gold hover:text-white transition-colors"><i class="fas fa-chevron-right"></i></button></td>
+                                    </tr>
+                                    <tr class="hover:bg-white/[0.02] transition-colors">
+                                        <td class="p-4 font-medium text-white">Corporate Fleet Logistics (Q3)</td>
+                                        <td class="p-4 text-brand-textMuted"><i class="fas fa-car text-brand-blue mr-2 w-4 text-center"></i>Automobile</td>
+                                        <td class="p-4"><span class="bg-purple-500/20 text-purple-400 border border-purple-500/30 text-[10px] px-2 py-1 rounded-md uppercase font-bold tracking-wider">Review Phase</span></td>
+                                        <td class="p-4">
+                                            <div class="flex items-center gap-2">
+                                                <div class="w-full bg-white/10 rounded-full h-1.5"><div class="bg-brand-blue h-1.5 rounded-full" style="width: 30%"></div></div>
+                                                <span class="text-xs text-brand-textMuted">30%</span>
+                                            </div>
+                                        </td>
+                                        <td class="p-4 text-right"><button class="text-brand-gold hover:text-white transition-colors"><i class="fas fa-chevron-right"></i></button></td>
+                                    </tr>
+                                    <tr class="hover:bg-white/[0.02] transition-colors">
+                                        <td class="p-4 font-medium text-white">Facility Management - HQ</td>
+                                        <td class="p-4 text-brand-textMuted"><i class="fas fa-broom text-gray-400 mr-2 w-4 text-center"></i>Cleaning</td>
+                                        <td class="p-4"><span class="status-active text-[10px] px-2 py-1 rounded-md uppercase font-bold tracking-wider">Active</span></td>
+                                        <td class="p-4">
+                                            <div class="flex items-center gap-2">
+                                                <div class="w-full bg-white/10 rounded-full h-1.5"><div class="bg-brand-green h-1.5 rounded-full" style="width: 90%"></div></div>
+                                                <span class="text-xs text-brand-textMuted">90%</span>
+                                            </div>
+                                        </td>
+                                        <td class="p-4 text-right"><button class="text-brand-gold hover:text-white transition-colors"><i class="fas fa-chevron-right"></i></button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ================= PROJECTS TAB ================= -->
+                <div id="projects" class="tab-content hidden animate-entry">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
+                        <div>
+                            <h2 class="text-3xl font-serif font-bold text-white mb-1">My Projects</h2>
+                            <p class="text-brand-textMuted text-sm">Monitor and manage all active, pending, and completed engagements.</p>
+                        </div>
+                        <div class="flex gap-2">
+                            <div class="relative">
+                                <i class="fas fa-filter absolute left-3 top-1/2 -translate-y-1/2 text-white/40 text-xs"></i>
+                                <select class="bg-white/5 border border-white/10 text-sm text-white rounded-lg pl-8 pr-8 py-2.5 outline-none appearance-none cursor-pointer hover:border-brand-gold/50 transition-colors">
+                                    <option value="all">All Statuses</option>
+                                    <option value="active">Active</option>
+                                    <option value="completed">Completed</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Detailed Projects Grid -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <!-- Project Card -->
+                        <div class="glass p-6 rounded-2xl flex flex-col group hover:border-brand-gold/30 transition-colors cursor-pointer">
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-xl bg-brand-gold/10 flex items-center justify-center text-brand-gold"><i class="fas fa-building"></i></div>
+                                    <div>
+                                        <h3 class="font-bold text-white leading-tight">Abuja Commercial Complex</h3>
+                                        <p class="text-xs text-brand-textMuted">Real Estate Division</p>
+                                    </div>
+                                </div>
+                                <span class="status-active text-[10px] px-2 py-1 rounded-md uppercase font-bold tracking-wider">In Progress</span>
+                            </div>
+                            
+                            <p class="text-sm text-brand-textMuted mb-6 line-clamp-2">Sourcing and acquisition facilitation for a 5-story commercial property located in Central Business District, Abuja.</p>
+                            
+                            <div class="mt-auto">
+                                <div class="flex justify-between text-xs text-brand-textMuted mb-2">
+                                    <span>Progress Overview</span>
+                                    <span>65%</span>
+                                </div>
+                                <div class="w-full bg-white/10 rounded-full h-2 mb-4"><div class="bg-brand-gold h-2 rounded-full" style="width: 65%"></div></div>
+                                
+                                <div class="flex justify-between items-center pt-4 border-t border-white/5">
+                                    <div class="flex -space-x-2">
+                                        <div class="w-8 h-8 rounded-full border-2 border-[#0a0a0e] bg-gray-700 flex items-center justify-center text-[10px] font-bold">JD</div>
+                                        <div class="w-8 h-8 rounded-full border-2 border-[#0a0a0e] bg-brand-blue flex items-center justify-center text-[10px] font-bold">MR</div>
+                                    </div>
+                                    <button class="text-xs font-bold text-white hover:text-brand-gold transition-colors flex items-center gap-1">View Details <i class="fas fa-arrow-right"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project Card -->
+                        <div class="glass p-6 rounded-2xl flex flex-col group hover:border-brand-blue/30 transition-colors cursor-pointer">
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-xl bg-brand-blue/10 flex items-center justify-center text-brand-blue"><i class="fas fa-car"></i></div>
+                                    <div>
+                                        <h3 class="font-bold text-white leading-tight">Corporate Fleet Logistics (Q3)</h3>
+                                        <p class="text-xs text-brand-textMuted">Vehicle Management Division</p>
+                                    </div>
+                                </div>
+                                <span class="bg-purple-500/20 text-purple-400 border border-purple-500/30 text-[10px] px-2 py-1 rounded-md uppercase font-bold tracking-wider">Review Phase</span>
+                            </div>
+                            
+                            <p class="text-sm text-brand-textMuted mb-6 line-clamp-2">Procurement and deployment of 15 executive sedans and 5 delivery trucks for the southern operational branch.</p>
+                            
+                            <div class="mt-auto">
+                                <div class="flex justify-between text-xs text-brand-textMuted mb-2">
+                                    <span>Progress Overview</span>
+                                    <span>30%</span>
+                                </div>
+                                <div class="w-full bg-white/10 rounded-full h-2 mb-4"><div class="bg-brand-blue h-2 rounded-full" style="width: 30%"></div></div>
+                                
+                                <div class="flex justify-between items-center pt-4 border-t border-white/5">
+                                    <div class="flex -space-x-2">
+                                        <div class="w-8 h-8 rounded-full border-2 border-[#0a0a0e] bg-brand-goldDark flex items-center justify-center text-[10px] font-bold">AK</div>
+                                    </div>
+                                    <button class="text-xs font-bold text-white hover:text-brand-gold transition-colors flex items-center gap-1">View Details <i class="fas fa-arrow-right"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project Card -->
+                        <div class="glass p-6 rounded-2xl flex flex-col group hover:border-brand-green/30 transition-colors cursor-pointer">
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-xl bg-brand-green/10 flex items-center justify-center text-brand-green"><i class="fas fa-seedling"></i></div>
+                                    <div>
+                                        <h3 class="font-bold text-white leading-tight">Agri-Processing Feasibility</h3>
+                                        <p class="text-xs text-brand-textMuted">Consultancy Division</p>
+                                    </div>
+                                </div>
+                                <span class="status-completed text-[10px] px-2 py-1 rounded-md uppercase font-bold tracking-wider">Completed</span>
+                            </div>
+                            
+                            <p class="text-sm text-brand-textMuted mb-6 line-clamp-2">Comprehensive market analysis, risk assessment, and financial modeling for the proposed grain processing plant.</p>
+                            
+                            <div class="mt-auto">
+                                <div class="flex justify-between text-xs text-brand-textMuted mb-2">
+                                    <span>Progress Overview</span>
+                                    <span>100%</span>
+                                </div>
+                                <div class="w-full bg-white/10 rounded-full h-2 mb-4"><div class="bg-brand-green h-2 rounded-full" style="width: 100%"></div></div>
+                                
+                                <div class="flex justify-between items-center pt-4 border-t border-white/5">
+                                    <div class="text-xs text-brand-textMuted"><i class="fas fa-check-circle text-brand-green mr-1"></i> Delivered: Jun 15, 2026</div>
+                                    <button class="text-xs font-bold text-white hover:text-brand-gold transition-colors flex items-center gap-1">View Report <i class="fas fa-download"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ================= REQUESTS TAB ================= -->
+                <div id="requests" class="tab-content hidden animate-entry">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
+                        <div>
+                            <h2 class="text-3xl font-serif font-bold text-white mb-1">Service Requests</h2>
+                            <p class="text-brand-textMuted text-sm">Initiate a new request or track pending enquiries across our divisions.</p>
+                        </div>
+                    </div>
+
+                    <!-- New Request Categories -->
+                    <h3 class="text-sm font-bold text-white uppercase tracking-widest mb-4">Initiate New Request</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+                        <div onclick="alert('Opening Request Modal...')" class="glass glass-hover p-4 rounded-xl flex flex-col items-center justify-center text-center gap-3 cursor-pointer">
+                            <i class="fas fa-building text-2xl text-brand-gold"></i>
+                            <span class="text-xs font-bold text-white">Real Estate</span>
+                        </div>
+                        <div onclick="alert('Opening Request Modal...')" class="glass glass-hover p-4 rounded-xl flex flex-col items-center justify-center text-center gap-3 cursor-pointer">
+                            <i class="fas fa-car text-2xl text-brand-blue"></i>
+                            <span class="text-xs font-bold text-white">Vehicle Management</span>
+                        </div>
+                        <div onclick="alert('Opening Request Modal...')" class="glass glass-hover p-4 rounded-xl flex flex-col items-center justify-center text-center gap-3 cursor-pointer">
+                            <i class="fas fa-broom text-2xl text-gray-300"></i>
+                            <span class="text-xs font-bold text-white">Cleaning Services</span>
+                        </div>
+                        <div onclick="alert('Opening Request Modal...')" class="glass glass-hover p-4 rounded-xl flex flex-col items-center justify-center text-center gap-3 cursor-pointer">
+                            <i class="fas fa-chart-pie text-2xl text-purple-400"></i>
+                            <span class="text-xs font-bold text-white">Consultancy</span>
+                        </div>
+                        <div onclick="alert('Opening Request Modal...')" class="glass glass-hover p-4 rounded-xl flex flex-col items-center justify-center text-center gap-3 cursor-pointer">
+                            <i class="fas fa-tractor text-2xl text-brand-green"></i>
+                            <span class="text-xs font-bold text-white">Agriculture</span>
+                        </div>
+                        <div onclick="alert('Opening Request Modal...')" class="glass glass-hover p-4 rounded-xl flex flex-col items-center justify-center text-center gap-3 cursor-pointer">
+                            <i class="fas fa-tint text-2xl text-cyan-400"></i>
+                            <span class="text-xs font-bold text-white">Water Production</span>
+                        </div>
+                        <div onclick="alert('Opening Request Modal...')" class="glass glass-hover p-4 rounded-xl flex flex-col items-center justify-center text-center gap-3 cursor-pointer">
+                            <i class="fas fa-shipping-fast text-2xl text-orange-500"></i>
+                            <span class="text-xs font-bold text-white">Logistics</span>
+                        </div>
+                        <div onclick="alert('Opening Request Modal...')" class="glass glass-hover p-4 rounded-xl flex flex-col items-center justify-center text-center gap-3 cursor-pointer">
+                            <i class="fas fa-gem text-2xl text-brand-goldDark"></i>
+                            <span class="text-xs font-bold text-white">Minerals</span>
+                        </div>
+                    </div>
+
+                    <h3 class="text-sm font-bold text-white uppercase tracking-widest mb-4">Request History</h3>
+                    <div class="glass rounded-2xl overflow-hidden">
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="bg-white/[0.02] text-xs uppercase tracking-wider text-brand-textMuted border-b border-white/5">
+                                        <th class="p-4 font-semibold">Request ID</th>
+                                        <th class="p-4 font-semibold">Type</th>
+                                        <th class="p-4 font-semibold">Date Submitted</th>
+                                        <th class="p-4 font-semibold">Status</th>
+                                        <th class="p-4 font-semibold text-right">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-sm divide-y divide-white/5">
+                                    <tr class="hover:bg-white/[0.02] transition-colors">
+                                        <td class="p-4 font-medium text-white">REQ-8902</td>
+                                        <td class="p-4 text-brand-textMuted">Logistics Supply Chain Assessment</td>
+                                        <td class="p-4 text-brand-textMuted">Jul 18, 2026</td>
+                                        <td class="p-4"><span class="status-pending text-[10px] px-2 py-1 rounded-md uppercase font-bold tracking-wider">Reviewing</span></td>
+                                        <td class="p-4 text-right"><button class="text-brand-gold hover:text-white transition-colors text-xs font-bold">View</button></td>
+                                    </tr>
+                                    <tr class="hover:bg-white/[0.02] transition-colors">
+                                        <td class="p-4 font-medium text-white">REQ-8755</td>
+                                        <td class="p-4 text-brand-textMuted">Corporate Office Deep Cleaning</td>
+                                        <td class="p-4 text-brand-textMuted">Jul 02, 2026</td>
+                                        <td class="p-4"><span class="status-completed text-[10px] px-2 py-1 rounded-md uppercase font-bold tracking-wider">Converted to Project</span></td>
+                                        <td class="p-4 text-right"><button class="text-brand-gold hover:text-white transition-colors text-xs font-bold">View</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ================= MESSAGES TAB ================= -->
+                <div id="messages" class="tab-content hidden animate-entry h-[calc(100vh-200px)]">
+                    <div class="glass rounded-2xl overflow-hidden flex h-full border border-white/10 shadow-2xl">
+                        <!-- Chat List -->
+                        <div class="w-1/3 border-r border-white/5 flex flex-col bg-white/[0.01]">
+                            <div class="p-4 border-b border-white/5">
+                                <h3 class="font-bold text-white mb-3">Messages</h3>
+                                <div class="relative">
+                                    <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-white/30 text-xs"></i>
+                                    <input type="text" placeholder="Search chats..." class="w-full bg-white/5 border-none rounded-lg pl-8 pr-4 py-2 text-xs text-white focus:outline-none focus:ring-1 focus:ring-brand-gold">
+                                </div>
+                            </div>
+                            <div class="flex-1 overflow-y-auto custom-scrollbar">
+                                <div class="p-3 border-b border-white/5 bg-white/[0.04] cursor-pointer relative border-l-2 border-l-brand-gold">
+                                    <div class="flex justify-between items-start mb-1">
+                                        <h4 class="font-bold text-sm text-white flex items-center gap-2"><i class="fas fa-user-circle text-brand-gold"></i> Admin Support</h4>
+                                        <span class="text-[10px] text-brand-gold">10:42 AM</span>
+                                    </div>
+                                    <p class="text-xs text-white/80 line-clamp-1">Your invoice has been updated. Please review.</p>
+                                    <span class="absolute top-4 right-3 w-2 h-2 bg-brand-gold rounded-full"></span>
+                                </div>
+                                <div class="p-3 border-b border-white/5 hover:bg-white/[0.02] cursor-pointer transition-colors">
+                                    <div class="flex justify-between items-start mb-1">
+                                        <h4 class="font-bold text-sm text-white/80 flex items-center gap-2"><i class="fas fa-user-circle text-brand-blue"></i> Project Mgr (Auto)</h4>
+                                        <span class="text-[10px] text-brand-textMuted">Yesterday</span>
+                                    </div>
+                                    <p class="text-xs text-brand-textMuted line-clamp-1">The fleet delivery schedule is confirmed for next Tuesday.</p>
+                                </div>
+                                <div class="p-3 border-b border-white/5 hover:bg-white/[0.02] cursor-pointer transition-colors">
+                                    <div class="flex justify-between items-start mb-1">
+                                        <h4 class="font-bold text-sm text-white/80 flex items-center gap-2"><i class="fas fa-user-circle text-brand-green"></i> Consultancy Team</h4>
+                                        <span class="text-[10px] text-brand-textMuted">Jul 15</span>
+                                    </div>
+                                    <p class="text-xs text-brand-textMuted line-clamp-1">Thank you. We have received the market report requirements.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chat Area -->
+                        <div class="w-2/3 flex flex-col bg-brand-darker/50">
+                            <!-- Chat Header -->
+                            <div class="p-4 border-b border-white/5 flex justify-between items-center bg-white/[0.02]">
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-user-circle text-brand-gold text-2xl"></i>
+                                    <div>
+                                        <h4 class="font-bold text-sm text-white">Admin Support</h4>
+                                        <p class="text-[10px] text-brand-green flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-brand-green"></span> Online</p>
+                                    </div>
+                                </div>
+                                <button class="text-white/50 hover:text-white transition-colors"><i class="fas fa-ellipsis-v"></i></button>
+                            </div>
+                            
+                            <!-- Chat Messages -->
+                            <div class="flex-1 overflow-y-auto p-6 space-y-4 custom-scrollbar">
+                                <div class="text-center"><span class="text-[10px] text-brand-textMuted bg-white/5 px-2 py-1 rounded-full">Today</span></div>
+                                
+                                <div class="flex items-end gap-2 justify-end">
+                                    <div class="bg-brand-gold text-brand-dark px-4 py-2.5 rounded-2xl rounded-br-sm max-w-[70%]">
+                                        <p class="text-sm font-medium">Hello, could you provide an update on the revised quotation for the facility management contract?</p>
+                                    </div>
+                                </div>
+                                <div class="flex justify-end text-[9px] text-brand-textMuted mt-[-12px] pr-2">10:15 AM <i class="fas fa-check-double ml-1 text-brand-gold"></i></div>
+
+                                <div class="flex items-end gap-2">
+                                    <div class="w-6 h-6 rounded-full bg-brand-gold/20 flex items-center justify-center shrink-0"><i class="fas fa-user text-[10px] text-brand-gold"></i></div>
+                                    <div class="glass px-4 py-2.5 rounded-2xl rounded-bl-sm max-w-[70%]">
+                                        <p class="text-sm text-white">Good morning John. I have reviewed the requirements with the Cleaning Division. I am uploading the revised invoice now.</p>
+                                    </div>
+                                </div>
+                                <div class="flex justify-start text-[9px] text-brand-textMuted mt-[-12px] pl-10">10:40 AM</div>
+                                
+                                <div class="flex items-end gap-2">
+                                    <div class="w-6 h-6 rounded-full bg-transparent shrink-0"></div>
+                                    <div class="glass px-4 py-2.5 rounded-2xl rounded-bl-sm max-w-[70%] border-brand-gold/30">
+                                        <p class="text-sm text-white mb-2">Your invoice has been updated. Please review.</p>
+                                        <div class="flex items-center gap-3 p-2 rounded-lg bg-white/5 border border-white/10 cursor-pointer hover:bg-white/10 transition-colors">
+                                            <i class="fas fa-file-pdf text-red-400 text-lg"></i>
+                                            <div>
+                                                <p class="text-xs font-bold text-white">INV-204_Revised.pdf</p>
+                                                <p class="text-[10px] text-brand-textMuted">124 KB</p>
+                                            </div>
+                                            <i class="fas fa-download text-white/50 ml-2"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex justify-start text-[9px] text-brand-textMuted mt-[-12px] pl-10">10:42 AM</div>
+                            </div>
+                            
+                            <!-- Chat Input -->
+                            <div class="p-4 border-t border-white/5 bg-white/[0.02]">
+                                <form onsubmit="event.preventDefault();" class="flex items-center gap-3">
+                                    <button type="button" class="text-white/40 hover:text-white transition-colors"><i class="fas fa-paperclip"></i></button>
+                                    <input type="text" placeholder="Type your message..." class="flex-1 bg-white/5 border border-white/10 rounded-full px-4 py-2 text-sm text-white focus:outline-none focus:border-brand-gold transition-colors">
+                                    <button type="button" class="text-white/40 hover:text-white transition-colors"><i class="far fa-smile"></i></button>
+                                    <button type="submit" class="w-10 h-10 rounded-full bg-brand-gold text-brand-dark flex items-center justify-center hover:shadow-[0_0_15px_rgba(212,175,55,0.4)] transition-all"><i class="fas fa-paper-plane text-xs"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ================= SETTINGS TAB ================= -->
+                <div id="settings" class="tab-content hidden animate-entry">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
+                        <div>
+                            <h2 class="text-3xl font-serif font-bold text-white mb-1">Account Settings</h2>
+                            <p class="text-brand-textMuted text-sm">Manage your corporate profile, security, and preferences.</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <!-- Settings Nav (Desktop) -->
+                        <div class="glass rounded-2xl p-4 h-max space-y-1">
+                            <button class="w-full text-left px-4 py-3 rounded-xl bg-white/10 text-brand-gold font-bold text-sm flex items-center justify-between">Company Profile <i class="fas fa-chevron-right text-xs"></i></button>
+                            <button class="w-full text-left px-4 py-3 rounded-xl text-white/70 hover:bg-white/5 hover:text-white font-medium text-sm transition-colors flex items-center justify-between">Security & Password</button>
+                            <button class="w-full text-left px-4 py-3 rounded-xl text-white/70 hover:bg-white/5 hover:text-white font-medium text-sm transition-colors flex items-center justify-between">Notification Preferences</button>
+                            <button class="w-full text-left px-4 py-3 rounded-xl text-white/70 hover:bg-white/5 hover:text-white font-medium text-sm transition-colors flex items-center justify-between">Billing Information</button>
+                        </div>
+
+                        <!-- Settings Content -->
+                        <div class="lg:col-span-2 glass rounded-2xl p-6 md:p-8">
+                            <h3 class="text-lg font-bold text-white mb-6 border-b border-white/5 pb-4">Company Profile</h3>
+                            
+                            <div class="flex items-center gap-6 mb-8">
+                                <div class="w-20 h-20 rounded-full bg-gradient-to-br from-brand-gold to-brand-goldDark flex items-center justify-center text-brand-dark font-bold text-2xl border-4 border-[#0a0a0e] relative group cursor-pointer">
+                                    JD
+                                    <div class="absolute inset-0 bg-black/50 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <i class="fas fa-camera text-white text-sm"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button class="px-4 py-2 rounded-lg border border-brand-gold/50 text-brand-gold text-xs font-bold hover:bg-brand-gold hover:text-brand-dark transition-colors">Change Logo</button>
+                                    <p class="text-[10px] text-brand-textMuted mt-2">JPG, GIF or PNG. Max size 2MB.</p>
+                                </div>
+                            </div>
+
+                            <form onsubmit="event.preventDefault();" class="space-y-5">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                    <div class="input-float">
+                                        <input type="text" id="set-name" class="peer placeholder-transparent" placeholder="Full Name" value="John Doe" />
+                                        <label for="set-name" class="floating-label peer-placeholder-shown:top-4 peer-placeholder-shown:text-base">Primary Contact Name</label>
+                                    </div>
+                                    <div class="input-float">
+                                        <input type="text" id="set-comp" class="peer placeholder-transparent" placeholder="Company Name" value="JD Enterprises Ltd" />
+                                        <label for="set-comp" class="floating-label peer-placeholder-shown:top-4 peer-placeholder-shown:text-base">Company Name</label>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                    <div class="input-float">
+                                        <input type="email" id="set-email" class="peer placeholder-transparent" placeholder="Email" value="client@example.com" disabled class="opacity-50 cursor-not-allowed" />
+                                        <label for="set-email" class="floating-label peer-placeholder-shown:top-4 peer-placeholder-shown:text-base">Corporate Email (Read Only)</label>
+                                    </div>
+                                    <div class="input-float">
+                                        <input type="tel" id="set-phone" class="peer placeholder-transparent" placeholder="Phone" value="+234 800 000 0000" />
+                                        <label for="set-phone" class="floating-label peer-placeholder-shown:top-4 peer-placeholder-shown:text-base">Phone Number</label>
+                                    </div>
+                                </div>
+
+                                <div class="input-float">
+                                    <textarea id="set-address" rows="3" class="peer placeholder-transparent resize-none" placeholder="Address">Plot 123, Business District, Abuja.</textarea>
+                                    <label for="set-address" class="floating-label peer-placeholder-shown:top-4 peer-placeholder-shown:text-base">Corporate Address</label>
+                                </div>
+
+                                <div class="pt-4 border-t border-white/5 flex justify-end">
+                                    <button type="submit" class="px-6 py-2.5 rounded-xl bg-brand-gold text-brand-dark font-bold hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-shadow duration-300">
+                                        Save Changes
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fallback for other tabs -->
+                <div id="coming-soon" class="tab-content hidden animate-entry flex items-center justify-center h-[50vh]">
+                    <div class="text-center">
+                        <i class="fas fa-tools text-4xl text-brand-textMuted mb-4"></i>
+                        <h2 class="text-2xl font-serif font-bold text-white mb-2">Module Loading</h2>
+                        <p class="text-brand-textMuted text-sm">This section of the portal is currently initializing data.</p>
+                        <button onclick="switchTab('dashboard')" class="mt-6 px-6 py-2 rounded-lg border border-brand-gold text-brand-gold text-sm hover:bg-brand-gold hover:text-brand-dark transition-colors">Return to Dashboard</button>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <script>
+        // Setup Date
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', options);
+
+        // UI Interactions
+        const loginScreen = document.getElementById('login-screen');
+        const appLayout = document.getElementById('app-layout');
+        const loginForm = document.getElementById('login-form');
+        const guestBtn = document.getElementById('guest-btn');
+        const logoutBtn = document.getElementById('logout-btn');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarToggle = document.getElementById('sidebar-toggle');
+
+        // Login Simulation
+        function enterPortal() {
+            // Show loader if it was a real login
+            const loader = document.getElementById('login-loader');
+            if(loader) loader.classList.remove('hidden');
+
+            setTimeout(() => {
+                loginScreen.classList.add('opacity-0', 'pointer-events-none');
+                setTimeout(() => {
+                    loginScreen.style.display = 'none';
+                    appLayout.classList.remove('opacity-0', 'pointer-events-none');
+                    
+                    // Entrance Animation for App
+                    gsap.from("#sidebar", { x: -50, opacity: 0, duration: 0.8, ease: "power3.out" });
+                    gsap.from("header", { y: -20, opacity: 0, duration: 0.8, ease: "power3.out", delay: 0.2 });
+                    gsap.from("#dashboard > div", { y: 20, opacity: 0, duration: 0.8, stagger: 0.1, ease: "power3.out", delay: 0.4 });
+                    
+                    initChart(); // Initialize chart when visible
+                }, 500);
+            }, 800);
+        }
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            enterPortal();
+        });
+        
+        guestBtn.addEventListener('click', enterPortal);
+
+        // Logout
+        logoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            appLayout.classList.add('opacity-0', 'pointer-events-none');
+            setTimeout(() => {
+                loginScreen.style.display = 'flex';
+                // Trigger reflow
+                void loginScreen.offsetWidth;
+                loginScreen.classList.remove('opacity-0', 'pointer-events-none');
+                
+                const loader = document.getElementById('login-loader');
+                if(loader) loader.classList.add('hidden');
+            }, 700);
+        });
+
+        // Mobile Sidebar Toggle
+        sidebarToggle.addEventListener('click', () => {
+            if (sidebar.classList.contains('-translate-x-full')) {
+                sidebar.classList.remove('-translate-x-full');
+                sidebar.classList.add('translate-x-0', 'absolute', 'shadow-2xl');
+            } else {
+                sidebar.classList.add('-translate-x-full');
+                sidebar.classList.remove('translate-x-0', 'absolute', 'shadow-2xl');
+            }
+        });
+
+        // Tab Switching Logic
+        const validTabs = ['dashboard', 'projects', 'requests', 'messages', 'settings'];
+        
+        function switchTab(tabId) {
+            // Hide all tab content
+            document.querySelectorAll('.tab-content').forEach(el => {
+                el.classList.add('hidden');
+            });
+            
+            // Show target or fallback
+            const target = validTabs.includes(tabId) ? document.getElementById(tabId) : document.getElementById('coming-soon');
+            target.classList.remove('hidden');
+            
+            // Add simple entry animation
+            gsap.fromTo(target, 
+                { opacity: 0, y: 10 },
+                { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }
+            );
+
+            // Update Nav active states
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active', 'bg-brand-gold/10', 'text-brand-gold', 'border-r-2', 'border-brand-gold');
+                link.querySelector('i').classList.remove('text-brand-gold');
+                link.querySelector('i').classList.add('text-white/50');
+            });
+
+            // Find clicked link based on onclick attribute (simple matching for prototype)
+            const activeLink = document.querySelector(`.nav-link[onclick="switchTab('${tabId}')"]`);
+            if (activeLink) {
+                activeLink.classList.add('active', 'bg-brand-gold/10', 'text-brand-gold', 'border-r-2', 'border-brand-gold');
+                activeLink.querySelector('i').classList.remove('text-white/50');
+                activeLink.querySelector('i').classList.add('text-brand-gold');
+            }
+
+            // Close mobile sidebar if open
+            if (window.innerWidth < 768) {
+                sidebar.classList.add('-translate-x-full');
+            }
+        }
+
+        // Initialize Chart.js
+        let chartInitialized = false;
+        function initChart() {
+            if (chartInitialized) return;
+            chartInitialized = true;
+            
+            const ctx = document.getElementById('dashboardChart');
+            if(!ctx) return;
+
+            // Gradient for chart line
+            const gradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 400);
+            gradient.addColorStop(0, 'rgba(212, 175, 55, 0.5)'); // Gold transparent
+            gradient.addColorStop(1, 'rgba(212, 175, 55, 0.0)');
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                    datasets: [{
+                        label: 'Project Value (USD)',
+                        data: [12000, 19000, 15000, 25000, 22000, 30000, 45200],
+                        borderColor: '#D4AF37', // brand-gold
+                        backgroundColor: gradient,
+                        borderWidth: 2,
+                        pointBackgroundColor: '#030305',
+                        pointBorderColor: '#D4AF37',
+                        pointBorderWidth: 2,
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: 'rgba(10, 10, 14, 0.9)',
+                            titleColor: '#8a8a93',
+                            bodyColor: '#fff',
+                            borderColor: 'rgba(255,255,255,0.1)',
+                            borderWidth: 1,
+                            padding: 10,
+                            displayColors: false,
+                            callbacks: {
+                                label: function(context) {
+                                    return '$' + context.parsed.y.toLocaleString();
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: 'rgba(255, 255, 255, 0.05)', drawBorder: false },
+                            ticks: { 
+                                color: '#8a8a93',
+                                callback: function(value) { return '$' + value/1000 + 'k'; }
+                            }
+                        },
+                        x: {
+                            grid: { display: false, drawBorder: false },
+                            ticks: { color: '#8a8a93' }
+                        }
+                    },
+                    interaction: {
+                        intersect: false,
+                        mode: 'index',
+                    },
+                }
+            });
+        }
+    </script>
+</body>
+</html>
