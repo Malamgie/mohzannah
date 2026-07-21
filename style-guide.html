@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Design System | MOH ZANNAH GROUP</title>
+    <meta name="description" content="Official Design System and Component Library for MOH ZANNAH GROUP LIMITED.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#030305',
+                            darker: '#010101',
+                            card: '#0a0a0e',
+                            gold: '#D4AF37',
+                            goldLight: '#F3E5AB',
+                            goldDark: '#997a00',
+                            blue: '#0033A0',
+                            green: '#00805A',
+                            orange: '#f97316',
+                            purple: '#8b5cf6',
+                            textMuted: '#8a8a93',
+                            border: 'rgba(255,255,255,0.08)'
+                        }
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                        'gold-gradient': 'linear-gradient(135deg, #F3E5AB 0%, #D4AF37 50%, #997a00 100%)',
+                        'blue-gradient': 'linear-gradient(135deg, #4da6ff 0%, #0033A0 50%, #001a4d 100%)',
+                        'green-gradient': 'linear-gradient(135deg, #00b37e 0%, #00805A 50%, #004d36 100%)',
+                        'mesh': 'radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .glass {
+                @apply bg-white/[0.02] backdrop-blur-xl border border-brand-border;
+            }
+            .glass-panel {
+                @apply bg-[#0a0a0e]/80 backdrop-blur-2xl border-r border-brand-border;
+            }
+            .glass-hover {
+                @apply hover:bg-white/[0.06] hover:border-brand-gold/40 hover:-translate-y-1 transition-all duration-300 ease-out hover:shadow-[0_10px_30px_-10px_rgba(212,175,55,0.15)];
+            }
+            .text-gradient {
+                @apply bg-clip-text text-transparent bg-gold-gradient;
+            }
+            
+            /* Form Standard */
+            .input-premium {
+                @apply w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold transition-colors duration-300;
+            }
+            
+            /* Floating Label Support */
+            .input-float { @apply relative; }
+            .input-float input, .input-float textarea, .input-float select { @apply pt-6 pb-2; }
+            .floating-label { @apply absolute left-4 top-4 text-brand-textMuted text-sm transition-all duration-300 pointer-events-none; }
+            .input-float input:focus ~ .floating-label,
+            .input-float input:not(:placeholder-shown) ~ .floating-label,
+            .input-float textarea:focus ~ .floating-label,
+            .input-float textarea:not(:placeholder-shown) ~ .floating-label,
+            .input-float select:focus ~ .floating-label,
+            .input-float select:not([value=""]) ~ .floating-label {
+                @apply text-xs top-2 text-brand-gold;
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
+
+        body {
+            background-color: #030305;
+            color: #ffffff;
+            overflow: hidden; /* Desktop app feel */
+        }
+
+        .noise-bg {
+            position: fixed; inset: 0; pointer-events: none; z-index: 50; opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Nav Link Active State */
+        .sidebar-link.active {
+            @apply bg-brand-gold/10 text-brand-gold border-r-2 border-brand-gold;
+        }
+        .sidebar-link.active i {
+            @apply text-brand-gold;
+        }
+
+        /* Code block styling */
+        pre {
+            @apply bg-[#010101] border border-white/10 rounded-xl p-4 overflow-x-auto text-xs font-mono text-white/70;
+        }
+        
+        /* Shimmer Loading */
+        .shimmer {
+            background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+        @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+
+        /* Loader */
+        .loader { border: 2px solid rgba(212, 175, 55, 0.2); border-left-color: #D4AF37; border-radius: 50%; width: 20px; height: 20px; animation: spin 1s linear infinite; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-gold selection:text-brand-dark">
+
+    <div class="noise-bg"></div>
+    
+    <!-- Background Gradients -->
+    <div class="fixed inset-0 pointer-events-none z-0">
+        <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-brand-blue/10 rounded-full blur-[120px]"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-brand-gold/10 rounded-full blur-[120px]"></div>
+        <div class="absolute inset-0 bg-mesh opacity-20" style="background-size: 30px 30px;"></div>
+    </div>
+
+    <div class="flex h-screen w-full relative z-10">
+        
+        <!-- LEFT SIDEBAR -->
+        <aside id="sidebar" class="w-64 h-full glass-panel flex-shrink-0 flex flex-col transition-transform duration-300 absolute md:relative -translate-x-full md:translate-x-0 z-40">
+            <div class="h-16 flex items-center justify-between px-6 border-b border-white/5">
+                <div class="flex items-center gap-3">
+                    <img src="logo.png" alt="Logo" class="h-6 object-contain">
+                    <span class="font-serif font-bold text-sm text-white">Design System</span>
+                </div>
+                <button id="close-sidebar" class="md:hidden text-white/50 hover:text-white"><i class="fas fa-times"></i></button>
+            </div>
+            
+            <div class="flex-1 overflow-y-auto py-6 px-3 space-y-1" id="nav-container">
+                <div class="text-[10px] font-bold text-brand-textMuted uppercase tracking-widest px-3 mb-2">Foundation</div>
+                <a href="#overview" class="sidebar-link active flex items-center gap-3 px-3 py-2 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-colors">
+                    <i class="fas fa-home w-4 text-center text-white/50"></i><span class="text-xs font-medium">Overview</span>
+                </a>
+                <a href="#brand" class="sidebar-link flex items-center gap-3 px-3 py-2 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-colors">
+                    <i class="fas fa-fingerprint w-4 text-center text-white/50"></i><span class="text-xs font-medium">Brand Identity</span>
+                </a>
+                <a href="#colors" class="sidebar-link flex items-center gap-3 px-3 py-2 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-colors">
+                    <i class="fas fa-palette w-4 text-center text-white/50"></i><span class="text-xs font-medium">Color System</span>
+                </a>
+                <a href="#typography" class="sidebar-link flex items-center gap-3 px-3 py-2 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-colors">
+                    <i class="fas fa-font w-4 text-center text-white/50"></i><span class="text-xs font-medium">Typography</span>
+                </a>
+                <a href="#spacing" class="sidebar-link flex items-center gap-3 px-3 py-2 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-colors">
+                    <i class="fas fa-ruler-combined w-4 text-center text-white/50"></i><span class="text-xs font-medium">Spacing & Grid</span>
+                </a>
+
+                <div class="text-[10px] font-bold text-brand-textMuted uppercase tracking-widest px-3 mb-2 mt-6">Components</div>
+                <a href="#buttons" class="sidebar-link flex items-center gap-3 px-3 py-2 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-colors">
+                    <i class="fas fa-toggle-on w-4 text-center text-white/50"></i><span class="text-xs font-medium">Buttons</span>
+                </a>
+                <a href="#forms" class="sidebar-link flex items-center gap-3 px-3 py-2 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-colors">
+                    <i class="fas fa-keyboard w-4 text-center text-white/50"></i><span class="text-xs font-medium">Forms & Inputs</span>
+                </a>
+                <a href="#cards" class="sidebar-link flex items-center gap-3 px-3 py-2 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-colors">
+                    <i class="fas fa-address-card w-4 text-center text-white/50"></i><span class="text-xs font-medium">Cards</span>
+                </a>
+                <a href="#badges" class="sidebar-link flex items-center gap-3 px-3 py-2 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-colors">
+                    <i class="fas fa-tags w-4 text-center text-white/50"></i><span class="text-xs font-medium">Badges & Alerts</span>
+                </a>
+                <a href="#tables" class="sidebar-link flex items-center gap-3 px-3 py-2 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-colors">
+                    <i class="fas fa-table w-4 text-center text-white/50"></i><span class="text-xs font-medium">Tables</span>
+                </a>
+                
+                <div class="text-[10px] font-bold text-brand-textMuted uppercase tracking-widest px-3 mb-2 mt-6">Data Visualization</div>
+                <a href="#charts" class="sidebar-link flex items-center gap-3 px-3 py-2 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-colors">
+                    <i class="fas fa-chart-bar w-4 text-center text-white/50"></i><span class="text-xs font-medium">Charts</span>
+                </a>
+                <a href="#stats" class="sidebar-link flex items-center gap-3 px-3 py-2 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-colors">
+                    <i class="fas fa-sort-numeric-up w-4 text-center text-white/50"></i><span class="text-xs font-medium">Statistics</span>
+                </a>
+
+                <div class="text-[10px] font-bold text-brand-textMuted uppercase tracking-widest px-3 mb-2 mt-6">Feedback & Motion</div>
+                <a href="#loaders" class="sidebar-link flex items-center gap-3 px-3 py-2 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-colors">
+                    <i class="fas fa-spinner w-4 text-center text-white/50"></i><span class="text-xs font-medium">Loading States</span>
+                </a>
+                <a href="#animations" class="sidebar-link flex items-center gap-3 px-3 py-2 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-colors">
+                    <i class="fas fa-film w-4 text-center text-white/50"></i><span class="text-xs font-medium">Animations</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT AREA -->
+        <main class="flex-1 flex flex-col min-w-0 h-full relative">
+            
+            <!-- TOP BAR -->
+            <header class="h-16 glass-panel flex items-center justify-between px-6 z-30 sticky top-0">
+                <div class="flex items-center gap-4">
+                    <button id="open-sidebar" class="md:hidden text-white/70 hover:text-white">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="text-xs text-brand-textMuted font-mono">v1.0.0 (Production)</div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button class="text-white/50 hover:text-white transition-colors" title="Toggle Dark/Light Mode (Demo)">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <div class="h-6 w-px bg-white/10 mx-1"></div>
+                    <button class="text-xs font-bold text-brand-gold bg-brand-gold/10 px-3 py-1.5 rounded-lg border border-brand-gold/20 hover:bg-brand-gold hover:text-brand-dark transition-colors">
+                        Download UI Kit
+                    </button>
+                </div>
+            </header>
+
+            <!-- SCROLLABLE SECTIONS -->
+            <div id="main-scroll" class="flex-1 overflow-y-auto p-6 md:p-10 lg:p-16 scroll-smooth pb-32">
+                
+                <!-- ================= OVERVIEW ================= -->
+                <section id="overview" class="mb-24 pt-4 scroll-mt-20">
+                    <h1 class="text-4xl md:text-5xl font-serif font-bold text-white mb-4">Enterprise Design System</h1>
+                    <p class="text-brand-textMuted max-w-3xl leading-relaxed text-lg mb-8">
+                        The official design language, component library, and digital brand guidelines for MOH ZANNAH GROUP LIMITED. This living document ensures consistency, premium quality, and architectural scalability across all corporate digital properties.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="glass p-6 rounded-2xl">
+                            <i class="fas fa-paint-brush text-brand-gold text-2xl mb-4"></i>
+                            <h3 class="font-bold text-white mb-2">Design Principles</h3>
+                            <p class="text-sm text-brand-textMuted">Minimalist, executive, and focused on trust and authority.</p>
+                        </div>
+                        <div class="glass p-6 rounded-2xl">
+                            <i class="fas fa-code text-brand-blue text-2xl mb-4"></i>
+                            <h3 class="font-bold text-white mb-2">Code Standards</h3>
+                            <p class="text-sm text-brand-textMuted">Tailwind CSS utility-first approach with semantic HTML5.</p>
+                        </div>
+                        <div class="glass p-6 rounded-2xl">
+                            <i class="fas fa-universal-access text-brand-green text-2xl mb-4"></i>
+                            <h3 class="font-bold text-white mb-2">Accessibility</h3>
+                            <p class="text-sm text-brand-textMuted">WCAG compliant, high contrast ratios, and screen-reader friendly.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ================= BRAND IDENTITY ================= -->
+                <section id="brand" class="mb-24 scroll-mt-20">
+                    <div class="flex items-center gap-3 mb-8 border-b border-white/10 pb-4">
+                        <i class="fas fa-fingerprint text-brand-gold text-xl"></i>
+                        <h2 class="text-2xl font-serif font-bold text-white">Brand Identity</h2>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                        <div>
+                            <h3 class="font-bold text-sm text-brand-textMuted uppercase tracking-widest mb-4">Primary Logo</h3>
+                            <div class="glass p-10 rounded-2xl flex items-center justify-center bg-white/5 border-dashed">
+                                <img src="logo.png" alt="MOH ZANNAH Logo" class="max-h-24 object-contain">
+                            </div>
+                            <p class="text-xs text-brand-textMuted mt-4">The primary corporate logo must always maintain its original aspect ratio. Do not alter colors or add unauthorized shadows directly to the asset.</p>
+                        </div>
+                        
+                        <div>
+                            <h3 class="font-bold text-sm text-brand-textMuted uppercase tracking-widest mb-4">Clear Space & Usage</h3>
+                            <div class="glass p-10 rounded-2xl flex items-center justify-center relative">
+                                <div class="absolute inset-8 border border-red-500/30 border-dashed"></div>
+                                <span class="absolute top-4 left-1/2 -translate-x-1/2 text-[10px] text-red-400 font-mono">Padding: 2rem (Minimum)</span>
+                                <img src="logo.png" alt="MOH ZANNAH Logo" class="max-h-16 object-contain relative z-10">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ================= COLOR SYSTEM ================= -->
+                <section id="colors" class="mb-24 scroll-mt-20">
+                    <div class="flex items-center gap-3 mb-8 border-b border-white/10 pb-4">
+                        <i class="fas fa-palette text-brand-gold text-xl"></i>
+                        <h2 class="text-2xl font-serif font-bold text-white">Color System</h2>
+                    </div>
+                    <p class="text-sm text-brand-textMuted mb-8 max-w-3xl">Our color palette is directly extracted from the corporate logo. It relies on a dark, sophisticated backdrop accented by premium gold, professional blue, and sustainable green.</p>
+
+                    <h3 class="font-bold text-sm text-white mb-4">Primary Brand Colors</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+                        <!-- Color Card -->
+                        <div class="glass rounded-xl overflow-hidden group cursor-pointer" onclick="copyColor('#D4AF37')">
+                            <div class="h-24 bg-[#D4AF37] flex items-center justify-center opacity-90 group-hover:opacity-100 transition-opacity">
+                                <span class="text-brand-dark font-mono text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity">Click to copy</span>
+                            </div>
+                            <div class="p-3">
+                                <p class="font-bold text-sm">Brand Gold</p>
+                                <p class="text-xs text-brand-textMuted font-mono">HEX: #D4AF37</p>
+                                <p class="text-[10px] text-brand-textMuted font-mono mt-1">class: bg-brand-gold</p>
+                            </div>
+                        </div>
+                        <!-- Color Card -->
+                        <div class="glass rounded-xl overflow-hidden group cursor-pointer" onclick="copyColor('#0033A0')">
+                            <div class="h-24 bg-[#0033A0] flex items-center justify-center opacity-90 group-hover:opacity-100 transition-opacity">
+                                <span class="text-white font-mono text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity">Click to copy</span>
+                            </div>
+                            <div class="p-3">
+                                <p class="font-bold text-sm">Brand Blue</p>
+                                <p class="text-xs text-brand-textMuted font-mono">HEX: #0033A0</p>
+                                <p class="text-[10px] text-brand-textMuted font-mono mt-1">class: bg-brand-blue</p>
+                            </div>
+                        </div>
+                        <!-- Color Card -->
+                        <div class="glass rounded-xl overflow-hidden group cursor-pointer" onclick="copyColor('#00805A')">
+                            <div class="h-24 bg-[#00805A] flex items-center justify-center opacity-90 group-hover:opacity-100 transition-opacity">
+                                <span class="text-white font-mono text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity">Click to copy</span>
+                            </div>
+                            <div class="p-3">
+                                <p class="font-bold text-sm">Brand Green</p>
+                                <p class="text-xs text-brand-textMuted font-mono">HEX: #00805A</p>
+                                <p class="text-[10px] text-brand-textMuted font-mono mt-1">class: bg-brand-green</p>
+                            </div>
+                        </div>
+                        <!-- Color Card -->
+                        <div class="glass rounded-xl overflow-hidden group cursor-pointer" onclick="copyColor('#030305')">
+                            <div class="h-24 bg-[#030305] border-b border-white/5 flex items-center justify-center opacity-90 group-hover:opacity-100 transition-opacity">
+                                <span class="text-white font-mono text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity">Click to copy</span>
+                            </div>
+                            <div class="p-3">
+                                <p class="font-bold text-sm">Brand Dark</p>
+                                <p class="text-xs text-brand-textMuted font-mono">HEX: #030305</p>
+                                <p class="text-[10px] text-brand-textMuted font-mono mt-1">class: bg-brand-dark</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="font-bold text-sm text-white mb-4">Semantic & UI Colors</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-[#10b981]"></div>
+                            <div>
+                                <p class="text-xs font-bold">Success</p>
+                                <p class="text-[10px] text-brand-textMuted font-mono">text-emerald-500</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-[#f59e0b]"></div>
+                            <div>
+                                <p class="text-xs font-bold">Warning</p>
+                                <p class="text-[10px] text-brand-textMuted font-mono">text-amber-500</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-[#ef4444]"></div>
+                            <div>
+                                <p class="text-xs font-bold">Danger</p>
+                                <p class="text-[10px] text-brand-textMuted font-mono">text-red-500</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-[#3b82f6]"></div>
+                            <div>
+                                <p class="text-xs font-bold">Info</p>
+                                <p class="text-[10px] text-brand-textMuted font-mono">text-blue-500</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-[#8a8a93]"></div>
+                            <div>
+                                <p class="text-xs font-bold">Text Muted</p>
+                                <p class="text-[10px] text-brand-textMuted font-mono">text-brand-textMuted</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ================= TYPOGRAPHY ================= -->
+                <section id="typography" class="mb-24 scroll-mt-20">
+                    <div class="flex items-center gap-3 mb-8 border-b border-white/10 pb-4">
+                        <i class="fas fa-font text-brand-gold text-xl"></i>
+                        <h2 class="text-2xl font-serif font-bold text-white">Typography</h2>
+                    </div>
+
+                    <div class="glass rounded-2xl p-8 mb-8">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 border-b border-white/5 pb-8">
+                            <div>
+                                <p class="text-xs text-brand-textMuted tracking-widest uppercase mb-2">Display & Headings</p>
+                                <h3 class="text-4xl font-serif text-white">Playfair Display</h3>
+                                <p class="text-sm text-brand-textMuted mt-2 font-serif italic">Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-brand-textMuted tracking-widest uppercase mb-2">Body & UI</p>
+                                <h3 class="text-4xl font-sans font-bold text-white">Plus Jakarta Sans</h3>
+                                <p class="text-sm text-brand-textMuted mt-2 font-sans">Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz 0123456789</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-8">
+                            <div class="flex flex-col md:flex-row md:items-baseline gap-4 border-b border-white/5 pb-4">
+                                <div class="w-32 shrink-0 text-brand-textMuted font-mono text-xs">H1 (Hero)</div>
+                                <h1 class="text-5xl md:text-7xl font-serif font-bold text-white">Corporate Excellence</h1>
+                                <div class="ml-auto text-brand-textMuted font-mono text-xs">text-5xl md:text-7xl font-serif font-bold</div>
+                            </div>
+                            <div class="flex flex-col md:flex-row md:items-baseline gap-4 border-b border-white/5 pb-4">
+                                <div class="w-32 shrink-0 text-brand-textMuted font-mono text-xs">H2 (Section)</div>
+                                <h2 class="text-3xl md:text-5xl font-serif font-bold text-white">Business Divisions</h2>
+                                <div class="ml-auto text-brand-textMuted font-mono text-xs">text-3xl md:text-5xl font-serif font-bold</div>
+                            </div>
+                            <div class="flex flex-col md:flex-row md:items-baseline gap-4 border-b border-white/5 pb-4">
+                                <div class="w-32 shrink-0 text-brand-textMuted font-mono text-xs">H3 (Card Title)</div>
+                                <h3 class="text-xl md:text-2xl font-bold text-white">Strategic Partnerships</h3>
+                                <div class="ml-auto text-brand-textMuted font-mono text-xs">text-xl md:text-2xl font-bold</div>
+                            </div>
+                            <div class="flex flex-col md:flex-row md:items-baseline gap-4 border-b border-white/5 pb-4">
+                                <div class="w-32 shrink-0 text-brand-textMuted font-mono text-xs">H4 (Sub UI)</div>
+                                <h4 class="text-lg font-bold text-white">Recent Activity</h4>
+                                <div class="ml-auto text-brand-textMuted font-mono text-xs">text-lg font-bold</div>
+                            </div>
+                            <div class="flex flex-col md:flex-row md:items-baseline gap-4 border-b border-white/5 pb-4">
+                                <div class="w-32 shrink-0 text-brand-textMuted font-mono text-xs">Body (P)</div>
+                                <p class="text-base text-brand-textMuted leading-relaxed max-w-xl">We connect opportunities with the right people, resources, and ideas. Our commitment to sustainable value spans across sectors.</p>
+                                <div class="ml-auto text-brand-textMuted font-mono text-xs">text-base text-brand-textMuted</div>
+                            </div>
+                            <div class="flex flex-col md:flex-row md:items-baseline gap-4">
+                                <div class="w-32 shrink-0 text-brand-textMuted font-mono text-xs">Overline</div>
+                                <span class="text-xs font-bold tracking-widest uppercase text-brand-gold">Core Values</span>
+                                <div class="ml-auto text-brand-textMuted font-mono text-xs">text-xs tracking-widest uppercase</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- ================= SPACING & GRID ================= -->
+                <section id="spacing" class="mb-24 scroll-mt-20">
+                    <div class="flex items-center gap-3 mb-8 border-b border-white/10 pb-4">
+                        <i class="fas fa-ruler-combined text-brand-gold text-xl"></i>
+                        <h2 class="text-2xl font-serif font-bold text-white">Spacing & Grid</h2>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="font-bold text-sm text-white mb-4">Spacing Scale (Tailwind)</h3>
+                            <div class="space-y-3">
+                                <div class="flex items-center gap-4"><div class="w-1 h-4 bg-brand-gold rounded"></div><span class="w-12 text-xs font-mono">p-1</span><span class="text-xs text-brand-textMuted">4px</span></div>
+                                <div class="flex items-center gap-4"><div class="w-2 h-4 bg-brand-gold rounded"></div><span class="w-12 text-xs font-mono">p-2</span><span class="text-xs text-brand-textMuted">8px</span></div>
+                                <div class="flex items-center gap-4"><div class="w-4 h-4 bg-brand-gold rounded"></div><span class="w-12 text-xs font-mono">p-4</span><span class="text-xs text-brand-textMuted">16px</span></div>
+                                <div class="flex items-center gap-4"><div class="w-6 h-4 bg-brand-gold rounded"></div><span class="w-12 text-xs font-mono">p-6</span><span class="text-xs text-brand-textMuted">24px</span></div>
+                                <div class="flex items-center gap-4"><div class="w-8 h-4 bg-brand-gold rounded"></div><span class="w-12 text-xs font-mono">p-8</span><span class="text-xs text-brand-textMuted">32px</span></div>
+                                <div class="flex items-center gap-4"><div class="w-12 h-4 bg-brand-gold rounded"></div><span class="w-12 text-xs font-mono">p-12</span><span class="text-xs text-brand-textMuted">48px</span></div>
+                                <div class="flex items-center gap-4"><div class="w-16 h-4 bg-brand-gold rounded"></div><span class="w-12 text-xs font-mono">p-16</span><span class="text-xs text-brand-textMuted">64px</span></div>
+                                <div class="flex items-center gap-4"><div class="w-24 h-4 bg-brand-gold rounded"></div><span class="w-12 text-xs font-mono">p-24</span><span class="text-xs text-brand-textMuted">96px</span></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 class="font-bold text-sm text-white mb-4">Grid System</h3>
+                            <p class="text-xs text-brand-textMuted mb-4">We use Tailwind's responsive 12-column grid. Standard layout relies on 1, 2, 3, or 4 columns depending on viewport.</p>
+                            
+                            <div class="w-full bg-white/5 rounded-xl border border-white/10 p-4 mb-4">
+                                <div class="grid grid-cols-12 gap-2 h-10 mb-2">
+                                    <div class="bg-brand-gold/20 rounded"></div><div class="bg-brand-gold/20 rounded"></div><div class="bg-brand-gold/20 rounded"></div><div class="bg-brand-gold/20 rounded"></div>
+                                    <div class="bg-brand-gold/20 rounded"></div><div class="bg-brand-gold/20 rounded"></div><div class="bg-brand-gold/20 rounded"></div><div class="bg-brand-gold/20 rounded"></div>
+                                    <div class="bg-brand-gold/20 rounded"></div><div class="bg-brand-gold/20 rounded"></div><div class="bg-brand-gold/20 rounded"></div><div class="bg-brand-gold/20 rounded"></div>
+                                </div>
+                                <p class="text-center text-[10px] text-brand-textMuted font-mono">grid-cols-12</p>
+                            </div>
+                            
+                            <div class="w-full bg-white/5 rounded-xl border border-white/10 p-4">
+                                <div class="grid grid-cols-3 gap-4 h-16 mb-2">
+                                    <div class="bg-brand-blue/20 rounded flex items-center justify-center text-xs text-brand-blue">col-span-1</div>
+                                    <div class="bg-brand-blue/20 rounded flex items-center justify-center text-xs text-brand-blue">col-span-1</div>
+                                    <div class="bg-brand-blue/20 rounded flex items-center justify-center text-xs text-brand-blue">col-span-1</div>
+                                </div>
+                                <p class="text-center text-[10px] text-brand-textMuted font-mono">grid-cols-3 gap-6</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ================= BUTTONS ================= -->
+                <section id="buttons" class="mb-24 scroll-mt-20">
+                    <div class="flex items-center gap-3 mb-8 border-b border-white/10 pb-4">
+                        <i class="fas fa-toggle-on text-brand-gold text-xl"></i>
+                        <h2 class="text-2xl font-serif font-bold text-white">Button Library</h2>
+                    </div>
+
+                    <div class="glass p-8 rounded-2xl">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                            
+                            <!-- Primary -->
+                            <div>
+                                <p class="text-xs text-brand-textMuted mb-4">Primary</p>
+                                <div class="space-y-4">
+                                    <button class="w-full px-6 py-3 rounded-full bg-brand-gold text-brand-dark font-bold hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-all duration-300">Default</button>
+                                    <button class="w-full px-6 py-3 rounded-full bg-brand-gold text-brand-dark font-bold shadow-[0_0_20px_rgba(212,175,55,0.4)] transform -translate-y-1">Hover</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Secondary / Glass -->
+                            <div>
+                                <p class="text-xs text-brand-textMuted mb-4">Secondary (Glass)</p>
+                                <div class="space-y-4">
+                                    <button class="w-full px-6 py-3 rounded-full glass hover:border-brand-gold/40 text-white font-semibold transition-all duration-300">Default</button>
+                                    <button class="w-full px-6 py-3 rounded-full glass border-brand-gold/40 text-brand-gold font-semibold transform -translate-y-1 shadow-[0_0_20px_rgba(212,175,55,0.15)]">Hover</button>
+                                </div>
+                            </div>
+
+                            <!-- Outline -->
+                            <div>
+                                <p class="text-xs text-brand-textMuted mb-4">Outline</p>
+                                <div class="space-y-4">
+                                    <button class="w-full px-6 py-3 rounded-xl border border-white/20 text-white text-sm font-semibold hover:bg-white/5 transition-colors">Default</button>
+                                    <button class="w-full px-6 py-3 rounded-xl border border-brand-gold text-brand-gold text-sm font-semibold bg-brand-gold/5">Hover/Active</button>
+                                </div>
+                            </div>
+
+                            <!-- Danger / Action -->
+                            <div>
+                                <p class="text-xs text-brand-textMuted mb-4">Semantic Actions</p>
+                                <div class="space-y-4">
+                                    <button class="w-full px-6 py-3 rounded-xl bg-red-500/10 text-red-500 border border-red-500/20 text-sm font-semibold hover:bg-red-500/20 transition-colors">Danger Action</button>
+                                    <button class="w-full px-6 py-3 rounded-xl bg-brand-green/10 text-brand-green border border-brand-green/20 text-sm font-semibold hover:bg-brand-green/20 transition-colors">Success Action</button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="mt-10 border-t border-white/5 pt-8">
+                            <p class="text-xs text-brand-textMuted mb-4">States & Icons</p>
+                            <div class="flex flex-wrap gap-4">
+                                <button class="px-6 py-3 rounded-full bg-brand-gold text-brand-dark font-bold opacity-50 cursor-not-allowed">Disabled</button>
+                                <button class="px-6 py-3 rounded-full bg-brand-gold text-brand-dark font-bold flex items-center gap-2">
+                                    Processing <div class="loader border-brand-dark border-left-transparent w-4 h-4"></div>
+                                </button>
+                                <button class="px-6 py-3 rounded-full bg-brand-gold text-brand-dark font-bold flex items-center gap-2 group">
+                                    Explore <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                                </button>
+                                <button class="w-12 h-12 rounded-full glass flex items-center justify-center text-white hover:text-brand-gold hover:border-brand-gold transition-colors">
+                                    <i class="fas fa-share-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ================= FORMS & INPUTS ================= -->
+                <section id="forms" class="mb-24 scroll-mt-20">
+                    <div class="flex items-center gap-3 mb-8 border-b border-white/10 pb-4">
+                        <i class="fas fa-keyboard text-brand-gold text-xl"></i>
+                        <h2 class="text-2xl font-serif font-bold text-white">Forms & Inputs</h2>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div class="glass p-8 rounded-2xl">
+                            <h3 class="font-bold text-sm mb-6">Floating Label Inputs (Corporate Standard)</h3>
+                            <form onsubmit="event.preventDefault()" class="space-y-5">
+                                <div class="input-float">
+                                    <input type="text" id="demo-name" class="peer placeholder-transparent" placeholder="Full Name" />
+                                    <label for="demo-name" class="floating-label peer-placeholder-shown:top-4 peer-placeholder-shown:text-base">Full Name</label>
+                                </div>
+                                <div class="input-float">
+                                    <select id="demo-select" class="peer appearance-none bg-transparent">
+                                        <option value="" disabled selected hidden></option>
+                                        <option value="1">Option 1</option>
+                                        <option value="2">Option 2</option>
+                                    </select>
+                                    <label for="demo-select" class="floating-label">Department</label>
+                                    <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-white/50">
+                                        <i class="fas fa-chevron-down text-xs"></i>
+                                    </div>
+                                </div>
+                                <div class="input-float">
+                                    <textarea id="demo-text" rows="3" class="peer placeholder-transparent resize-none" placeholder="Message"></textarea>
+                                    <label for="demo-text" class="floating-label peer-placeholder-shown:top-4 peer-placeholder-shown:text-base">Your Message</label>
+                                </div>
+                                
+                                <div class="pt-2">
+                                    <label class="flex items-center gap-3 cursor-pointer group">
+                                        <input type="checkbox" class="rounded border-white/20 bg-white/5 text-brand-gold focus:ring-brand-gold w-4 h-4 cursor-pointer" checked>
+                                        <span class="text-sm text-brand-textMuted group-hover:text-white transition-colors">I accept the terms and conditions</span>
+                                    </label>
+                                </div>
+                                
+                                <!-- File Upload UI -->
+                                <div class="mt-4">
+                                    <label class="block text-sm font-medium text-brand-textMuted mb-2">Document Upload</label>
+                                    <div class="border-2 border-dashed border-white/20 rounded-xl bg-white/5 hover:border-brand-gold/50 hover:bg-white/10 transition-colors duration-300 text-center py-6 cursor-pointer relative overflow-hidden">
+                                        <input type="file" class="absolute inset-0 opacity-0 cursor-pointer w-full h-full z-10">
+                                        <i class="fas fa-cloud-upload-alt text-2xl text-brand-gold mb-2"></i>
+                                        <p class="text-xs text-white/80 font-medium">Click or drag file here</p>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <div class="glass p-8 rounded-2xl">
+                            <h3 class="font-bold text-sm mb-6">Backend / Dashboard Inputs</h3>
+                            <div class="space-y-5">
+                                <div>
+                                    <label class="block text-xs font-bold text-brand-textMuted uppercase tracking-wider mb-2">Standard Input</label>
+                                    <input type="text" class="input-premium" placeholder="Enter project name...">
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-xs font-bold text-brand-textMuted uppercase tracking-wider mb-2">Search Input</label>
+                                    <div class="relative">
+                                        <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-white/40"></i>
+                                        <input type="text" class="input-premium pl-10" placeholder="Search records...">
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-xs font-bold text-brand-textMuted uppercase tracking-wider mb-2">Validation States</label>
+                                    <input type="email" class="w-full bg-red-500/5 border border-red-500/50 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-red-500 mb-1" value="invalid-email@">
+                                    <p class="text-[10px] text-red-400"><i class="fas fa-exclamation-circle"></i> Please enter a valid email address.</p>
+                                </div>
+                                
+                                <div>
+                                    <input type="text" class="w-full bg-brand-green/5 border border-brand-green/50 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-brand-green" value="Valid input">
+                                    <p class="text-[10px] text-brand-green mt-1"><i class="fas fa-check-circle"></i> Username is available.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ================= CARDS ================= -->
+                <section id="cards" class="mb-24 scroll-mt-20">
+                    <div class="flex items-center gap-3 mb-8 border-b border-white/10 pb-4">
+                        <i class="fas fa-address-card text-brand-gold text-xl"></i>
+                        <h2 class="text-2xl font-serif font-bold text-white">Card Library</h2>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Stat Card -->
+                        <div class="glass p-6 rounded-2xl flex flex-col justify-between group hover:border-brand-gold/30 transition-colors">
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="w-10 h-10 rounded-full bg-brand-gold/10 flex items-center justify-center text-brand-gold group-hover:scale-110 transition-transform"><i class="fas fa-chart-bar"></i></div>
+                                <span class="bg-brand-green/20 text-brand-green border border-brand-green/30 text-xs px-2 py-0.5 rounded-md"><i class="fas fa-arrow-up mr-1"></i>12%</span>
+                            </div>
+                            <div>
+                                <h3 class="text-3xl font-bold text-white mb-1">1,492</h3>
+                                <p class="text-xs text-brand-textMuted uppercase tracking-wider font-bold">Stat Card (KPI)</p>
+                            </div>
+                        </div>
+
+                        <!-- Feature Card (Public) -->
+                        <div class="glass glass-hover p-8 rounded-3xl group flex flex-col">
+                            <div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-brand-blue text-xl mb-6 group-hover:scale-110 group-hover:bg-brand-blue group-hover:text-white transition-all duration-300">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3 class="text-lg font-bold mb-3">Feature Card</h3>
+                            <p class="text-sm text-brand-textMuted leading-relaxed">Used primarily on public marketing pages to highlight division capabilities.</p>
+                        </div>
+
+                        <!-- Profile/Entity Card -->
+                        <div class="glass p-6 rounded-2xl flex items-center gap-4 group hover:border-white/20 transition-colors cursor-pointer">
+                            <div class="w-14 h-14 rounded-full bg-gradient-to-br from-brand-gold to-brand-goldDark flex items-center justify-center text-brand-dark font-bold text-xl border-2 border-[#0a0a0e]">
+                                JD
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white group-hover:text-brand-gold transition-colors">Profile Card</h3>
+                                <p class="text-xs text-brand-textMuted">Chief Executive Officer</p>
+                            </div>
+                            <i class="fas fa-chevron-right ml-auto text-white/30 group-hover:text-white transition-colors"></i>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ================= BADGES & ALERTS ================= -->
+                <section id="badges" class="mb-24 scroll-mt-20">
+                    <div class="flex items-center gap-3 mb-8 border-b border-white/10 pb-4">
+                        <i class="fas fa-tags text-brand-gold text-xl"></i>
+                        <h2 class="text-2xl font-serif font-bold text-white">Badges & Alerts</h2>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="glass p-6 rounded-2xl">
+                            <h3 class="font-bold text-sm mb-6">Status Badges (Pills)</h3>
+                            <div class="flex flex-wrap gap-4">
+                                <span class="bg-brand-green/20 text-brand-green border border-brand-green/30 text-xs px-2.5 py-1 rounded-md uppercase font-bold tracking-wider">Active</span>
+                                <span class="bg-orange-500/20 text-orange-400 border border-orange-500/30 text-xs px-2.5 py-1 rounded-md uppercase font-bold tracking-wider">Pending</span>
+                                <span class="bg-red-500/20 text-red-400 border border-red-500/30 text-xs px-2.5 py-1 rounded-md uppercase font-bold tracking-wider">Overdue</span>
+                                <span class="bg-brand-blue/20 text-blue-400 border border-brand-blue/30 text-xs px-2.5 py-1 rounded-md uppercase font-bold tracking-wider">Processing</span>
+                                <span class="bg-white/10 text-white/80 border border-white/20 text-xs px-2.5 py-1 rounded-md uppercase font-bold tracking-wider">Draft</span>
+                                <span class="bg-brand-gold/20 text-brand-gold border border-brand-gold/30 text-xs px-2.5 py-1 rounded-md uppercase font-bold tracking-wider">Premium</span>
+                            </div>
+                        </div>
+
+                        <div class="glass p-6 rounded-2xl">
+                            <h3 class="font-bold text-sm mb-6">Notification Alerts</h3>
+                            <div class="space-y-3">
+                                <!-- Success -->
+                                <div class="bg-brand-green/10 border border-brand-green/30 p-3 rounded-xl flex items-start gap-3">
+                                    <i class="fas fa-check-circle text-brand-green mt-0.5"></i>
+                                    <div>
+                                        <p class="text-sm font-bold text-white">System Updated</p>
+                                        <p class="text-xs text-brand-textMuted">Changes have been saved successfully.</p>
+                                    </div>
+                                </div>
+                                <!-- Warning -->
+                                <div class="bg-brand-gold/10 border border-brand-gold/30 p-3 rounded-xl flex items-start gap-3">
+                                    <i class="fas fa-exclamation-triangle text-brand-gold mt-0.5"></i>
+                                    <div>
+                                        <p class="text-sm font-bold text-white">Action Required</p>
+                                        <p class="text-xs text-brand-textMuted">Your subscription will expire in 3 days.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ================= TABLES ================= -->
+                <section id="tables" class="mb-24 scroll-mt-20">
+                    <div class="flex items-center gap-3 mb-8 border-b border-white/10 pb-4">
+                        <i class="fas fa-table text-brand-gold text-xl"></i>
+                        <h2 class="text-2xl font-serif font-bold text-white">Data Tables</h2>
+                    </div>
+
+                    <div class="glass rounded-2xl overflow-hidden">
+                        <div class="p-4 border-b border-white/5 flex justify-between items-center bg-white/[0.01]">
+                            <h3 class="font-bold text-sm">Standard Enterprise Table</h3>
+                            <div class="relative w-48">
+                                <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-white/40 text-xs"></i>
+                                <input type="text" placeholder="Search..." class="w-full bg-white/5 border border-white/10 rounded-lg pl-8 pr-3 py-1.5 text-xs text-white focus:border-brand-gold outline-none">
+                            </div>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse whitespace-nowrap">
+                                <thead>
+                                    <tr class="bg-white/[0.03] text-[10px] uppercase tracking-wider text-brand-textMuted border-b border-white/10">
+                                        <th class="p-4 font-semibold w-10 text-center"><input type="checkbox" class="rounded bg-white/5 border-white/20"></th>
+                                        <th class="p-4 font-semibold">Column ID <i class="fas fa-sort ml-1 text-white/20"></i></th>
+                                        <th class="p-4 font-semibold">User Details</th>
+                                        <th class="p-4 font-semibold">Status</th>
+                                        <th class="p-4 font-semibold">Amount</th>
+                                        <th class="p-4 font-semibold text-right">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-sm divide-y divide-white/5">
+                                    <tr class="hover:bg-white/[0.02] transition-colors">
+                                        <td class="p-4 text-center"><input type="checkbox" class="rounded bg-white/5 border-white/20"></td>
+                                        <td class="p-4 font-mono text-xs">#TRX-001</td>
+                                        <td class="p-4">
+                                            <div class="flex items-center gap-3">
+                                                <div class="w-8 h-8 rounded-full bg-brand-blue/20 flex items-center justify-center text-brand-blue text-xs font-bold">JD</div>
+                                                <div>
+                                                    <p class="font-bold text-white">John Doe</p>
+                                                    <p class="text-[10px] text-brand-textMuted">john@example.com</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="p-4"><span class="bg-brand-green/20 text-brand-green border border-brand-green/30 text-[10px] px-2 py-1 rounded-md uppercase font-bold">Paid</span></td>
+                                        <td class="p-4 font-mono">$1,250.00</td>
+                                        <td class="p-4 text-right">
+                                            <button class="text-white/50 hover:text-brand-gold transition-colors mx-1"><i class="fas fa-eye"></i></button>
+                                            <button class="text-white/50 hover:text-brand-blue transition-colors mx-1"><i class="fas fa-edit"></i></button>
+                                            <button class="text-white/50 hover:text-red-500 transition-colors mx-1"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-white/[0.02] transition-colors">
+                                        <td class="p-4 text-center"><input type="checkbox" class="rounded bg-white/5 border-white/20"></td>
+                                        <td class="p-4 font-mono text-xs">#TRX-002</td>
+                                        <td class="p-4">
+                                            <div class="flex items-center gap-3">
+                                                <div class="w-8 h-8 rounded-full bg-orange-500/20 flex items-center justify-center text-orange-500 text-xs font-bold">SW</div>
+                                                <div>
+                                                    <p class="font-bold text-white">Sarah Williams</p>
+                                                    <p class="text-[10px] text-brand-textMuted">sarah@example.com</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="p-4"><span class="bg-orange-500/20 text-orange-400 border border-orange-500/30 text-[10px] px-2 py-1 rounded-md uppercase font-bold">Pending</span></td>
+                                        <td class="p-4 font-mono">$850.00</td>
+                                        <td class="p-4 text-right">
+                                            <button class="text-white/50 hover:text-brand-gold transition-colors mx-1"><i class="fas fa-eye"></i></button>
+                                            <button class="text-white/50 hover:text-brand-blue transition-colors mx-1"><i class="fas fa-edit"></i></button>
+                                            <button class="text-white/50 hover:text-red-500 transition-colors mx-1"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="p-3 border-t border-white/5 flex justify-between items-center text-xs text-brand-textMuted bg-white/[0.01]">
+                            <span>Showing 1-2 of 24 records</span>
+                            <div class="flex gap-1">
+                                <button class="w-6 h-6 rounded bg-white/5 flex items-center justify-center hover:text-white disabled:opacity-50"><i class="fas fa-chevron-left"></i></button>
+                                <button class="w-6 h-6 rounded bg-brand-gold text-brand-dark flex items-center justify-center font-bold">1</button>
+                                <button class="w-6 h-6 rounded bg-white/5 flex items-center justify-center hover:text-white">2</button>
+                                <button class="w-6 h-6 rounded bg-white/5 flex items-center justify-center hover:text-white"><i class="fas fa-chevron-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ================= CHARTS ================= -->
+                <section id="charts" class="mb-24 scroll-mt-20">
+                    <div class="flex items-center gap-3 mb-8 border-b border-white/10 pb-4">
+                        <i class="fas fa-chart-bar text-brand-gold text-xl"></i>
+                        <h2 class="text-2xl font-serif font-bold text-white">Chart.js Implementations</h2>
+                    </div>
+                    <p class="text-sm text-brand-textMuted mb-6">Standardized configuration for analytical widgets in dark mode.</p>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="glass p-6 rounded-2xl min-h-[300px] flex flex-col">
+                            <h3 class="font-bold text-sm mb-4">Area Chart (Gradient)</h3>
+                            <div class="flex-1 relative w-full"><canvas id="styleChartLine"></canvas></div>
+                        </div>
+                        <div class="glass p-6 rounded-2xl min-h-[300px] flex flex-col">
+                            <h3 class="font-bold text-sm mb-4">Bar Chart</h3>
+                            <div class="flex-1 relative w-full"><canvas id="styleChartBar"></canvas></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ================= LOADING STATES ================= -->
+                <section id="loaders" class="mb-24 scroll-mt-20">
+                    <div class="flex items-center gap-3 mb-8 border-b border-white/10 pb-4">
+                        <i class="fas fa-spinner text-brand-gold text-xl"></i>
+                        <h2 class="text-2xl font-serif font-bold text-white">Loading States</h2>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="glass p-8 rounded-2xl">
+                            <h3 class="font-bold text-sm mb-6">Skeleton UI (Shimmer)</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-12 h-12 rounded-full shimmer bg-white/5"></div>
+                                    <div class="space-y-2 flex-1">
+                                        <div class="h-3 w-1/3 shimmer bg-white/5 rounded"></div>
+                                        <div class="h-2 w-1/2 shimmer bg-white/5 rounded"></div>
+                                    </div>
+                                </div>
+                                <div class="h-24 w-full shimmer bg-white/5 rounded-xl mt-4"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="glass p-8 rounded-2xl flex flex-col items-center justify-center">
+                            <h3 class="font-bold text-sm mb-6 w-full text-left">Spinners & Processing</h3>
+                            <div class="flex gap-8 items-center">
+                                <div class="loader"></div>
+                                <div class="loader border-brand-blue border-left-transparent w-8 h-8"></div>
+                                <button class="px-6 py-2 rounded-full bg-brand-gold text-brand-dark font-bold flex items-center gap-2 opacity-80">
+                                    Saving <div class="loader border-brand-dark border-left-transparent w-4 h-4 border-2"></div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Footer within workspace -->
+                <footer class="mt-20 border-t border-white/5 pt-8 text-center md:text-left flex flex-col md:flex-row justify-between items-center text-xs text-brand-textMuted">
+                    <p>&copy; <span id="year"></span> MOH ZANNAH GROUP LIMITED. Official Design System.</p>
+                    <p class="mt-2 md:mt-0">v1.0.0 (Production Release)</p>
+                </footer>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- TOAST CONTAINER -->
+    <div id="toast-container" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] flex flex-col gap-3 pointer-events-none"></div>
+
+    <script>
+        // Set current year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Layout Toggles
+        const sidebar = document.getElementById('sidebar');
+        
+        document.getElementById('open-sidebar').addEventListener('click', () => {
+            sidebar.classList.remove('-translate-x-full');
+        });
+        document.getElementById('close-sidebar').addEventListener('click', () => {
+            sidebar.classList.add('-translate-x-full');
+        });
+
+        // Sidebar Active State Sync on Scroll
+        const mainScroll = document.getElementById('main-scroll');
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.sidebar-link');
+
+        mainScroll.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (mainScroll.scrollTop >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active', 'bg-brand-gold/10', 'text-brand-gold', 'border-r-2', 'border-brand-gold');
+                link.querySelector('i').classList.remove('text-brand-gold');
+                link.querySelector('i').classList.add('text-white/50');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active', 'bg-brand-gold/10', 'text-brand-gold', 'border-r-2', 'border-brand-gold');
+                    link.querySelector('i').classList.remove('text-white/50');
+                    link.querySelector('i').classList.add('text-brand-gold');
+                }
+            });
+        });
+
+        // Smooth Scroll for Sidebar Links (since we are inside an overflow div)
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+                
+                mainScroll.scrollTo({
+                    top: targetSection.offsetTop - 80, // offset for sticky header
+                    behavior: 'smooth'
+                });
+
+                if(window.innerWidth < 768) {
+                    sidebar.classList.add('-translate-x-full');
+                }
+            });
+        });
+
+        // Copy Color Function
+        function copyColor(hex) {
+            navigator.clipboard.writeText(hex).then(() => {
+                showToast(`Copied ${hex} to clipboard`, 'success');
+            }).catch(err => {
+                // Fallback for iframe restrictions
+                const textArea = document.createElement("textarea");
+                textArea.value = hex;
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    showToast(`Copied ${hex} to clipboard`, 'success');
+                } catch (err) {
+                    showToast('Failed to copy', 'error');
+                }
+                document.body.removeChild(textArea);
+            });
+        }
+
+        // Toast Notification
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            
+            let icon = 'fa-info-circle text-brand-blue';
+            let border = 'border-brand-blue/30';
+            if(type === 'success') { icon = 'fa-check-circle text-brand-green'; border = 'border-brand-green/30'; }
+            
+            toast.className = `glass px-6 py-3 rounded-full border ${border} shadow-2xl flex items-center gap-3 text-sm text-white pointer-events-auto w-max mx-auto bg-[#0a0a0e]/90`;
+            toast.innerHTML = `<i class="fas ${icon}"></i> <span class="font-medium">${message}</span>`;
+            
+            container.appendChild(toast);
+            
+            gsap.fromTo(toast, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: "back.out(1.5)" });
+            
+            setTimeout(() => {
+                gsap.to(toast, { opacity: 0, y: 20, duration: 0.3, ease: "power2.in", onComplete: () => toast.remove() });
+            }, 3000);
+        }
+
+        // Initialize Initialization Sequence & Charts
+        window.addEventListener('DOMContentLoaded', () => {
+            // Loader sequence
+            const progress = document.getElementById('loader-progress');
+            let w = 0;
+            const interval = setInterval(() => {
+                w += Math.random() * 20;
+                if (w > 100) w = 100;
+                progress.style.width = w + '%';
+                if (w === 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        loaderScreen.classList.add('opacity-0');
+                        setTimeout(() => {
+                            loaderScreen.classList.add('hidden');
+                            initCharts();
+                        }, 1000);
+                    }, 500);
+                }
+            }, 100);
+        });
+
+        function initCharts() {
+            Chart.defaults.color = '#8a8a93';
+            Chart.defaults.font.family = '"Plus Jakarta Sans", sans-serif';
+
+            // Line Chart
+            const ctxLine = document.getElementById('styleChartLine');
+            if(ctxLine) {
+                const gradientLine = ctxLine.getContext('2d').createLinearGradient(0, 0, 0, 300);
+                gradientLine.addColorStop(0, 'rgba(0, 51, 160, 0.5)');
+                gradientLine.addColorStop(1, 'rgba(0, 51, 160, 0.0)');
+
+                new Chart(ctxLine, {
+                    type: 'line',
+                    data: {
+                        labels: ['1', '2', '3', '4', '5'],
+                        datasets: [{
+                            data: [10, 25, 20, 40, 35],
+                            borderColor: '#0033A0',
+                            backgroundColor: gradientLine,
+                            borderWidth: 2, fill: true, tension: 0.4, pointRadius: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true, maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: { y: { display: false }, x: { display: false } }
+                    }
+                });
+            }
+
+            // Bar Chart
+            const ctxBar = document.getElementById('styleChartBar');
+            if(ctxBar) {
+                new Chart(ctxBar, {
+                    type: 'bar',
+                    data: {
+                        labels: ['A', 'B', 'C', 'D'],
+                        datasets: [{
+                            data: [65, 45, 80, 55],
+                            backgroundColor: '#D4AF37',
+                            borderRadius: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true, maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: { grid: { color: 'rgba(255,255,255,0.05)' }, border: {display: false} },
+                            x: { grid: { display: false }, border: {display: false} }
+                        }
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>
+
