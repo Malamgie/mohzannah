@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise OS | MOH ZANNAH GROUP</title>
+    <meta name="description" content="World-class Enterprise Corporate Management Dashboard for MOH ZANNAH GROUP LIMITED.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- External Libraries -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#030305',
+                            darker: '#010101',
+                            card: '#0a0a0e',
+                            panel: '#111116',
+                            gold: '#D4AF37',
+                            goldLight: '#F3E5AB',
+                            goldDark: '#997a00',
+                            blue: '#0033A0',
+                            green: '#00805A',
+                            orange: '#f97316',
+                            purple: '#8b5cf6',
+                            textMuted: '#8a8a93',
+                            border: 'rgba(255,255,255,0.06)'
+                        }
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                        'hero-glow': 'radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.15), transparent 60%)',
+                        'gold-gradient': 'linear-gradient(135deg, #F3E5AB 0%, #D4AF37 50%, #997a00 100%)',
+                        'mesh': 'radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px)',
+                        'grid-pattern': 'linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)',
+                    },
+                    animation: {
+                        'spin-slow': 'spin 20s linear infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .glass {
+                @apply bg-white/[0.02] backdrop-blur-2xl border border-brand-border;
+            }
+            .glass-panel {
+                @apply bg-brand-panel/80 backdrop-blur-3xl border border-brand-border;
+            }
+            .glass-hover {
+                @apply hover:bg-white/[0.05] hover:border-brand-gold/30 hover:shadow-[0_8px_30px_-10px_rgba(212,175,55,0.15)] transition-all duration-300;
+            }
+            .text-gradient {
+                @apply bg-clip-text text-transparent bg-gold-gradient;
+            }
+            .input-premium {
+                @apply w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold transition-colors duration-300;
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 5px; height: 5px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
+
+        body {
+            background-color: #030305;
+            color: #ffffff;
+            overflow: hidden;
+        }
+
+        /* Abstract Noise Texture */
+        .noise-bg {
+            position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.02;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Kbd tag styling */
+        kbd {
+            @apply bg-white/10 border border-white/20 rounded px-1.5 py-0.5 text-[10px] font-mono text-white/70 mx-0.5;
+        }
+
+        /* Sidebar transitions */
+        #sidebar { transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .sidebar-collapsed { width: 80px !important; }
+        .sidebar-collapsed .nav-label, .sidebar-collapsed .nav-arrow, .sidebar-collapsed .nav-group-title { display: none; }
+        .sidebar-collapsed .nav-icon { margin-right: 0 !important; font-size: 1.25rem; }
+        .sidebar-collapsed .nav-item { justify-content: center; padding-left: 0; padding-right: 0; }
+
+        /* Sortable JS styling */
+        .sortable-ghost { opacity: 0.4; }
+        .sortable-drag { background: rgba(212, 175, 55, 0.1) !important; border: 1px solid #D4AF37 !important; cursor: grabbing !important; }
+
+        /* Loader */
+        .loader { border: 2px solid rgba(212, 175, 55, 0.2); border-left-color: #D4AF37; border-radius: 50%; width: 20px; height: 20px; animation: spin 1s linear infinite; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-gold selection:text-brand-dark">
+
+    <div class="noise-bg"></div>
+
+    <!-- Background Ambience -->
+    <div class="fixed inset-0 pointer-events-none z-0">
+        <div class="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-brand-blue/10 rounded-full blur-[150px]"></div>
+        <div class="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-brand-gold/10 rounded-full blur-[150px]"></div>
+        <div class="absolute inset-0 bg-grid-pattern opacity-30" style="background-size: 40px 40px;"></div>
+    </div>
+
+    <!-- ================= LOADING SCREEN ================= -->
+    <div id="loader-screen" class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-brand-dark transition-opacity duration-1000">
+        <div class="relative flex flex-col items-center">
+            <div class="absolute inset-0 bg-brand-gold/20 blur-[50px] rounded-full animate-pulse-slow"></div>
+            <img src="logo.png" alt="MOH ZANNAH Logo" class="h-16 object-contain z-10 animate-float mb-8">
+            <div class="w-48 h-1 bg-white/10 rounded-full overflow-hidden">
+                <div id="loader-progress" class="h-full bg-brand-gold w-0 transition-all duration-100 ease-out"></div>
+            </div>
+            <p class="text-[10px] text-brand-textMuted uppercase tracking-widest mt-4 font-mono">Initializing Enterprise OS</p>
+        </div>
+    </div>
+
+    <!-- ================= LOGIN SCREEN ================= -->
+    <div id="login-screen" class="fixed inset-0 z-[60] hidden items-center justify-center bg-brand-dark/50 backdrop-blur-xl transition-opacity duration-700 opacity-0">
+        <div class="glass p-10 md:p-12 rounded-[2rem] w-[90%] max-w-md relative overflow-hidden shadow-[0_0_50px_rgba(212,175,55,0.1)] border-white/10">
+            <div class="absolute -top-10 -right-10 w-40 h-40 bg-brand-gold/10 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-brand-blue/10 rounded-full blur-3xl"></div>
+            
+            <div class="text-center mb-10 relative z-10">
+                <img src="logo.png" alt="MOH ZANNAH Logo" class="h-12 object-contain mx-auto mb-6">
+                <h1 class="text-2xl font-serif font-bold text-white mb-2">Executive Portal</h1>
+                <p class="text-sm text-brand-textMuted">Secure Administrator Login</p>
+            </div>
+
+            <form id="login-form" class="space-y-5 relative z-10">
+                <div>
+                    <input type="email" class="input-premium" placeholder="Corporate Email" value="admin@mohzannah.com" required />
+                </div>
+                <div>
+                    <input type="password" class="input-premium" placeholder="Password" value="••••••••••••" required />
+                </div>
+
+                <div class="flex items-center justify-between text-xs text-brand-textMuted">
+                    <label class="flex items-center gap-2 cursor-pointer hover:text-white transition-colors">
+                        <input type="checkbox" class="rounded border-white/20 bg-white/5 text-brand-gold focus:ring-brand-gold" checked>
+                        <span>Remember ME</span>
+                    </label>
+                    <a href="#" class="hover:text-brand-gold transition-colors">Recover Access</a>
+                </div>
+
+                <button type="submit" id="login-btn" class="w-full py-3 mt-6 rounded-xl bg-brand-gold text-brand-dark font-bold hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-all duration-300 flex justify-center items-center gap-2 group">
+                    <span>Secure Login</span>
+                    <i class="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ================= APP LAYOUT ================= -->
+    <div id="app-layout" class="relative z-10 flex h-screen w-full hidden opacity-0 transition-opacity duration-700">
+        
+        <!-- LEFT SIDEBAR -->
+        <aside id="sidebar" class="w-64 h-full glass-panel flex-shrink-0 flex flex-col z-40 border-r border-white/5 shadow-2xl relative">
+            <!-- Sidebar Header -->
+            <div class="h-16 flex items-center justify-between px-6 border-b border-white/5">
+                <div class="flex items-center gap-3 overflow-hidden">
+                    <img src="logo.png" alt="Logo" class="h-6 object-contain flex-shrink-0">
+                    <span class="nav-label font-serif font-bold text-sm text-white whitespace-nowrap">MOH ZANNAH</span>
+                </div>
+            </div>
+            
+            <!-- Sidebar Nav -->
+            <div class="flex-1 overflow-y-auto py-4 px-3 space-y-1 custom-scrollbar">
+                
+                <div class="nav-group-title text-[10px] font-bold text-brand-textMuted uppercase tracking-widest px-3 mb-2 mt-2">Overview</div>
+                <a href="#" onclick="switchTab('dashboard')" class="nav-item active flex items-center px-3 py-2.5 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-colors group">
+                    <i class="fas fa-chart-line nav-icon w-6 text-brand-textMuted group-hover:text-brand-gold transition-colors"></i>
+                    <span class="nav-label text-sm font-medium flex-1">Dashboard</span>
+                </a>
+                <a href="#" onclick="switchTab('analytics')" class="nav-item flex items-center px-3 py-2.5 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-colors group">
+                    <i class="fas fa-chart-pie nav-icon w-6 text-brand-textMuted group-hover:text-brand-gold transition-colors"></i>
+                    <span class="nav-label text-sm font-medium flex-1">Analytics</span>
+                </a>
+
+                <div class="nav-group-title text-[10px] font-bold text-brand-textMuted uppercase tracking-widest px-3 mb-2 mt-6">Enterprise</div>
+                <a href="#" onclick="switchTab('cms')" class="nav-item flex items-center px-3 py-2.5 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-colors group">
+                    <i class="fas fa-globe nav-icon w-6 text-brand-textMuted group-hover:text-brand-gold transition-colors"></i>
+                    <span class="nav-label text-sm font-medium flex-1">Website CMS</span>
+                </a>
+                <a href="#" onclick="switchTab('divisions')" class="nav-item flex items-center px-3 py-2.5 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-colors group">
+                    <i class="fas fa-layer-group nav-icon w-6 text-brand-textMuted group-hover:text-brand-gold transition-colors"></i>
+                    <span class="nav-label text-sm font-medium flex-1">Business Divisions</span>
+                </a>
+                <a href="#" onclick="switchTab('projects')" class="nav-item flex items-center px-3 py-2.5 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-colors group">
+                    <i class="fas fa-tasks nav-icon w-6 text-brand-textMuted group-hover:text-brand-gold transition-colors"></i>
+                    <span class="nav-label text-sm font-medium flex-1">Projects</span>
+                </a>
+                <a href="#" onclick="switchTab('clients')" class="nav-item flex items-center px-3 py-2.5 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-colors group">
+                    <i class="fas fa-building nav-icon w-6 text-brand-textMuted group-hover:text-brand-gold transition-colors"></i>
+                    <span class="nav-label text-sm font-medium flex-1">Clients & Partners</span>
+                </a>
+
+                <div class="nav-group-title text-[10px] font-bold text-brand-textMuted uppercase tracking-widest px-3 mb-2 mt-6">Operations</div>
+                <a href="#" onclick="switchTab('requests')" class="nav-item flex items-center px-3 py-2.5 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-colors group">
+                    <i class="fas fa-clipboard-list nav-icon w-6 text-brand-textMuted group-hover:text-brand-gold transition-colors"></i>
+                    <span class="nav-label text-sm font-medium flex-1">Service Requests</span>
+                    <span class="nav-label ml-auto bg-orange-500/20 text-orange-400 text-[10px] py-0.5 px-2 rounded-md font-bold">12</span>
+                </a>
+                <a href="#" onclick="switchTab('finance')" class="nav-item flex items-center px-3 py-2.5 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-colors group">
+                    <i class="fas fa-file-invoice-dollar nav-icon w-6 text-brand-textMuted group-hover:text-brand-gold transition-colors"></i>
+                    <span class="nav-label text-sm font-medium flex-1">Finance & Quotes</span>
+                </a>
+                <a href="#" onclick="switchTab('hr')" class="nav-item flex items-center px-3 py-2.5 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-colors group">
+                    <i class="fas fa-users nav-icon w-6 text-brand-textMuted group-hover:text-brand-gold transition-colors"></i>
+                    <span class="nav-label text-sm font-medium flex-1">Staff & Careers</span>
+                </a>
+
+                <div class="nav-group-title text-[10px] font-bold text-brand-textMuted uppercase tracking-widest px-3 mb-2 mt-6">System</div>
+                <a href="#" onclick="switchTab('settings')" class="nav-item flex items-center px-3 py-2.5 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-colors group">
+                    <i class="fas fa-cog nav-icon w-6 text-brand-textMuted group-hover:text-brand-gold transition-colors"></i>
+                    <span class="nav-label text-sm font-medium flex-1">Settings</span>
+                </a>
+                <a href="#" onclick="switchTab('audit')" class="nav-item flex items-center px-3 py-2.5 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-colors group">
+                    <i class="fas fa-shield-alt nav-icon w-6 text-brand-textMuted group-hover:text-brand-gold transition-colors"></i>
+                    <span class="nav-label text-sm font-medium flex-1">Security & Logs</span>
+                </a>
+            </div>
+
+            <!-- Sidebar Footer -->
+            <div class="p-4 border-t border-white/5">
+                <div class="flex items-center gap-3 px-2">
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-brand-gold to-brand-goldDark flex items-center justify-center text-brand-dark font-bold text-xs shrink-0">CEO</div>
+                    <div class="nav-label overflow-hidden">
+                        <p class="text-xs font-bold text-white truncate">Admin User</p>
+                        <p class="text-[10px] text-brand-textMuted truncate">System Administrator</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN WORKSPACE -->
+        <div class="flex-1 flex flex-col min-w-0">
+            
+            <!-- TOP NAVIGATION -->
+            <header class="h-16 glass-panel flex items-center justify-between px-4 lg:px-8 border-b border-white/5 z-30">
+                <div class="flex items-center gap-4">
+                    <button id="sidebar-toggle" class="text-white/70 hover:text-white transition-colors">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    
+                    <button onclick="toggleCommandPalette()" class="hidden md:flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg px-3 py-1.5 text-sm text-brand-textMuted transition-colors w-64 lg:w-80">
+                        <i class="fas fa-search text-xs"></i>
+                        <span>Search anywhere...</span>
+                        <div class="ml-auto flex items-center">
+                            <kbd>Ctrl</kbd><kbd>K</kbd>
+                        </div>
+                    </button>
+                </div>
+
+                <div class="flex items-center gap-2 md:gap-4">
+                    <button class="w-8 h-8 rounded-lg hover:bg-white/5 flex items-center justify-center text-white/70 hover:text-brand-gold transition-colors tooltip-trigger" data-tooltip="Quick Create">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <button class="w-8 h-8 rounded-lg hover:bg-white/5 flex items-center justify-center text-white/70 hover:text-brand-gold transition-colors tooltip-trigger relative" data-tooltip="Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-brand-gold rounded-full shadow-[0_0_5px_#D4AF37]"></span>
+                    </button>
+                    <div class="w-px h-5 bg-white/10 mx-1"></div>
+                    <button id="right-sidebar-toggle" class="w-8 h-8 rounded-lg hover:bg-white/5 flex items-center justify-center text-white/70 hover:text-brand-gold transition-colors tooltip-trigger" data-tooltip="Activity Panel">
+                        <i class="fas fa-columns"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- MODULE CONTENT AREA -->
+            <main class="flex-1 overflow-y-auto custom-scrollbar p-4 lg:p-8 relative" id="main-content">
+                
+                <!-- ================= TAB: DASHBOARD ================= -->
+                <div id="tab-dashboard" class="tab-pane block animate-entry">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
+                        <div>
+                            <h2 class="text-2xl font-serif font-bold text-white mb-1">Executive Dashboard</h2>
+                            <p class="text-brand-textMuted text-xs font-mono">SYSTEM_STATUS: <span class="text-brand-green">OPTIMAL</span> | LAST_SYNC: <span id="sync-time">Just now</span></p>
+                        </div>
+                        <div class="flex gap-2">
+                            <button class="px-4 py-2 rounded-lg border border-white/10 bg-white/5 text-xs font-semibold hover:bg-white/10 transition-colors"><i class="fas fa-download mr-2"></i>Export Report</button>
+                        </div>
+                    </div>
+
+                    <!-- KPI Cards -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                        <!-- KPI 1 -->
+                        <div class="glass p-5 rounded-2xl flex flex-col justify-between relative overflow-hidden group">
+                            <div class="absolute -right-4 -top-4 text-brand-gold/5 text-7xl group-hover:scale-110 transition-transform"><i class="fas fa-chart-line"></i></div>
+                            <div class="flex justify-between items-start mb-4 relative z-10">
+                                <p class="text-xs text-brand-textMuted uppercase tracking-wider font-bold">Total Revenue (YTD)</p>
+                                <span class="bg-brand-green/20 text-brand-green text-[10px] px-1.5 py-0.5 rounded font-bold">+14.2%</span>
+                            </div>
+                            <h3 class="text-3xl font-bold text-white relative z-10 counter" data-target="24500000" data-prefix="$" data-suffix="">$0</h3>
+                        </div>
+                        
+                        <!-- KPI 2 -->
+                        <div class="glass p-5 rounded-2xl flex flex-col justify-between relative overflow-hidden group">
+                            <div class="absolute -right-4 -top-4 text-brand-blue/5 text-7xl group-hover:scale-110 transition-transform"><i class="fas fa-briefcase"></i></div>
+                            <div class="flex justify-between items-start mb-4 relative z-10">
+                                <p class="text-xs text-brand-textMuted uppercase tracking-wider font-bold">Active Projects</p>
+                                <span class="bg-brand-blue/20 text-blue-400 text-[10px] px-1.5 py-0.5 rounded font-bold">+5</span>
+                            </div>
+                            <h3 class="text-3xl font-bold text-white relative z-10 counter" data-target="128" data-prefix="" data-suffix="">0</h3>
+                        </div>
+
+                        <!-- KPI 3 -->
+                        <div class="glass p-5 rounded-2xl flex flex-col justify-between relative overflow-hidden group">
+                            <div class="absolute -right-4 -top-4 text-brand-gold/5 text-7xl group-hover:scale-110 transition-transform"><i class="fas fa-users"></i></div>
+                            <div class="flex justify-between items-start mb-4 relative z-10">
+                                <p class="text-xs text-brand-textMuted uppercase tracking-wider font-bold">Total Clients</p>
+                                <span class="bg-brand-gold/20 text-brand-gold text-[10px] px-1.5 py-0.5 rounded font-bold">+24</span>
+                            </div>
+                            <h3 class="text-3xl font-bold text-white relative z-10 counter" data-target="856" data-prefix="" data-suffix="">0</h3>
+                        </div>
+
+                        <!-- KPI 4 -->
+                        <div class="glass p-5 rounded-2xl flex flex-col justify-between relative overflow-hidden group">
+                            <div class="absolute -right-4 -top-4 text-orange-500/5 text-7xl group-hover:scale-110 transition-transform"><i class="fas fa-clipboard-list"></i></div>
+                            <div class="flex justify-between items-start mb-4 relative z-10">
+                                <p class="text-xs text-brand-textMuted uppercase tracking-wider font-bold">Pending Requests</p>
+                                <span class="bg-orange-500/20 text-orange-400 text-[10px] px-1.5 py-0.5 rounded font-bold">Action Req</span>
+                            </div>
+                            <h3 class="text-3xl font-bold text-white relative z-10 counter" data-target="42" data-prefix="" data-suffix="">0</h3>
+                        </div>
+                    </div>
+
+                    <!-- Charts Area -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                        <div class="lg:col-span-2 glass rounded-2xl p-6 flex flex-col min-h-[350px]">
+                            <div class="flex justify-between items-center mb-6">
+                                <h3 class="font-bold text-sm">Revenue vs Expenditure</h3>
+                                <div class="flex gap-2">
+                                    <span class="flex items-center text-[10px] text-brand-textMuted"><div class="w-2 h-2 rounded-full bg-brand-gold mr-1"></div> Revenue</span>
+                                    <span class="flex items-center text-[10px] text-brand-textMuted"><div class="w-2 h-2 rounded-full bg-brand-blue mr-1"></div> Expenditure</span>
+                                </div>
+                            </div>
+                            <div class="flex-1 w-full relative">
+                                <canvas id="mainChart"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="glass rounded-2xl p-6 flex flex-col min-h-[350px]">
+                            <h3 class="font-bold text-sm mb-6">Division Performance</h3>
+                            <div class="flex-1 w-full relative flex items-center justify-center">
+                                <canvas id="pieChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ================= TAB: WEBSITE CMS ================= -->
+                <div id="tab-cms" class="tab-pane hidden animate-entry">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
+                        <div>
+                            <h2 class="text-2xl font-serif font-bold text-white mb-1">Website CMS</h2>
+                            <p class="text-brand-textMuted text-xs">Manage public-facing website content, layout, and SEO.</p>
+                        </div>
+                        <div class="flex gap-2">
+                            <button class="px-4 py-2 rounded-lg bg-brand-gold text-brand-dark text-xs font-bold hover:shadow-[0_0_15px_rgba(212,175,55,0.4)] transition-all">Publish Changes</button>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                        <!-- Pages Sidebar -->
+                        <div class="glass rounded-2xl p-4 h-max space-y-1">
+                            <div class="text-[10px] font-bold text-brand-textMuted uppercase tracking-widest px-2 mb-2">Pages</div>
+                            <button class="w-full text-left px-3 py-2 rounded-lg bg-white/10 text-brand-gold text-xs font-bold flex justify-between items-center">Homepage <i class="fas fa-chevron-right text-[10px]"></i></button>
+                            <button class="w-full text-left px-3 py-2 rounded-lg hover:bg-white/5 text-white/70 text-xs transition-colors">Business Divisions</button>
+                            <button class="w-full text-left px-3 py-2 rounded-lg hover:bg-white/5 text-white/70 text-xs transition-colors">Real Estate</button>
+                            <button class="w-full text-left px-3 py-2 rounded-lg hover:bg-white/5 text-white/70 text-xs transition-colors">Logistics</button>
+                            <button class="w-full text-left px-3 py-2 rounded-lg hover:bg-white/5 text-white/70 text-xs transition-colors">Newsroom</button>
+                            <button class="w-full text-left px-3 py-2 rounded-lg hover:bg-white/5 text-white/70 text-xs transition-colors">Contact</button>
+                        </div>
+
+                        <!-- Content Editor -->
+                        <div class="lg:col-span-3 space-y-6">
+                            <div class="glass rounded-2xl p-6">
+                                <h3 class="font-bold text-sm mb-4 border-b border-white/5 pb-2">Page SEO Settings</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-[10px] text-brand-textMuted mb-1">Page Title</label>
+                                        <input type="text" class="input-premium" value="MOH ZANNAH GROUP LIMITED | Home">
+                                    </div>
+                                    <div>
+                                        <label class="block text-[10px] text-brand-textMuted mb-1">Meta Description</label>
+                                        <input type="text" class="input-premium" value="A diversified and forward-looking Nigerian business enterprise...">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="glass rounded-2xl p-6">
+                                <div class="flex justify-between items-center mb-4 border-b border-white/5 pb-2">
+                                    <h3 class="font-bold text-sm">Section Order (Drag & Drop)</h3>
+                                    <button class="text-xs text-brand-gold"><i class="fas fa-plus mr-1"></i> Add Section</button>
+                                </div>
+                                
+                                <div id="cms-sections" class="space-y-2">
+                                    <div class="glass p-3 rounded-lg flex items-center justify-between cursor-move group">
+                                        <div class="flex items-center gap-3">
+                                            <i class="fas fa-grip-vertical text-white/30 group-hover:text-brand-gold transition-colors"></i>
+                                            <span class="text-sm font-medium text-white">Hero Section</span>
+                                        </div>
+                                        <div class="flex gap-2">
+                                            <button class="w-6 h-6 rounded bg-white/5 hover:bg-brand-gold hover:text-brand-dark flex items-center justify-center text-xs transition-colors"><i class="fas fa-pen"></i></button>
+                                            <button class="w-6 h-6 rounded bg-white/5 hover:bg-red-500 hover:text-white flex items-center justify-center text-xs transition-colors"><i class="fas fa-trash"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="glass p-3 rounded-lg flex items-center justify-between cursor-move group">
+                                        <div class="flex items-center gap-3">
+                                            <i class="fas fa-grip-vertical text-white/30 group-hover:text-brand-gold transition-colors"></i>
+                                            <span class="text-sm font-medium text-white">Trust / Values Section</span>
+                                        </div>
+                                        <div class="flex gap-2">
+                                            <button class="w-6 h-6 rounded bg-white/5 hover:bg-brand-gold hover:text-brand-dark flex items-center justify-center text-xs transition-colors"><i class="fas fa-pen"></i></button>
+                                            <button class="w-6 h-6 rounded bg-white/5 hover:bg-red-500 hover:text-white flex items-center justify-center text-xs transition-colors"><i class="fas fa-trash"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="glass p-3 rounded-lg flex items-center justify-between cursor-move group">
+                                        <div class="flex items-center gap-3">
+                                            <i class="fas fa-grip-vertical text-white/30 group-hover:text-brand-gold transition-colors"></i>
+                                            <span class="text-sm font-medium text-white">Business Divisions Preview</span>
+                                        </div>
+                                        <div class="flex gap-2">
+                                            <button class="w-6 h-6 rounded bg-white/5 hover:bg-brand-gold hover:text-brand-dark flex items-center justify-center text-xs transition-colors"><i class="fas fa-pen"></i></button>
+                                            <button class="w-6 h-6 rounded bg-white/5 hover:bg-red-500 hover:text-white flex items-center justify-center text-xs transition-colors"><i class="fas fa-trash"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="glass p-3 rounded-lg flex items-center justify-between cursor-move group">
+                                        <div class="flex items-center gap-3">
+                                            <i class="fas fa-grip-vertical text-white/30 group-hover:text-brand-gold transition-colors"></i>
+                                            <span class="text-sm font-medium text-white">Corporate Statistics</span>
+                                        </div>
+                                        <div class="flex gap-2">
+                                            <button class="w-6 h-6 rounded bg-white/5 hover:bg-brand-gold hover:text-brand-dark flex items-center justify-center text-xs transition-colors"><i class="fas fa-pen"></i></button>
+                                            <button class="w-6 h-6 rounded bg-white/5 hover:bg-red-500 hover:text-white flex items-center justify-center text-xs transition-colors"><i class="fas fa-trash"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ================= TAB: PROJECTS KANBAN ================= -->
+                <div id="tab-projects" class="tab-pane hidden animate-entry h-[calc(100vh-140px)] flex flex-col">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 gap-4 shrink-0">
+                        <div>
+                            <h2 class="text-2xl font-serif font-bold text-white mb-1">Project Management</h2>
+                            <p class="text-brand-textMuted text-xs">Cross-divisional operational tracking.</p>
+                        </div>
+                        <div class="flex gap-2 bg-white/5 p-1 rounded-lg">
+                            <button class="px-3 py-1.5 rounded-md bg-white/10 text-xs font-bold text-white"><i class="fas fa-columns mr-1"></i> Board</button>
+                            <button class="px-3 py-1.5 rounded-md text-xs font-medium text-white/50 hover:text-white transition-colors"><i class="fas fa-list mr-1"></i> List</button>
+                            <button class="px-3 py-1.5 rounded-md text-xs font-medium text-white/50 hover:text-white transition-colors"><i class="fas fa-calendar mr-1"></i> Timeline</button>
+                        </div>
+                    </div>
+
+                    <!-- Kanban Board -->
+                    <div class="flex-1 overflow-x-auto overflow-y-hidden flex gap-6 pb-4 custom-scrollbar">
+                        
+                        <!-- Column 1 -->
+                        <div class="w-80 flex-shrink-0 flex flex-col">
+                            <div class="flex justify-between items-center mb-3 px-1">
+                                <h3 class="font-bold text-sm text-white flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-white/30"></div> To Do <span class="text-[10px] bg-white/10 px-1.5 py-0.5 rounded text-white/50">3</span></h3>
+                                <button class="text-white/50 hover:text-white"><i class="fas fa-ellipsis-h text-xs"></i></button>
+                            </div>
+                            <div id="kanban-todo" class="flex-1 glass rounded-2xl p-3 flex flex-col gap-3 overflow-y-auto custom-scrollbar min-h-[100px]">
+                                <!-- Card -->
+                                <div class="glass p-4 rounded-xl cursor-grab hover:border-brand-gold/30 transition-colors">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <span class="text-[9px] font-bold uppercase tracking-wider text-brand-gold bg-brand-gold/10 px-1.5 py-0.5 rounded">Consultancy</span>
+                                        <i class="fas fa-paperclip text-white/30 text-[10px]"></i>
+                                    </div>
+                                    <h4 class="text-sm font-bold text-white mb-2 leading-tight">SME Incubator Program Setup</h4>
+                                    <p class="text-xs text-brand-textMuted mb-3 line-clamp-2">Draft initial curriculum and partnership agreements for the Q4 incubator launch.</p>
+                                    <div class="flex justify-between items-center border-t border-white/5 pt-2">
+                                        <div class="w-6 h-6 rounded-full bg-blue-500 text-[8px] flex items-center justify-center font-bold">AS</div>
+                                        <span class="text-[10px] text-white/50"><i class="far fa-clock"></i> Sep 15</span>
+                                    </div>
+                                </div>
+                                <!-- Card -->
+                                <div class="glass p-4 rounded-xl cursor-grab hover:border-brand-gold/30 transition-colors">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <span class="text-[9px] font-bold uppercase tracking-wider text-cyan-400 bg-cyan-400/10 px-1.5 py-0.5 rounded">Water Prod.</span>
+                                    </div>
+                                    <h4 class="text-sm font-bold text-white mb-2 leading-tight">New Bottling Line Procurement</h4>
+                                    <div class="flex justify-between items-center border-t border-white/5 pt-2 mt-2">
+                                        <div class="w-6 h-6 rounded-full bg-brand-goldDark text-[8px] flex items-center justify-center font-bold">JD</div>
+                                        <span class="text-[10px] text-orange-400"><i class="far fa-clock"></i> Sep 05</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="mt-3 text-xs text-brand-textMuted hover:text-white flex items-center gap-1 justify-center py-2 glass rounded-lg"><i class="fas fa-plus"></i> Add Task</button>
+                        </div>
+
+                        <!-- Column 2 -->
+                        <div class="w-80 flex-shrink-0 flex flex-col">
+                            <div class="flex justify-between items-center mb-3 px-1">
+                                <h3 class="font-bold text-sm text-white flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-brand-blue"></div> In Progress <span class="text-[10px] bg-white/10 px-1.5 py-0.5 rounded text-white/50">2</span></h3>
+                                <button class="text-white/50 hover:text-white"><i class="fas fa-ellipsis-h text-xs"></i></button>
+                            </div>
+                            <div id="kanban-progress" class="flex-1 glass rounded-2xl p-3 flex flex-col gap-3 overflow-y-auto custom-scrollbar min-h-[100px]">
+                                <!-- Card -->
+                                <div class="glass p-4 rounded-xl cursor-grab hover:border-brand-blue/30 border-brand-blue/20 transition-colors">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <span class="text-[9px] font-bold uppercase tracking-wider text-white bg-white/10 px-1.5 py-0.5 rounded">Real Estate</span>
+                                    </div>
+                                    <h4 class="text-sm font-bold text-white mb-2 leading-tight">Abuja Commercial Acq.</h4>
+                                    <div class="w-full bg-white/5 rounded-full h-1 mb-3"><div class="bg-brand-blue h-1 rounded-full" style="width: 65%"></div></div>
+                                    <div class="flex justify-between items-center border-t border-white/5 pt-2">
+                                        <div class="flex -space-x-2">
+                                            <div class="w-6 h-6 rounded-full border border-[#0a0a0e] bg-brand-gold text-[8px] flex items-center justify-center font-bold text-brand-dark">MR</div>
+                                            <div class="w-6 h-6 rounded-full border border-[#0a0a0e] bg-purple-500 text-[8px] flex items-center justify-center font-bold">AK</div>
+                                        </div>
+                                        <span class="text-[10px] text-white/50"><i class="far fa-comment"></i> 4</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="mt-3 text-xs text-brand-textMuted hover:text-white flex items-center gap-1 justify-center py-2 glass rounded-lg"><i class="fas fa-plus"></i> Add Task</button>
+                        </div>
+
+                        <!-- Column 3 -->
+                        <div class="w-80 flex-shrink-0 flex flex-col">
+                            <div class="flex justify-between items-center mb-3 px-1">
+                                <h3 class="font-bold text-sm text-white flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-brand-gold"></div> Review <span class="text-[10px] bg-white/10 px-1.5 py-0.5 rounded text-white/50">1</span></h3>
+                                <button class="text-white/50 hover:text-white"><i class="fas fa-ellipsis-h text-xs"></i></button>
+                            </div>
+                            <div id="kanban-review" class="flex-1 glass rounded-2xl p-3 flex flex-col gap-3 overflow-y-auto custom-scrollbar min-h-[100px]">
+                                <!-- Card -->
+                                <div class="glass p-4 rounded-xl cursor-grab hover:border-brand-gold/30 border-brand-gold/20 transition-colors">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <span class="text-[9px] font-bold uppercase tracking-wider text-orange-400 bg-orange-400/10 px-1.5 py-0.5 rounded">Logistics</span>
+                                    </div>
+                                    <h4 class="text-sm font-bold text-white mb-2 leading-tight">Q3 Fleet Expansion Contract</h4>
+                                    <div class="flex justify-between items-center border-t border-white/5 pt-2 mt-2">
+                                        <div class="w-6 h-6 rounded-full bg-gray-600 text-[8px] flex items-center justify-center font-bold">CEO</div>
+                                        <span class="text-[10px] text-brand-gold font-bold">Awaiting Signoff</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Column 4 -->
+                        <div class="w-80 flex-shrink-0 flex flex-col">
+                            <div class="flex justify-between items-center mb-3 px-1">
+                                <h3 class="font-bold text-sm text-white flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-brand-green"></div> Done</h3>
+                                <button class="text-white/50 hover:text-white"><i class="fas fa-ellipsis-h text-xs"></i></button>
+                            </div>
+                            <div id="kanban-done" class="flex-1 glass rounded-2xl p-3 flex flex-col gap-3 overflow-y-auto custom-scrollbar min-h-[100px]">
+                                <!-- Empty State for Done -->
+                                <div class="h-full flex flex-col items-center justify-center text-center opacity-50 border-2 border-dashed border-white/10 rounded-xl p-4">
+                                    <i class="fas fa-check-circle text-2xl mb-2 text-brand-textMuted"></i>
+                                    <p class="text-xs">Drag completed items here</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- ================= TAB: CLIENTS (Table view example) ================= -->
+                <div id="tab-clients" class="tab-pane hidden animate-entry">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
+                        <div>
+                            <h2 class="text-2xl font-serif font-bold text-white mb-1">Client & Partner Directory</h2>
+                            <p class="text-brand-textMuted text-xs">Centralized CRM for all stakeholders.</p>
+                        </div>
+                        <div class="flex gap-3">
+                            <div class="relative hidden sm:block">
+                                <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-white/40 text-xs"></i>
+                                <input type="text" placeholder="Search entity..." class="bg-white/5 border border-white/10 text-xs text-white rounded-lg pl-8 pr-4 py-2 outline-none focus:border-brand-gold">
+                            </div>
+                            <button class="px-4 py-2 rounded-lg bg-brand-gold text-brand-dark text-xs font-bold hover:shadow-[0_0_15px_rgba(212,175,55,0.4)] transition-all"><i class="fas fa-plus mr-1"></i> Add Entity</button>
+                        </div>
+                    </div>
+
+                    <div class="glass rounded-2xl overflow-hidden">
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse whitespace-nowrap">
+                                <thead>
+                                    <tr class="bg-white/[0.02] text-[10px] uppercase tracking-wider text-brand-textMuted border-b border-white/5">
+                                        <th class="p-4 font-semibold w-10 text-center"><input type="checkbox" class="rounded bg-white/5 border-white/20"></th>
+                                        <th class="p-4 font-semibold">Entity Name</th>
+                                        <th class="p-4 font-semibold">Type</th>
+                                        <th class="p-4 font-semibold">Industry</th>
+                                        <th class="p-4 font-semibold">Primary Contact</th>
+                                        <th class="p-4 font-semibold">Status</th>
+                                        <th class="p-4 font-semibold text-right">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-sm divide-y divide-white/5">
+                                    <tr class="hover:bg-white/[0.02] transition-colors group">
+                                        <td class="p-4 text-center"><input type="checkbox" class="rounded bg-white/5 border-white/20"></td>
+                                        <td class="p-4">
+                                            <div class="flex items-center gap-3">
+                                                <div class="w-8 h-8 rounded-full bg-brand-blue/20 flex items-center justify-center text-brand-blue text-xs font-bold">AZ</div>
+                                                <div>
+                                                    <p class="font-bold text-white">Azure Holdings Ltd</p>
+                                                    <p class="text-[10px] text-brand-textMuted">Abuja, Nigeria</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="p-4 text-xs"><span class="bg-white/10 px-2 py-1 rounded text-white/80">Corporate Client</span></td>
+                                        <td class="p-4 text-xs text-brand-textMuted">Real Estate</td>
+                                        <td class="p-4">
+                                            <p class="text-xs text-white">Ibrahim Musa</p>
+                                            <p class="text-[10px] text-brand-textMuted">ibrahim@azure.com</p>
+                                        </td>
+                                        <td class="p-4"><span class="status-active text-[10px] px-2 py-1 rounded-md uppercase font-bold">Active</span></td>
+                                        <td class="p-4 text-right">
+                                            <button class="w-7 h-7 rounded bg-white/5 hover:bg-brand-gold hover:text-brand-dark flex items-center justify-center text-xs transition-colors ml-auto opacity-0 group-hover:opacity-100"><i class="fas fa-ellipsis-v"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-white/[0.02] transition-colors group">
+                                        <td class="p-4 text-center"><input type="checkbox" class="rounded bg-white/5 border-white/20"></td>
+                                        <td class="p-4">
+                                            <div class="flex items-center gap-3">
+                                                <div class="w-8 h-8 rounded-full bg-brand-green/20 flex items-center justify-center text-brand-green text-xs font-bold">NF</div>
+                                                <div>
+                                                    <p class="font-bold text-white">Northern Farms Co.</p>
+                                                    <p class="text-[10px] text-brand-textMuted">Kano, Nigeria</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="p-4 text-xs"><span class="bg-brand-gold/10 text-brand-gold px-2 py-1 rounded">Strategic Partner</span></td>
+                                        <td class="p-4 text-xs text-brand-textMuted">Agriculture</td>
+                                        <td class="p-4">
+                                            <p class="text-xs text-white">Aisha Bello</p>
+                                            <p class="text-[10px] text-brand-textMuted">a.bello@nfc.com</p>
+                                        </td>
+                                        <td class="p-4"><span class="status-active text-[10px] px-2 py-1 rounded-md uppercase font-bold">Active</span></td>
+                                        <td class="p-4 text-right">
+                                            <button class="w-7 h-7 rounded bg-white/5 hover:bg-brand-gold hover:text-brand-dark flex items-center justify-center text-xs transition-colors ml-auto opacity-0 group-hover:opacity-100"><i class="fas fa-ellipsis-v"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-white/[0.02] transition-colors group">
+                                        <td class="p-4 text-center"><input type="checkbox" class="rounded bg-white/5 border-white/20"></td>
+                                        <td class="p-4">
+                                            <div class="flex items-center gap-3">
+                                                <div class="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 text-xs font-bold">GI</div>
+                                                <div>
+                                                    <p class="font-bold text-white">Global Invest Partners</p>
+                                                    <p class="text-[10px] text-brand-textMuted">London, UK</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="p-4 text-xs"><span class="bg-brand-blue/10 text-brand-blue px-2 py-1 rounded">Investor</span></td>
+                                        <td class="p-4 text-xs text-brand-textMuted">Finance / Minerals</td>
+                                        <td class="p-4">
+                                            <p class="text-xs text-white">David Smith</p>
+                                            <p class="text-[10px] text-brand-textMuted">d.smith@gip.co.uk</p>
+                                        </td>
+                                        <td class="p-4"><span class="status-pending text-[10px] px-2 py-1 rounded-md uppercase font-bold">Onboarding</span></td>
+                                        <td class="p-4 text-right">
+                                            <button class="w-7 h-7 rounded bg-white/5 hover:bg-brand-gold hover:text-brand-dark flex items-center justify-center text-xs transition-colors ml-auto opacity-0 group-hover:opacity-100"><i class="fas fa-ellipsis-v"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="p-4 border-t border-white/5 flex justify-between items-center text-xs text-brand-textMuted">
+                            <span>Showing 1-3 of 856 Entities</span>
+                            <div class="flex gap-1">
+                                <button class="w-6 h-6 rounded bg-white/5 flex items-center justify-center hover:text-white disabled:opacity-50"><i class="fas fa-chevron-left"></i></button>
+                                <button class="w-6 h-6 rounded bg-brand-gold text-brand-dark flex items-center justify-center font-bold">1</button>
+                                <button class="w-6 h-6 rounded bg-white/5 flex items-center justify-center hover:text-white">2</button>
+                                <button class="w-6 h-6 rounded bg-white/5 flex items-center justify-center hover:text-white"><i class="fas fa-chevron-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ================= UNIVERSAL EMPTY STATE (For unbuilt modules) ================= -->
+                <div id="tab-placeholder" class="tab-pane hidden animate-entry h-full flex flex-col items-center justify-center text-center">
+                    <div class="relative w-40 h-40 mb-8 flex items-center justify-center">
+                        <div class="absolute inset-0 bg-brand-gold/10 rounded-full blur-[30px] animate-pulse-slow"></div>
+                        <div class="absolute w-full h-full border border-white/5 rounded-full border-dashed animate-spin-slow"></div>
+                        <i class="fas fa-layer-group text-5xl text-brand-gold/50 relative z-10"></i>
+                    </div>
+                    <h2 class="text-3xl font-serif font-bold text-white mb-2" id="placeholder-title">Module Loading</h2>
+                    <p class="text-brand-textMuted text-sm max-w-md mx-auto mb-8">This module of the Enterprise OS is currently initializing or awaits appropriate administrative privileges to render data.</p>
+                    <button onclick="switchTab('dashboard')" class="px-6 py-2.5 rounded-xl border border-brand-gold/50 text-brand-gold text-sm font-bold hover:bg-brand-gold hover:text-brand-dark transition-all">Return to Dashboard</button>
+                </div>
+
+            </main>
+        </div>
+
+        <!-- RIGHT SIDEBAR (Quick Info & Activity) -->
+        <aside id="right-sidebar" class="w-72 h-full glass-panel flex-shrink-0 flex-col z-30 border-l border-white/5 hidden lg:flex transition-all duration-300 relative">
+            <div class="p-6 border-b border-white/5">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="font-bold text-sm text-white">System Health</h3>
+                    <div class="w-2 h-2 rounded-full bg-brand-green shadow-[0_0_5px_#00805A] animate-pulse"></div>
+                </div>
+                <div class="space-y-3 text-xs">
+                    <div>
+                        <div class="flex justify-between text-brand-textMuted mb-1"><span>Server Load</span><span>24%</span></div>
+                        <div class="w-full bg-white/5 rounded-full h-1"><div class="bg-brand-blue h-1 rounded-full" style="width: 24%"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-brand-textMuted mb-1"><span>Storage</span><span>68%</span></div>
+                        <div class="w-full bg-white/5 rounded-full h-1"><div class="bg-brand-gold h-1 rounded-full" style="width: 68%"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex-1 overflow-y-auto p-6 space-y-8 custom-scrollbar">
+                
+                <!-- Quick Tasks -->
+                <div>
+                    <h3 class="font-bold text-sm text-white mb-4 flex items-center gap-2"><i class="fas fa-check-square text-brand-gold"></i> My Tasks</h3>
+                    <div class="space-y-2">
+                        <label class="flex items-start gap-3 p-3 rounded-lg bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] cursor-pointer transition-colors group">
+                            <input type="checkbox" class="mt-0.5 rounded border-white/20 bg-white/5 text-brand-gold focus:ring-brand-gold">
+                            <span class="text-xs text-white/80 group-hover:text-white leading-tight">Review draft proposal for Northern Farms.</span>
+                        </label>
+                        <label class="flex items-start gap-3 p-3 rounded-lg bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] cursor-pointer transition-colors group">
+                            <input type="checkbox" class="mt-0.5 rounded border-white/20 bg-white/5 text-brand-gold focus:ring-brand-gold">
+                            <span class="text-xs text-white/80 group-hover:text-white leading-tight">Approve Q3 Logistics Budget.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Calendar Mini -->
+                <div>
+                    <h3 class="font-bold text-sm text-white mb-4 flex items-center gap-2"><i class="fas fa-calendar text-brand-blue"></i> Upcoming</h3>
+                    <div class="space-y-3">
+                        <div class="flex gap-3">
+                            <div class="w-10 flex flex-col items-center shrink-0">
+                                <span class="text-[10px] text-brand-textMuted uppercase font-bold">Oct</span>
+                                <span class="text-lg font-serif font-bold text-white">12</span>
+                            </div>
+                            <div class="glass p-3 rounded-xl flex-1 border-l-2 border-l-brand-gold">
+                                <h4 class="text-xs font-bold text-white mb-0.5">Board Meeting</h4>
+                                <p class="text-[10px] text-brand-textMuted"><i class="far fa-clock"></i> 10:00 AM - Exec Room</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-3">
+                            <div class="w-10 flex flex-col items-center shrink-0">
+                                <span class="text-[10px] text-brand-textMuted uppercase font-bold">Oct</span>
+                                <span class="text-lg font-serif font-bold text-white">14</span>
+                            </div>
+                            <div class="glass p-3 rounded-xl flex-1 border-l-2 border-l-brand-blue">
+                                <h4 class="text-xs font-bold text-white mb-0.5">Site Inspection</h4>
+                                <p class="text-[10px] text-brand-textMuted"><i class="fas fa-map-marker-alt"></i> Abuja Complex</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </aside>
+
+        <!-- COMMAND PALETTE (CTRL+K) -->
+        <div id="command-palette" class="fixed inset-0 z-[100] hidden items-start justify-center pt-[15vh] bg-brand-dark/60 backdrop-blur-sm opacity-0 transition-opacity duration-200">
+            <div class="glass-panel w-[90%] max-w-2xl rounded-2xl overflow-hidden shadow-2xl transform scale-95 transition-transform duration-200" id="cmd-modal">
+                <div class="flex items-center px-4 py-3 border-b border-white/10">
+                    <i class="fas fa-search text-brand-gold mr-3"></i>
+                    <input type="text" id="cmd-input" placeholder="Search commands, clients, projects..." class="w-full bg-transparent border-none text-white focus:outline-none text-lg placeholder-white/30">
+                    <kbd class="ml-auto border-white/10 text-white/30 px-2 py-1 rounded text-xs bg-white/5 shadow-none">ESC</kbd>
+                </div>
+                <div class="max-h-[60vh] overflow-y-auto custom-scrollbar p-2">
+                    <div class="px-3 py-2 text-[10px] font-bold text-brand-textMuted uppercase tracking-widest">Quick Actions</div>
+                    <button class="w-full text-left px-3 py-3 rounded-xl hover:bg-brand-gold/10 hover:text-brand-gold text-white/80 text-sm transition-colors flex items-center gap-3">
+                        <i class="fas fa-plus-circle w-5 text-center text-white/30"></i> Create New Project
+                    </button>
+                    <button class="w-full text-left px-3 py-3 rounded-xl hover:bg-brand-gold/10 hover:text-brand-gold text-white/80 text-sm transition-colors flex items-center gap-3">
+                        <i class="fas fa-file-invoice w-5 text-center text-white/30"></i> Generate Invoice
+                    </button>
+                    <button class="w-full text-left px-3 py-3 rounded-xl hover:bg-brand-gold/10 hover:text-brand-gold text-white/80 text-sm transition-colors flex items-center gap-3">
+                        <i class="fas fa-user-plus w-5 text-center text-white/30"></i> Add Client
+                    </button>
+                    
+                    <div class="px-3 py-2 mt-2 text-[10px] font-bold text-brand-textMuted uppercase tracking-widest border-t border-white/5 pt-4">Navigation</div>
+                    <button onclick="switchTab('dashboard'); toggleCommandPalette();" class="w-full text-left px-3 py-3 rounded-xl hover:bg-white/5 text-white/80 text-sm transition-colors flex items-center gap-3">
+                        <i class="fas fa-home w-5 text-center text-white/30"></i> Go to Dashboard
+                    </button>
+                    <button onclick="switchTab('cms'); toggleCommandPalette();" class="w-full text-left px-3 py-3 rounded-xl hover:bg-white/5 text-white/80 text-sm transition-colors flex items-center gap-3">
+                        <i class="fas fa-globe w-5 text-center text-white/30"></i> Website CMS
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- FLOATING ACTION BUTTON (FAB) -->
+        <div class="fixed bottom-6 right-6 z-50">
+            <button onclick="showToast('Action Menu Opened', 'info')" class="w-14 h-14 rounded-full bg-brand-gold text-brand-dark flex items-center justify-center text-xl shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:scale-110 transition-transform">
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
+
+        <!-- TOAST CONTAINER -->
+        <div id="toast-container" class="fixed bottom-6 left-6 z-[100] flex flex-col gap-3 pointer-events-none"></div>
+
+    </div>
+
+    <script>
+        // Global State & Elements
+        const loaderScreen = document.getElementById('loader-screen');
+        const loginScreen = document.getElementById('login-screen');
+        const appLayout = document.getElementById('app-layout');
+        const sidebar = document.getElementById('sidebar');
+        const rightSidebar = document.getElementById('right-sidebar');
+        const cmdPalette = document.getElementById('command-palette');
+        const cmdModal = document.getElementById('cmd-modal');
+        const cmdInput = document.getElementById('cmd-input');
+        
+        let chartInstance = null;
+        let pieInstance = null;
+        let isCmdOpen = false;
+
+        // Valid module tabs
+        const modules = ['dashboard', 'cms', 'projects', 'clients', 'analytics', 'divisions', 'requests', 'finance', 'hr', 'settings', 'audit'];
+
+        // --- Initialization Sequence ---
+        window.addEventListener('DOMContentLoaded', () => {
+            // Simulate Loading
+            const progress = document.getElementById('loader-progress');
+            let w = 0;
+            const interval = setInterval(() => {
+                w += Math.random() * 15;
+                if (w > 100) w = 100;
+                progress.style.width = w + '%';
+                if (w === 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        loaderScreen.classList.add('opacity-0');
+                        setTimeout(() => {
+                            loaderScreen.classList.add('hidden');
+                            // Show Login
+                            loginScreen.classList.remove('hidden');
+                            void loginScreen.offsetWidth; // Trigger reflow
+                            loginScreen.classList.remove('opacity-0');
+                        }, 1000);
+                    }, 500);
+                }
+            }, 100);
+        });
+
+        // --- Login Simulation ---
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('login-btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<div class="loader"></div>';
+            
+            setTimeout(() => {
+                loginScreen.classList.add('opacity-0');
+                setTimeout(() => {
+                    loginScreen.classList.add('hidden');
+                    btn.innerHTML = originalText;
+                    
+                    // Show App
+                    appLayout.classList.remove('hidden');
+                    void appLayout.offsetWidth;
+                    appLayout.classList.remove('opacity-0');
+                    
+                    // Initial Animations
+                    gsap.from("#sidebar", { x: -50, opacity: 0, duration: 0.8, ease: "power3.out" });
+                    gsap.from("header", { y: -20, opacity: 0, duration: 0.8, ease: "power3.out", delay: 0.2 });
+                    gsap.from("#tab-dashboard > div", { y: 20, opacity: 0, duration: 0.8, stagger: 0.1, ease: "power3.out", delay: 0.4 });
+                    
+                    initCharts();
+                    initSortables();
+                    showToast('Authentication Successful. Welcome to Enterprise OS.', 'success');
+                }, 700);
+            }, 1200);
+        });
+
+        // --- Layout Toggles ---
+        document.getElementById('sidebar-toggle').addEventListener('click', () => {
+            sidebar.classList.toggle('sidebar-collapsed');
+            if(window.innerWidth < 768) {
+                if(sidebar.classList.contains('sidebar-collapsed')) {
+                    sidebar.style.transform = 'translateX(-100%)';
+                } else {
+                    sidebar.style.transform = 'translateX(0)';
+                }
+            }
+        });
+
+        document.getElementById('right-sidebar-toggle').addEventListener('click', () => {
+            if(rightSidebar.classList.contains('hidden')) {
+                rightSidebar.classList.remove('hidden');
+                rightSidebar.classList.add('flex');
+            } else {
+                rightSidebar.classList.add('hidden');
+                rightSidebar.classList.remove('flex');
+            }
+        });
+
+        // --- Tab Switching Logic ---
+        function switchTab(tabId) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-pane').forEach(el => el.classList.add('hidden'));
+            
+            // Remove active state from nav
+            document.querySelectorAll('.nav-item').forEach(el => {
+                el.classList.remove('active', 'bg-white/10', 'border-r-2', 'border-brand-gold');
+                const icon = el.querySelector('.nav-icon');
+                if(icon) { icon.classList.remove('text-brand-gold'); icon.classList.add('text-brand-textMuted'); }
+            });
+
+            // Determine target
+            const targetId = modules.includes(tabId) ? 'tab-' + tabId : 'tab-placeholder';
+            const targetEl = document.getElementById(targetId);
+            
+            // Update Placeholder Title if needed
+            if(targetId === 'tab-placeholder') {
+                const titleMap = {
+                    'analytics': 'Advanced Analytics', 'divisions': 'Division Management',
+                    'requests': 'Service Requests Queue', 'finance': 'Financial Operations',
+                    'hr': 'Human Resources', 'settings': 'System Settings', 'audit': 'Audit Logs'
+                };
+                document.getElementById('placeholder-title').innerText = titleMap[tabId] || 'Module Loading';
+            }
+
+            // Show and animate
+            targetEl.classList.remove('hidden');
+            gsap.fromTo(targetEl, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" });
+
+            // Set active nav link
+            const activeLink = document.querySelector(`.nav-item[onclick="switchTab('${tabId}')"]`);
+            if (activeLink) {
+                activeLink.classList.add('active', 'bg-white/10', 'border-r-2', 'border-brand-gold');
+                const icon = activeLink.querySelector('.nav-icon');
+                if(icon) { icon.classList.remove('text-brand-textMuted'); icon.classList.add('text-brand-gold'); }
+            }
+
+            // Mobile specific closure
+            if (window.innerWidth < 768) {
+                sidebar.classList.add('sidebar-collapsed');
+                sidebar.style.transform = 'translateX(-100%)';
+            }
+        }
+
+        // --- Chart.js Initialization ---
+        function initCharts() {
+            Chart.defaults.color = '#8a8a93';
+            Chart.defaults.font.family = '"Plus Jakarta Sans", sans-serif';
+
+            // Main Line Chart
+            const ctxMain = document.getElementById('mainChart');
+            if(ctxMain && !chartInstance) {
+                const gradientGold = ctxMain.getContext('2d').createLinearGradient(0, 0, 0, 400);
+                gradientGold.addColorStop(0, 'rgba(212, 175, 55, 0.5)');
+                gradientGold.addColorStop(1, 'rgba(212, 175, 55, 0.0)');
+
+                const gradientBlue = ctxMain.getContext('2d').createLinearGradient(0, 0, 0, 400);
+                gradientBlue.addColorStop(0, 'rgba(0, 51, 160, 0.5)');
+                gradientBlue.addColorStop(1, 'rgba(0, 51, 160, 0.0)');
+
+                chartInstance = new Chart(ctxMain, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+                        datasets: [
+                            {
+                                label: 'Revenue', data: [12, 19, 15, 25, 22, 30, 35, 42],
+                                borderColor: '#D4AF37', backgroundColor: gradientGold,
+                                borderWidth: 2, fill: true, tension: 0.4, pointRadius: 0, pointHitRadius: 10
+                            },
+                            {
+                                label: 'Expenditure', data: [8, 12, 10, 15, 18, 16, 20, 24],
+                                borderColor: '#0033A0', backgroundColor: gradientBlue,
+                                borderWidth: 2, fill: true, tension: 0.4, pointRadius: 0, pointHitRadius: 10
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true, maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: { grid: { color: 'rgba(255,255,255,0.05)', drawBorder: false }, ticks: { callback: v => '$' + v + 'M' } },
+                            x: { grid: { display: false, drawBorder: false } }
+                        },
+                        interaction: { intersect: false, mode: 'index' },
+                    }
+                });
+            }
+
+            // Doughnut Chart
+            const ctxPie = document.getElementById('pieChart');
+            if(ctxPie && !pieInstance) {
+                pieInstance = new Chart(ctxPie, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Real Estate', 'Logistics', 'Agriculture', 'Minerals', 'Others'],
+                        datasets: [{
+                            data: [35, 25, 20, 15, 5],
+                            backgroundColor: ['#D4AF37', '#0033A0', '#00805A', '#f97316', '#8b5cf6'],
+                            borderWidth: 0,
+                            hoverOffset: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true, maintainAspectRatio: false, cutout: '75%',
+                        plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, usePointStyle: true, padding: 20 } } }
+                    }
+                });
+            }
+        }
+
+        // --- SortableJS Initialization (CMS & Kanban) ---
+        function initSortables() {
+            // CMS Sections
+            const cmsList = document.getElementById('cms-sections');
+            if(cmsList) {
+                new Sortable(cmsList, { animation: 150, handle: '.fa-grip-vertical', ghostClass: 'sortable-ghost' });
+            }
+
+            // Kanban Boards
+            const kanbanConfig = { group: 'kanban', animation: 150, ghostClass: 'sortable-ghost' };
+            ['kanban-todo', 'kanban-progress', 'kanban-review', 'kanban-done'].forEach(id => {
+                const el = document.getElementById(id);
+                if(el) new Sortable(el, kanbanConfig);
+            });
+        }
+
+        // --- Command Palette (CTRL + K) ---
+        function toggleCommandPalette() {
+            isCmdOpen = !isCmdOpen;
+            if (isCmdOpen) {
+                cmdPalette.classList.remove('hidden');
+                // Small delay to allow display:block to apply before animating opacity
+                requestAnimationFrame(() => {
+                    cmdPalette.classList.remove('opacity-0');
+                    cmdModal.classList.remove('scale-95');
+                    cmdInput.focus();
+                });
+            } else {
+                cmdPalette.classList.add('opacity-0');
+                cmdModal.classList.add('scale-95');
+                setTimeout(() => { cmdPalette.classList.add('hidden'); }, 200);
+            }
+        }
+
+        // Global Keydown Listener
+        document.addEventListener('keydown', (e) => {
+            // Ctrl/Cmd + K
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                // Only open if app is visible
+                if(!appLayout.classList.contains('hidden')) {
+                    toggleCommandPalette();
+                }
+            }
+            // Escape
+            if (e.key === 'Escape' && isCmdOpen) {
+                toggleCommandPalette();
+            }
+        });
+
+        // Close Palette on backdrop click
+        cmdPalette.addEventListener('click', (e) => {
+            if(e.target === cmdPalette) toggleCommandPalette();
+        });
+
+        // --- Toast Notification System ---
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            
+            // Styling based on type
+            let icon = 'fa-info-circle text-brand-blue';
+            let border = 'border-brand-blue/30';
+            if(type === 'success') { icon = 'fa-check-circle text-brand-green'; border = 'border-brand-green/30'; }
+            if(type === 'warning') { icon = 'fa-exclamation-triangle text-brand-gold'; border = 'border-brand-gold/30'; }
+            
+            toast.className = `glass px-4 py-3 rounded-xl border ${border} shadow-lg flex items-center gap-3 text-sm text-white pointer-events-auto min-w-[250px]`;
+            toast.innerHTML = `<i class="fas ${icon}"></i> <span>${message}</span>`;
+            
+            container.appendChild(toast);
+            
+            // Animate In
+            gsap.fromTo(toast, { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.3, ease: "back.out(1.5)" });
+            
+            // Remove after 3s
+            setTimeout(() => {
+                gsap.to(toast, { opacity: 0, x: -50, duration: 0.3, ease: "power2.in", onComplete: () => toast.remove() });
+            }, 3000);
+        }
+
+        // --- Counter Animations ---
+        // Triggered via CSS/GSAP in previous iterations, simplifying here for standalone execution
+        document.querySelectorAll('.counter').forEach(counter => {
+            const target = +counter.getAttribute('data-target');
+            const prefix = counter.getAttribute('data-prefix') || '';
+            const suffix = counter.getAttribute('data-suffix') || '';
+            let current = 0;
+            const inc = target / 100;
+            
+            // Only animate once app is visible. Using a simple timeout for prototype.
+            setTimeout(() => {
+                const update = () => {
+                    current += inc;
+                    if(current < target) {
+                        counter.innerText = prefix + Math.ceil(current).toLocaleString() + suffix;
+                        requestAnimationFrame(update);
+                    } else {
+                        counter.innerText = prefix + target.toLocaleString() + suffix;
+                    }
+                };
+                update();
+            }, 2500); // Delay until after login animation
+        });
+
+    </script>
+</body>
+</html>
