@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Careers & Recruitment | MOH ZANNAH GROUP</title>
+    <meta name="description" content="Build your career with MOH ZANNAH GROUP LIMITED. Join a growing organization where innovation, professionalism, and integrity create meaningful opportunities.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#030305',
+                            darker: '#010101',
+                            card: '#0a0a0e',
+                            gold: '#D4AF37',
+                            goldLight: '#F3E5AB',
+                            goldDark: '#997a00',
+                            blue: '#0033A0',
+                            green: '#00805A',
+                            textMuted: '#8a8a93'
+                        }
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                        'hero-glow': 'radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.15), transparent 60%)',
+                        'gold-gradient': 'linear-gradient(135deg, #F3E5AB 0%, #D4AF37 50%, #997a00 100%)',
+                        'blue-gradient': 'linear-gradient(135deg, #4da6ff 0%, #0033A0 50%, #001a4d 100%)',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delayed': 'float 6s ease-in-out 3s infinite',
+                        'float-slow': 'float 8s ease-in-out 1s infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'spin-slow': 'spin 20s linear infinite',
+                        'pulse-glow': 'pulse-glow 4s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        'pulse-glow': {
+                            '0%, 100%': { opacity: '0.4', transform: 'scale(1)' },
+                            '50%': { opacity: '0.8', transform: 'scale(1.05)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .glass {
+                @apply bg-white/[0.03] backdrop-blur-xl border border-white/[0.08];
+            }
+            .glass-hover {
+                @apply hover:bg-white/[0.06] hover:border-brand-gold/40 hover:-translate-y-2 transition-all duration-500 ease-out hover:shadow-[0_15px_40px_-10px_rgba(212,175,55,0.15)];
+            }
+            .text-gradient {
+                @apply bg-clip-text text-transparent bg-gold-gradient;
+            }
+            .text-gradient-blue {
+                @apply bg-clip-text text-transparent bg-blue-gradient;
+            }
+            .reveal {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #030305;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D4AF37;
+        }
+
+        body {
+            background-color: #030305;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .noise-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Form Inputs */
+        input[type="text"], input[type="email"], input[type="tel"], select, textarea {
+            @apply w-full bg-white/5 border border-white/10 rounded-xl px-4 pt-6 pb-2 text-white focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold transition-colors duration-300;
+        }
+        
+        .floating-label {
+            @apply absolute left-4 top-4 text-brand-textMuted text-sm transition-all duration-300 pointer-events-none;
+        }
+        
+        input:focus ~ .floating-label,
+        input:not(:placeholder-shown) ~ .floating-label,
+        select:focus ~ .floating-label,
+        select:not([value=""]) ~ .floating-label,
+        textarea:focus ~ .floating-label,
+        textarea:not(:placeholder-shown) ~ .floating-label {
+            @apply text-xs top-2 text-brand-gold;
+        }
+
+        /* Accordion transition */
+        .accordion-content {
+            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        .accordion-item.active .accordion-content {
+            max-height: 200px;
+            opacity: 1;
+        }
+        .accordion-item.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        /* File Upload Styling */
+        .file-upload-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+        .file-upload-input {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-gold selection:text-brand-dark">
+
+    <div class="noise-bg"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6 px-6 lg:px-12">
+        <div class="max-w-7xl mx-auto flex items-center justify-between glass rounded-full px-6 py-3">
+            <div class="flex items-center gap-3 cursor-pointer">
+                <!-- Logo -->
+                <div class="h-10 flex items-center">
+                    <img src="logo.png" alt="MOH ZANNAH GROUP LIMITED Logo" class="h-full object-contain">
+                </div>
+            </div>
+
+            <!-- Desktop Menu -->
+            <div class="hidden xl:flex items-center gap-6">
+                <a href="index.html" class="text-sm font-medium text-white/80 hover:text-brand-gold transition-colors">Home</a>
+                <a href="business-divisions.html" class="text-sm font-medium text-white/80 hover:text-brand-gold transition-colors">Divisions</a>
+                <a href="partnership.html" class="text-sm font-medium text-white/80 hover:text-brand-gold transition-colors">Partnership</a>
+                <a href="careers.html" class="text-sm font-medium text-brand-gold transition-colors">Careers</a>
+                <a href="#culture" class="text-sm font-medium text-white/80 hover:text-brand-gold transition-colors">Culture</a>
+                <a href="#opportunities" class="text-sm font-medium text-white/80 hover:text-brand-gold transition-colors">Jobs</a>
+                <a href="#contact" class="text-sm font-medium text-white/80 hover:text-brand-gold transition-colors">Contact</a>
+            </div>
+
+            <!-- CTA -->
+            <div class="hidden lg:flex">
+                <a href="#application-form" class="group relative px-6 py-2.5 rounded-full bg-white/5 border border-white/10 hover:border-brand-gold/50 overflow-hidden transition-all duration-300">
+                    <div class="absolute inset-0 bg-brand-gold opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+                    <span class="relative text-sm font-semibold tracking-wide text-brand-gold">Submit CV</span>
+                </a>
+            </div>
+
+            <!-- Mobile Toggle -->
+            <button id="mobile-menu-btn" class="xl:hidden text-white focus:outline-none">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="fixed inset-0 bg-brand-dark/95 backdrop-blur-xl z-40 flex flex-col items-center justify-center gap-6 opacity-0 pointer-events-none transition-all duration-500 overflow-y-auto py-10">
+            <button id="close-menu-btn" class="absolute top-8 right-8 text-white focus:outline-none">
+                <i class="fas fa-times text-3xl hover:text-brand-gold transition-colors"></i>
+            </button>
+            <a href="index.html" class="mobile-link text-2xl font-serif text-white hover:text-brand-gold">Home</a>
+            <a href="business-divisions.html" class="mobile-link text-2xl font-serif text-white hover:text-brand-gold">Divisions</a>
+            <a href="partnership.html" class="mobile-link text-2xl font-serif text-white hover:text-brand-gold">Partnership</a>
+            <a href="careers.html" class="mobile-link text-2xl font-serif text-brand-gold">Careers</a>
+            <a href="#culture" class="mobile-link text-2xl font-serif text-white hover:text-brand-gold">Culture</a>
+            <a href="#opportunities" class="mobile-link text-2xl font-serif text-white hover:text-brand-gold">Jobs</a>
+            <a href="#contact" class="mobile-link text-2xl font-serif text-white hover:text-brand-gold">Contact</a>
+            <a href="#application-form" class="mt-4 px-8 py-3 rounded-full bg-brand-gold text-brand-dark font-semibold">Submit CV</a>
+        </div>
+    </nav>
+
+    <!-- Premium Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center pt-28 pb-20 overflow-hidden">
+        <!-- Background Elements & Abstract Office/Network Motif -->
+        <div class="absolute inset-0 bg-hero-glow z-0"></div>
+        <div class="absolute top-1/4 -right-40 w-[600px] h-[600px] bg-brand-blue/10 rounded-full blur-[150px] pointer-events-none"></div>
+        <div class="absolute bottom-1/4 -left-40 w-[500px] h-[500px] bg-brand-gold/10 rounded-full blur-[150px] pointer-events-none"></div>
+        
+        <!-- Abstract Corporate Building & Growth Vectors -->
+        <div class="absolute inset-0 z-0 opacity-[0.15] pointer-events-none overflow-hidden flex items-end justify-center pb-10">
+            <!-- Grid Perspective -->
+            <div class="absolute bottom-0 w-full h-[50vh] border-t border-white/10" style="perspective: 1000px;">
+                <div class="w-full h-full border-[0.5px] border-white/10" style="transform: rotateX(80deg); background-image: linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px); background-size: 50px 50px;"></div>
+            </div>
+            
+            <!-- Abstract Architecture/Ascension lines -->
+            <div class="w-[2px] h-[60vh] bg-gradient-to-t from-brand-gold to-transparent mx-8 animate-float" style="animation-delay: 0s;"></div>
+            <div class="w-[2px] h-[40vh] bg-gradient-to-t from-brand-blue to-transparent mx-8 animate-float-delayed" style="animation-delay: 1s;"></div>
+            <div class="w-[2px] h-[80vh] bg-gradient-to-t from-brand-gold to-transparent mx-8 animate-float-slow" style="animation-delay: 2s;"></div>
+            <div class="w-[2px] h-[50vh] bg-gradient-to-t from-white/50 to-transparent mx-8 animate-float" style="animation-delay: 1.5s;"></div>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10 text-center max-w-5xl">
+            <div class="hero-anim inline-block mb-6 px-5 py-2 rounded-full border border-brand-gold/30 bg-brand-gold/10 backdrop-blur-sm">
+                <span class="text-brand-gold text-xs font-bold tracking-widest uppercase flex items-center gap-2">
+                    <i class="fas fa-briefcase"></i> Talent Acquisition
+                </span>
+            </div>
+            
+            <h1 class="hero-anim text-5xl md:text-6xl lg:text-8xl font-serif font-bold tracking-tight leading-[1.1] mb-8">
+                Build Your Career With <br/>
+                <span class="text-gradient drop-shadow-sm">MOH ZANNAH GROUP</span>
+            </h1>
+            
+            <p class="hero-anim text-lg md:text-xl text-brand-textMuted font-light leading-relaxed max-w-3xl mx-auto mb-10">
+                Join a growing organization where innovation, professionalism, integrity, and long-term vision create meaningful opportunities for exceptional people.
+            </p>
+            
+            <div class="hero-anim flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#opportunities" class="w-full sm:w-auto px-8 py-4 rounded-full bg-brand-gold text-brand-dark font-bold hover:shadow-[0_0_30px_rgba(212,175,55,0.4)] hover:scale-105 transition-all duration-300">
+                    View Opportunities
+                </a>
+                <a href="#application-form" class="w-full sm:w-auto px-8 py-4 rounded-full glass glass-hover border-white/10 text-white font-semibold flex items-center justify-center gap-2 group">
+                    Submit Your CV <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Floating Glass Cards -->
+        <div class="absolute hidden xl:flex flex-col gap-2 top-1/3 left-[5%] glass p-5 rounded-2xl animate-float opacity-90 backdrop-blur-2xl border-brand-gold/20">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-brand-gold to-brand-goldDark flex items-center justify-center text-brand-dark">
+                    <i class="fas fa-arrow-trend-up"></i>
+                </div>
+                <div>
+                    <div class="text-sm font-bold text-white">Career Growth</div>
+                    <div class="text-xs text-brand-textMuted">Professional Mobility</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute hidden xl:flex flex-col gap-2 bottom-1/4 right-[5%] glass p-5 rounded-2xl animate-float-delayed opacity-90 backdrop-blur-2xl border-brand-blue/20">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-brand-blue border border-brand-blue/30">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div>
+                    <div class="text-sm font-bold text-white">Top Employer</div>
+                    <div class="text-xs text-brand-textMuted">Inclusive Culture</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Join Us (9 Cards) -->
+    <section class="py-24 relative z-10 bg-brand-darker border-t border-white/5">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="text-center mb-16 reveal">
+                <span class="text-brand-gold text-xs font-bold tracking-widest uppercase mb-4 block">The Experience</span>
+                <h2 class="text-3xl md:text-5xl font-serif font-bold">Why Join Us</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Feature 1 -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal group flex items-start gap-4">
+                    <div class="w-12 h-12 rounded-full bg-brand-gold/10 flex items-center justify-center text-brand-gold shrink-0">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-2 group-hover:text-brand-gold transition-colors">Professional Development</h3>
+                        <p class="text-sm text-brand-textMuted leading-relaxed">Continuous learning programs and training designed to elevate your technical and leadership capabilities.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal group flex items-start gap-4" style="transition-delay: 50ms;">
+                    <div class="w-12 h-12 rounded-full bg-brand-gold/10 flex items-center justify-center text-brand-gold shrink-0">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-2 group-hover:text-brand-gold transition-colors">Career Growth</h3>
+                        <p class="text-sm text-brand-textMuted leading-relaxed">Merit-based promotions and structured career pathways within a rapidly expanding corporate ecosystem.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal group flex items-start gap-4" style="transition-delay: 100ms;">
+                    <div class="w-12 h-12 rounded-full bg-brand-gold/10 flex items-center justify-center text-brand-gold shrink-0">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-2 group-hover:text-brand-gold transition-colors">Meaningful Work</h3>
+                        <p class="text-sm text-brand-textMuted leading-relaxed">Engage in projects that solve real-world problems and drive significant economic and social impact.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal group flex items-start gap-4">
+                    <div class="w-12 h-12 rounded-full bg-brand-gold/10 flex items-center justify-center text-brand-gold shrink-0">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-2 group-hover:text-brand-gold transition-colors">Innovation</h3>
+                        <p class="text-sm text-brand-textMuted leading-relaxed">Work in an environment that encourages new ideas, technological integration, and creative problem-solving.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal group flex items-start gap-4" style="transition-delay: 50ms;">
+                    <div class="w-12 h-12 rounded-full bg-brand-blue/10 flex items-center justify-center text-brand-blue shrink-0">
+                        <i class="fas fa-globe-americas"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-2 group-hover:text-brand-blue transition-colors">Diverse Industries</h3>
+                        <p class="text-sm text-brand-textMuted leading-relaxed">Gain exposure to multiple sectors including real estate, agriculture, minerals, logistics, and consulting.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal group flex items-start gap-4" style="transition-delay: 100ms;">
+                    <div class="w-12 h-12 rounded-full bg-brand-gold/10 flex items-center justify-center text-brand-gold shrink-0">
+                        <i class="fas fa-users-cog"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-2 group-hover:text-brand-gold transition-colors">Collaborative Culture</h3>
+                        <p class="text-sm text-brand-textMuted leading-relaxed">Join a team that values mutual respect, cross-departmental synergy, and collective success.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 7 -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal group flex items-start gap-4">
+                    <div class="w-12 h-12 rounded-full bg-brand-gold/10 flex items-center justify-center text-brand-gold shrink-0">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-2 group-hover:text-brand-gold transition-colors">Integrity</h3>
+                        <p class="text-sm text-brand-textMuted leading-relaxed">Operate in a corporate setting governed by strict ethical standards, transparency, and accountability.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 8 -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal group flex items-start gap-4" style="transition-delay: 50ms;">
+                    <div class="w-12 h-12 rounded-full bg-brand-gold/10 flex items-center justify-center text-brand-gold shrink-0">
+                        <i class="fas fa-infinity"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-2 group-hover:text-brand-gold transition-colors">Long-Term Opportunities</h3>
+                        <p class="text-sm text-brand-textMuted leading-relaxed">Build a resilient career with an organization focused on generational value rather than short-term gains.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 9 -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal group flex items-start gap-4" style="transition-delay: 100ms;">
+                    <div class="w-12 h-12 rounded-full bg-brand-gold/10 flex items-center justify-center text-brand-gold shrink-0">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-2 group-hover:text-brand-gold transition-colors">Competitive Rewards</h3>
+                        <p class="text-sm text-brand-textMuted leading-relaxed">We acknowledge and reward exceptional performance with competitive compensation and benefits.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Culture (Split Layout) -->
+    <section id="culture" class="py-24 relative z-10 overflow-hidden">
+        <div class="absolute inset-0 bg-white/[0.02] skew-y-2 origin-bottom-right -z-10"></div>
+        
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-1/2 reveal">
+                    <span class="text-brand-gold text-xs font-bold tracking-widest uppercase mb-4 block">The Environment</span>
+                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold leading-tight mb-8">
+                        Our Corporate <br/><span class="text-gradient">Culture.</span>
+                    </h2>
+                    <p class="text-brand-textMuted text-lg leading-relaxed mb-6">
+                        At MOH ZANNAH GROUP LIMITED, our culture is the foundation of our success. We cultivate a professional environment where ambition is matched with integrity, and individual talent is amplified through teamwork.
+                    </p>
+                    
+                    <div class="space-y-4 mt-8">
+                        <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-gold/30 transition-colors">
+                            <i class="fas fa-users text-brand-gold text-xl w-6"></i>
+                            <span class="text-sm font-bold text-white">Teamwork & Collaborative problem solving.</span>
+                        </div>
+                        <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-gold/30 transition-colors">
+                            <i class="fas fa-chess-king text-brand-gold text-xl w-6"></i>
+                            <span class="text-sm font-bold text-white">Leadership at every level of the organization.</span>
+                        </div>
+                        <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-gold/30 transition-colors">
+                            <i class="fas fa-book-reader text-brand-gold text-xl w-6"></i>
+                            <span class="text-sm font-bold text-white">Continuous Learning and upskilling.</span>
+                        </div>
+                        <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-gold/30 transition-colors">
+                            <i class="fas fa-hands text-brand-gold text-xl w-6"></i>
+                            <span class="text-sm font-bold text-white">Respect for diverse perspectives and backgrounds.</span>
+                        </div>
+                        <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-gold/30 transition-colors">
+                            <i class="fas fa-star text-brand-gold text-xl w-6"></i>
+                            <span class="text-sm font-bold text-white">Excellence as the minimum standard.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:w-1/2 relative reveal h-[500px] w-full flex items-center justify-center">
+                    <!-- Elegant Abstract Workplace/Synergy Illustration -->
+                    <div class="relative w-full max-w-md h-full flex justify-center items-center">
+                        <div class="absolute w-64 h-64 bg-brand-gold/10 rounded-full blur-[60px] animate-pulse-slow"></div>
+                        <div class="absolute w-64 h-64 bg-brand-blue/10 rounded-full blur-[60px] translate-x-20 translate-y-20 animate-pulse-slow" style="animation-delay: 1s;"></div>
+                        
+                        <!-- Glowing Network of People -->
+                        <div class="absolute w-64 h-64 border border-white/10 rounded-full animate-spin-slow"></div>
+                        
+                        <!-- Center Core -->
+                        <div class="w-32 h-32 glass rounded-full border-brand-gold/40 flex items-center justify-center z-10 shadow-[0_0_50px_rgba(212,175,55,0.2)] bg-brand-dark">
+                            <i class="fas fa-users-viewfinder text-4xl text-brand-gold drop-shadow-lg"></i>
+                        </div>
+
+                        <!-- Employee Nodes -->
+                        <div class="absolute top-[10%] left-[20%] w-12 h-12 glass rounded-full border-brand-blue/30 flex items-center justify-center animate-float z-20 shadow-lg">
+                            <i class="fas fa-user text-brand-blue text-sm"></i>
+                        </div>
+                        <div class="absolute bottom-[10%] right-[10%] w-14 h-14 glass rounded-full border-white/30 flex items-center justify-center animate-float-delayed z-20 shadow-lg">
+                            <i class="fas fa-user-tie text-white text-lg"></i>
+                        </div>
+                        <div class="absolute top-[40%] right-[5%] w-10 h-10 glass rounded-full border-brand-gold/30 flex items-center justify-center animate-float z-20 shadow-lg">
+                            <i class="fas fa-user text-brand-gold text-sm"></i>
+                        </div>
+                        
+                        <!-- Connecting Lines (Static SVG overlay for structure) -->
+                        <svg class="absolute inset-0 w-full h-full z-0" viewBox="0 0 100 100">
+                            <path d="M50 50 L30 15" stroke="rgba(255,255,255,0.1)" stroke-width="0.5" />
+                            <path d="M50 50 L85 45" stroke="rgba(212,175,55,0.2)" stroke-width="0.5" />
+                            <path d="M50 50 L80 85" stroke="rgba(0,51,160,0.2)" stroke-width="0.5" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Working Across Our Divisions -->
+    <section class="py-24 relative z-10 bg-brand-darker border-y border-white/5">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="text-center mb-16 reveal">
+                <span class="text-brand-gold text-xs font-bold tracking-widest uppercase mb-4 block">Enterprise Mobility</span>
+                <h2 class="text-3xl md:text-5xl font-serif font-bold">Working Across Our Divisions</h2>
+                <p class="text-brand-textMuted text-sm mt-4 max-w-2xl mx-auto">Explore career opportunities across our specialized operational and administrative branches.</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 reveal">
+                <div class="glass px-4 py-4 rounded-xl flex flex-col items-center justify-center text-center gap-2 hover:-translate-y-1 transition-transform duration-300 hover:border-brand-gold/40 cursor-default">
+                    <i class="fas fa-building text-xl text-white/50"></i>
+                    <span class="text-xs font-bold text-white uppercase">Real Estate</span>
+                </div>
+                <div class="glass px-4 py-4 rounded-xl flex flex-col items-center justify-center text-center gap-2 hover:-translate-y-1 transition-transform duration-300 hover:border-brand-gold/40 cursor-default">
+                    <i class="fas fa-car text-xl text-white/50"></i>
+                    <span class="text-xs font-bold text-white uppercase">Automobile</span>
+                </div>
+                <div class="glass px-4 py-4 rounded-xl flex flex-col items-center justify-center text-center gap-2 hover:-translate-y-1 transition-transform duration-300 hover:border-brand-gold/40 cursor-default">
+                    <i class="fas fa-broom text-xl text-white/50"></i>
+                    <span class="text-xs font-bold text-white uppercase">Cleaning</span>
+                </div>
+                <div class="glass px-4 py-4 rounded-xl flex flex-col items-center justify-center text-center gap-2 hover:-translate-y-1 transition-transform duration-300 hover:border-brand-gold/40 cursor-default">
+                    <i class="fas fa-gem text-xl text-white/50"></i>
+                    <span class="text-xs font-bold text-white uppercase">Minerals</span>
+                </div>
+                <div class="glass px-4 py-4 rounded-xl flex flex-col items-center justify-center text-center gap-2 hover:-translate-y-1 transition-transform duration-300 hover:border-brand-gold/40 cursor-default">
+                    <i class="fas fa-chart-pie text-xl text-brand-gold/80"></i>
+                    <span class="text-xs font-bold text-white uppercase">Consultancy</span>
+                </div>
+                <div class="glass px-4 py-4 rounded-xl flex flex-col items-center justify-center text-center gap-2 hover:-translate-y-1 transition-transform duration-300 hover:border-brand-gold/40 cursor-default">
+                    <i class="fas fa-tractor text-xl text-white/50"></i>
+                    <span class="text-xs font-bold text-white uppercase">Agriculture</span>
+                </div>
+                <div class="glass px-4 py-4 rounded-xl flex flex-col items-center justify-center text-center gap-2 hover:-translate-y-1 transition-transform duration-300 hover:border-brand-gold/40 cursor-default">
+                    <i class="fas fa-tint text-xl text-white/50"></i>
+                    <span class="text-xs font-bold text-white uppercase">Water</span>
+                </div>
+                <div class="glass px-4 py-4 rounded-xl flex flex-col items-center justify-center text-center gap-2 hover:-translate-y-1 transition-transform duration-300 hover:border-brand-gold/40 cursor-default">
+                    <i class="fas fa-truck text-xl text-white/50"></i>
+                    <span class="text-xs font-bold text-white uppercase">Logistics</span>
+                </div>
+                <div class="glass px-4 py-4 rounded-xl flex flex-col items-center justify-center text-center gap-2 hover:-translate-y-1 transition-transform duration-300 hover:border-brand-blue/40 cursor-default">
+                    <i class="fas fa-sitemap text-xl text-brand-blue/80"></i>
+                    <span class="text-xs font-bold text-white uppercase">Corporate Ops</span>
+                </div>
+                <div class="glass px-4 py-4 rounded-xl flex flex-col items-center justify-center text-center gap-2 hover:-translate-y-1 transition-transform duration-300 hover:border-brand-gold/40 cursor-default">
+                    <i class="fas fa-folder-open text-xl text-white/50"></i>
+                    <span class="text-xs font-bold text-white uppercase">Administration</span>
+                </div>
+                <div class="glass px-4 py-4 rounded-xl flex flex-col items-center justify-center text-center gap-2 hover:-translate-y-1 transition-transform duration-300 hover:border-brand-gold/40 cursor-default lg:col-start-2">
+                    <i class="fas fa-calculator text-xl text-white/50"></i>
+                    <span class="text-xs font-bold text-white uppercase">Finance</span>
+                </div>
+                <div class="glass px-4 py-4 rounded-xl flex flex-col items-center justify-center text-center gap-2 hover:-translate-y-1 transition-transform duration-300 hover:border-brand-gold/40 cursor-default">
+                    <i class="fas fa-microchip text-xl text-white/50"></i>
+                    <span class="text-xs font-bold text-white uppercase">Technology</span>
+                </div>
+                <div class="glass px-4 py-4 rounded-xl flex flex-col items-center justify-center text-center gap-2 hover:-translate-y-1 transition-transform duration-300 hover:border-brand-gold/40 cursor-default">
+                    <i class="fas fa-bullhorn text-xl text-white/50"></i>
+                    <span class="text-xs font-bold text-white uppercase">Marketing</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why People Choose Us (Statistics) -->
+    <section class="py-24 border-b border-white/5 bg-brand-card relative z-10">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-5xl font-serif font-bold">Why People Choose Us</h2>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 divide-x divide-white/5">
+                <div class="text-center p-4 reveal">
+                    <div class="text-4xl md:text-5xl font-bold font-serif text-brand-gold mb-2 counter" data-target="100">0</div>
+                    <div class="text-xs font-bold tracking-widest text-brand-textMuted uppercase">Prof. Environment</div>
+                </div>
+                <div class="text-center p-4 reveal" style="transition-delay: 50ms;">
+                    <div class="text-4xl md:text-5xl font-bold font-serif text-brand-blue mb-2 counter" data-target="100">0</div>
+                    <div class="text-xs font-bold tracking-widest text-brand-textMuted uppercase">Career Progression</div>
+                </div>
+                <div class="text-center p-4 reveal" style="transition-delay: 100ms;">
+                    <div class="text-4xl md:text-5xl font-bold font-serif text-brand-green mb-2 counter" data-target="365">0</div>
+                    <div class="text-xs font-bold tracking-widest text-brand-textMuted uppercase">Learning Ops.</div>
+                </div>
+                <div class="text-center p-4 reveal" style="transition-delay: 150ms;">
+                    <div class="text-4xl md:text-5xl font-bold font-serif text-white mb-2 counter" data-target="100">0</div>
+                    <div class="text-xs font-bold tracking-widest text-brand-textMuted uppercase">Inclusive Culture</div>
+                </div>
+                <div class="text-center p-4 reveal" style="transition-delay: 200ms;">
+                    <div class="text-4xl md:text-5xl font-bold font-serif text-brand-gold mb-2 counter" data-target="100">0</div>
+                    <div class="text-xs font-bold tracking-widest text-brand-textMuted uppercase">Leadership Dev.</div>
+                </div>
+                <div class="text-center p-4 reveal" style="transition-delay: 250ms;">
+                    <div class="text-4xl md:text-5xl font-bold font-serif text-brand-blue mb-2 counter" data-target="100">0</div>
+                    <div class="text-xs font-bold tracking-widest text-brand-textMuted uppercase">Long-Term Vision</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Current Opportunities -->
+    <section id="opportunities" class="py-24 relative z-10 overflow-hidden">
+        <div class="absolute inset-0 bg-brand-gold/5 skew-y-[-2deg] origin-bottom-right -z-10"></div>
+        
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 reveal">
+                <div class="max-w-2xl">
+                    <span class="text-brand-gold text-xs font-bold tracking-widest uppercase mb-2 block">Open Roles</span>
+                    <h2 class="text-3xl md:text-5xl font-serif font-bold">Current Opportunities</h2>
+                </div>
+                <div class="mt-6 md:mt-0">
+                    <a href="#application-form" class="text-brand-gold hover:text-white transition-colors flex items-center gap-2 text-sm font-semibold uppercase tracking-wider">
+                        Submit General CV <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Job Card 1 -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal flex flex-col h-full border-brand-gold/10 hover:border-brand-gold/40">
+                    <div class="flex justify-between items-start mb-6">
+                        <span class="px-3 py-1 bg-brand-gold/10 text-brand-gold text-xs font-bold rounded-md uppercase tracking-wider">Consultancy</span>
+                        <i class="fas fa-briefcase text-white/20 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Business Development Officer</h3>
+                    <p class="text-sm text-brand-textMuted mb-6 flex-grow">Drive corporate growth, identify new market opportunities, and manage strategic client relationships.</p>
+                    
+                    <div class="space-y-2 mb-8">
+                        <div class="flex items-center text-xs text-white/70 gap-2"><i class="fas fa-map-marker-alt w-4 text-brand-gold"></i> Bauchi, Nigeria</div>
+                        <div class="flex items-center text-xs text-white/70 gap-2"><i class="fas fa-clock w-4 text-brand-gold"></i> Full-Time</div>
+                        <div class="flex items-center text-xs text-white/70 gap-2"><i class="fas fa-layer-group w-4 text-brand-gold"></i> Mid-Level</div>
+                    </div>
+                    
+                    <a href="#application-form" class="block text-center w-full py-3 rounded-xl border border-white/10 bg-white/5 text-sm font-bold hover:bg-brand-gold hover:text-brand-dark hover:border-brand-gold transition-all duration-300">
+                        Apply Now
+                    </a>
+                </div>
+
+                <!-- Job Card 2 -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal flex flex-col h-full border-brand-gold/10 hover:border-brand-gold/40" style="transition-delay: 50ms;">
+                    <div class="flex justify-between items-start mb-6">
+                        <span class="px-3 py-1 bg-white/10 text-white text-xs font-bold rounded-md uppercase tracking-wider">Administration</span>
+                        <i class="fas fa-folder-open text-white/20 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Administrative Officer</h3>
+                    <p class="text-sm text-brand-textMuted mb-6 flex-grow">Ensure smooth daily operations, manage executive schedules, and optimize office workflows.</p>
+                    
+                    <div class="space-y-2 mb-8">
+                        <div class="flex items-center text-xs text-white/70 gap-2"><i class="fas fa-map-marker-alt w-4 text-brand-gold"></i> Bauchi, Nigeria</div>
+                        <div class="flex items-center text-xs text-white/70 gap-2"><i class="fas fa-clock w-4 text-brand-gold"></i> Full-Time</div>
+                        <div class="flex items-center text-xs text-white/70 gap-2"><i class="fas fa-layer-group w-4 text-brand-gold"></i> Entry-Level</div>
+                    </div>
+                    
+                    <a href="#application-form" class="block text-center w-full py-3 rounded-xl border border-white/10 bg-white/5 text-sm font-bold hover:bg-brand-gold hover:text-brand-dark hover:border-brand-gold transition-all duration-300">
+                        Apply Now
+                    </a>
+                </div>
+
+                <!-- Job Card 3 -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal flex flex-col h-full border-brand-gold/10 hover:border-brand-gold/40" style="transition-delay: 100ms;">
+                    <div class="flex justify-between items-start mb-6">
+                        <span class="px-3 py-1 bg-brand-blue/20 text-brand-blue text-xs font-bold rounded-md uppercase tracking-wider">Corporate Ops</span>
+                        <i class="fas fa-bullhorn text-white/20 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Marketing Executive</h3>
+                    <p class="text-sm text-brand-textMuted mb-6 flex-grow">Develop and execute brand strategies to elevate the Group's presence across multiple sectors.</p>
+                    
+                    <div class="space-y-2 mb-8">
+                        <div class="flex items-center text-xs text-white/70 gap-2"><i class="fas fa-map-marker-alt w-4 text-brand-gold"></i> Bauchi, Nigeria</div>
+                        <div class="flex items-center text-xs text-white/70 gap-2"><i class="fas fa-clock w-4 text-brand-gold"></i> Full-Time</div>
+                        <div class="flex items-center text-xs text-white/70 gap-2"><i class="fas fa-layer-group w-4 text-brand-gold"></i> Mid-Level</div>
+                    </div>
+                    
+                    <a href="#application-form" class="block text-center w-full py-3 rounded-xl border border-white/10 bg-white/5 text-sm font-bold hover:bg-brand-gold hover:text-brand-dark hover:border-brand-gold transition-all duration-300">
+                        Apply Now
+                    </a>
+                </div>
+
+                <!-- Job Card 4 -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal flex flex-col h-full border-brand-gold/10 hover:border-brand-gold/40">
+                    <div class="flex justify-between items-start mb-6">
+                        <span class="px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-bold rounded-md uppercase tracking-wider">Corporate Ops</span>
+                        <i class="fas fa-project-diagram text-white/20 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Project Coordinator</h3>
+                    <p class="text-sm text-brand-textMuted mb-6 flex-grow">Oversee cross-divisional projects ensuring adherence to timelines, budgets, and quality standards.</p>
+                    
+                    <div class="space-y-2 mb-8">
+                        <div class="flex items-center text-xs text-white/70 gap-2"><i class="fas fa-map-marker-alt w-4 text-brand-gold"></i> Bauchi, Nigeria</div>
+                        <div class="flex items-center text-xs text-white/70 gap-2"><i class="fas fa-clock w-4 text-brand-gold"></i> Full-Time</div>
+                        <div class="flex items-center text-xs text-white/70 gap-2"><i class="fas fa-layer-group w-4 text-brand-gold"></i> Senior-Level</div>
+                    </div>
+                    
+                    <a href="#application-form" class="block text-center w-full py-3 rounded-xl border border-white/10 bg-white/5 text-sm font-bold hover:bg-brand-gold hover:text-brand-dark hover:border-brand-gold transition-all duration-300">
+                        Apply Now
+                    </a>
+                </div>
+
+                <!-- Job Card 5 -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal flex flex-col h-full border-brand-gold/10 hover:border-brand-gold/40" style="transition-delay: 50ms;">
+                    <div class="flex justify-between items-start mb-6">
+                        <span class="px-3 py-1 bg-orange-500/20 text-orange-400 text-xs font-bold rounded-md uppercase tracking-wider">Logistics</span>
+                        <i class="fas fa-truck text-white/20 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Logistics Officer</h3>
+                    <p class="text-sm text-brand-textMuted mb-6 flex-grow">Manage supply chain operations, coordinate transportation, and optimize distribution networks.</p>
+                    
+                    <div class="space-y-2 mb-8">
+                        <div class="flex items-center text-xs text-white/70 gap-2"><i class="fas fa-map-marker-alt w-4 text-brand-gold"></i> Bauchi, Nigeria</div>
+                        <div class="flex items-center text-xs text-white/70 gap-2"><i class="fas fa-clock w-4 text-brand-gold"></i> Full-Time</div>
+                        <div class="flex items-center text-xs text-white/70 gap-2"><i class="fas fa-layer-group w-4 text-brand-gold"></i> Mid-Level</div>
+                    </div>
+                    
+                    <a href="#application-form" class="block text-center w-full py-3 rounded-xl border border-white/10 bg-white/5 text-sm font-bold hover:bg-brand-gold hover:text-brand-dark hover:border-brand-gold transition-all duration-300">
+                        Apply Now
+                    </a>
+                </div>
+
+                <!-- Job Card 6 -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal flex flex-col h-full border-brand-gold/10 hover:border-brand-gold/40" style="transition-delay: 100ms;">
+                    <div class="flex justify-between items-start mb-6">
+                        <span class="px-3 py-1 bg-brand-green/20 text-brand-greenLight text-xs font-bold rounded-md uppercase tracking-wider">Agriculture</span>
+                        <i class="fas fa-seedling text-white/20 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Agribusiness Officer</h3>
+                    <p class="text-sm text-brand-textMuted mb-6 flex-grow">Facilitate agricultural operations, oversee farm management, and develop agribusiness value chains.</p>
+                    
+                    <div class="space-y-2 mb-8">
+                        <div class="flex items-center text-xs text-white/70 gap-2"><i class="fas fa-map-marker-alt w-4 text-brand-gold"></i> Bauchi, Nigeria</div>
+                        <div class="flex items-center text-xs text-white/70 gap-2"><i class="fas fa-clock w-4 text-brand-gold"></i> Full-Time</div>
+                        <div class="flex items-center text-xs text-white/70 gap-2"><i class="fas fa-layer-group w-4 text-brand-gold"></i> Mid-Level</div>
+                    </div>
+                    
+                    <a href="#application-form" class="block text-center w-full py-3 rounded-xl border border-white/10 bg-white/5 text-sm font-bold hover:bg-brand-gold hover:text-brand-dark hover:border-brand-gold transition-all duration-300">
+                        Apply Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Application Process (Timeline) -->
+    <section class="py-24 relative z-10 bg-brand-darker border-y border-white/5">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <div class="text-center mb-20 reveal">
+                <span class="text-brand-gold text-xs font-bold tracking-widest uppercase mb-4 block">Hiring Workflow</span>
+                <h2 class="text-3xl md:text-5xl font-serif font-bold">Application Process</h2>
+            </div>
+
+            <div class="relative wrap overflow-hidden p-4 lg:p-0">
+                <!-- Vertical Line -->
+                <div class="absolute h-full w-[2px] bg-gradient-to-b from-brand-gold via-white/10 to-brand-gold left-8 lg:left-1/2 lg:-translate-x-1/2 rounded-full process-line origin-top transform scale-y-0"></div>
+                
+                <div class="space-y-12 relative z-10">
+                    
+                    <!-- Step 1 -->
+                    <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between w-full reveal pl-16 lg:pl-0">
+                        <div class="hidden lg:block w-5/12"></div>
+                        <div class="absolute left-8 lg:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-brand-dark border-[4px] border-brand-gold z-20 shadow-[0_0_15px_rgba(212,175,55,0.5)] flex items-center justify-center"><span class="absolute text-[10px] font-bold mt-10 text-brand-gold">01</span></div>
+                        <div class="w-full lg:w-5/12 glass p-6 rounded-2xl">
+                            <h4 class="text-lg font-bold text-white mb-2">Application</h4>
+                            <p class="text-sm text-brand-textMuted">Submit your CV and cover letter through our secure online portal specifying your area of interest.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="flex flex-col lg:flex-row-reverse items-start lg:items-center justify-between w-full reveal pl-16 lg:pl-0">
+                        <div class="hidden lg:block w-5/12"></div>
+                        <div class="absolute left-8 lg:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-brand-dark border-[4px] border-white/40 z-20 flex items-center justify-center"><span class="absolute text-[10px] font-bold mt-10 text-white/50">02</span></div>
+                        <div class="w-full lg:w-5/12 glass p-6 rounded-2xl text-left lg:text-right">
+                            <h4 class="text-lg font-bold text-white mb-2">Review</h4>
+                            <p class="text-sm text-brand-textMuted">Our HR team carefully evaluates your qualifications against current requirements and future pipeline needs.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between w-full reveal pl-16 lg:pl-0">
+                        <div class="hidden lg:block w-5/12"></div>
+                        <div class="absolute left-8 lg:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-brand-dark border-[4px] border-white/40 z-20 flex items-center justify-center"><span class="absolute text-[10px] font-bold mt-10 text-white/50">03</span></div>
+                        <div class="w-full lg:w-5/12 glass p-6 rounded-2xl">
+                            <h4 class="text-lg font-bold text-white mb-2">Interview</h4>
+                            <p class="text-sm text-brand-textMuted">Shortlisted candidates are invited for preliminary interviews (virtual or in-person) to assess cultural fit.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="flex flex-col lg:flex-row-reverse items-start lg:items-center justify-between w-full reveal pl-16 lg:pl-0">
+                        <div class="hidden lg:block w-5/12"></div>
+                        <div class="absolute left-8 lg:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-brand-dark border-[4px] border-white/40 z-20 flex items-center justify-center"><span class="absolute text-[10px] font-bold mt-10 text-white/50">04</span></div>
+                        <div class="w-full lg:w-5/12 glass p-6 rounded-2xl text-left lg:text-right">
+                            <h4 class="text-lg font-bold text-white mb-2">Assessment</h4>
+                            <p class="text-sm text-brand-textMuted">Technical discussions or practical assessments with departmental heads to verify professional competency.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 5 -->
+                    <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between w-full reveal pl-16 lg:pl-0">
+                        <div class="hidden lg:block w-5/12"></div>
+                        <div class="absolute left-8 lg:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-brand-dark border-[4px] border-white/40 z-20 flex items-center justify-center"><span class="absolute text-[10px] font-bold mt-10 text-white/50">05</span></div>
+                        <div class="w-full lg:w-5/12 glass p-6 rounded-2xl">
+                            <h4 class="text-lg font-bold text-white mb-2">Offer</h4>
+                            <p class="text-sm text-brand-textMuted">Successful candidates receive a formal offer detailing competitive compensation and comprehensive benefits.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 6 -->
+                    <div class="flex flex-col lg:flex-row-reverse items-start lg:items-center justify-between w-full reveal pl-16 lg:pl-0">
+                        <div class="hidden lg:block w-5/12"></div>
+                        <div class="absolute left-8 lg:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-brand-dark border-[4px] border-brand-gold z-20 shadow-[0_0_15px_rgba(212,175,55,0.5)] flex items-center justify-center"><span class="absolute text-[10px] font-bold mt-10 text-brand-gold">06</span></div>
+                        <div class="w-full lg:w-5/12 glass p-6 rounded-2xl text-left lg:text-right border-brand-gold/30 bg-brand-gold/10">
+                            <h4 class="text-lg font-bold text-brand-gold mb-2">Onboarding</h4>
+                            <p class="text-sm text-white/90">A structured integration program to introduce you to the Group's operations, teams, and corporate philosophy.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Submit Your CV Form -->
+    <section id="application-form" class="py-24 relative z-10 border-t border-white/5">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-brand-gold/5 via-transparent to-transparent pointer-events-none"></div>
+        <div class="container mx-auto px-6 max-w-4xl relative z-10">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-5xl font-serif font-bold mb-4">Submit Your CV</h2>
+                <p class="text-brand-textMuted">Take the next step in your career. Apply for an open role or submit your resume for future opportunities.</p>
+            </div>
+
+            <div class="glass rounded-3xl p-8 md:p-12 reveal shadow-[0_0_40px_rgba(212,175,55,0.05)] border-brand-gold/10">
+                <form onsubmit="event.preventDefault(); alert('Application Submitted Successfully!');" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Full Name -->
+                        <div class="relative">
+                            <input type="text" id="name" class="peer placeholder-transparent" placeholder="Full Name" required />
+                            <label for="name" class="floating-label peer-placeholder-shown:top-4 peer-placeholder-shown:text-base">Full Name</label>
+                        </div>
+                        <!-- Phone -->
+                        <div class="relative">
+                            <input type="tel" id="phone" class="peer placeholder-transparent" placeholder="Phone Number" required />
+                            <label for="phone" class="floating-label peer-placeholder-shown:top-4 peer-placeholder-shown:text-base">Phone Number</label>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Email -->
+                        <div class="relative">
+                            <input type="email" id="email" class="peer placeholder-transparent" placeholder="Email Address" required />
+                            <label for="email" class="floating-label peer-placeholder-shown:top-4 peer-placeholder-shown:text-base">Email Address</label>
+                        </div>
+                        <!-- Years of Experience -->
+                        <div class="relative">
+                            <select id="experience" class="peer appearance-none bg-transparent" required>
+                                <option value="" disabled selected hidden></option>
+                                <option value="0-2" class="bg-brand-dark">Entry Level (0-2 Years)</option>
+                                <option value="3-5" class="bg-brand-dark">Mid Level (3-5 Years)</option>
+                                <option value="6-10" class="bg-brand-dark">Senior Level (6-10 Years)</option>
+                                <option value="10+" class="bg-brand-dark">Executive (10+ Years)</option>
+                            </select>
+                            <label for="experience" class="floating-label">Years of Experience</label>
+                            <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-white/50">
+                                <i class="fas fa-chevron-down text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Position of Interest -->
+                        <div class="relative">
+                            <input type="text" id="position" class="peer placeholder-transparent" placeholder="Position of Interest" required />
+                            <label for="position" class="floating-label peer-placeholder-shown:top-4 peer-placeholder-shown:text-base">Position of Interest</label>
+                        </div>
+                        <!-- Department -->
+                        <div class="relative">
+                            <select id="department" class="peer appearance-none bg-transparent" required>
+                                <option value="" disabled selected hidden></option>
+                                <option value="realestate" class="bg-brand-dark">Real Estate</option>
+                                <option value="automobile" class="bg-brand-dark">Automobile</option>
+                                <option value="cleaning" class="bg-brand-dark">Cleaning Services</option>
+                                <option value="minerals" class="bg-brand-dark">Mineral Resources</option>
+                                <option value="consultancy" class="bg-brand-dark">Consultancy & Dev.</option>
+                                <option value="agriculture" class="bg-brand-dark">Agriculture & Animal Prod.</option>
+                                <option value="water" class="bg-brand-dark">Water Production</option>
+                                <option value="logistics" class="bg-brand-dark">Logistics & Import/Export</option>
+                                <option value="admin" class="bg-brand-dark">Administration / Ops / HR</option>
+                                <option value="finance" class="bg-brand-dark">Finance & Accounting</option>
+                                <option value="general" class="bg-brand-dark">General Application</option>
+                            </select>
+                            <label for="department" class="floating-label">Department</label>
+                            <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-white/50">
+                                <i class="fas fa-chevron-down text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cover Letter -->
+                    <div class="relative">
+                        <textarea id="coverletter" rows="4" class="peer placeholder-transparent resize-none" placeholder="Cover Letter" required></textarea>
+                        <label for="coverletter" class="floating-label peer-placeholder-shown:top-4 peer-placeholder-shown:text-base">Cover Letter / Professional Summary</label>
+                    </div>
+
+                    <!-- File Upload -->
+                    <div class="relative mt-2">
+                        <label class="block text-sm font-medium text-brand-textMuted mb-2">Upload Resume / CV (PDF, DOCX)</label>
+                        <div class="file-upload-wrapper border-2 border-dashed border-white/20 rounded-xl bg-white/5 hover:border-brand-gold hover:bg-white/10 transition-colors duration-300 text-center py-8">
+                            <input type="file" id="cv-upload" class="file-upload-input" accept=".pdf,.doc,.docx" required onchange="document.getElementById('file-name').textContent = this.files[0] ? this.files[0].name : 'Click to upload CV or drag and drop';">
+                            <div class="pointer-events-none">
+                                <i class="fas fa-cloud-upload-alt text-3xl text-brand-gold mb-3"></i>
+                                <p id="file-name" class="text-white/80 font-medium">Click to upload CV or drag and drop</p>
+                                <p class="text-xs text-white/40 mt-1">Maximum file size 5MB</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full py-4 rounded-xl bg-brand-gold text-brand-dark font-bold hover:shadow-[0_0_30px_rgba(212,175,55,0.4)] transition-shadow duration-300 mt-4">
+                        Submit Application
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Employee Benefits -->
+    <section class="py-16 relative z-10 overflow-hidden bg-brand-darker border-y border-white/5">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="text-center mb-10 reveal">
+                <p class="text-xs tracking-widest uppercase text-brand-gold border border-brand-gold/30 inline-block px-4 py-2 rounded-full mb-4">The Perks</p>
+            </div>
+            
+            <div class="flex flex-wrap justify-center gap-4 reveal">
+                <div class="glass px-6 py-3 rounded-full border border-white/10 text-sm font-semibold hover:border-brand-gold transition-colors text-brand-textMuted hover:text-white cursor-default">Professional Development</div>
+                <div class="glass px-6 py-3 rounded-full border border-white/10 text-sm font-semibold hover:border-brand-gold transition-colors text-brand-textMuted hover:text-white cursor-default">Continuous Training</div>
+                <div class="glass px-6 py-3 rounded-full border border-white/10 text-sm font-semibold hover:border-brand-gold transition-colors text-brand-textMuted hover:text-white cursor-default">Career Growth</div>
+                <div class="glass px-6 py-3 rounded-full border border-brand-gold/50 bg-brand-gold/10 text-sm font-bold text-white cursor-default">Supportive Culture</div>
+                <div class="glass px-6 py-3 rounded-full border border-white/10 text-sm font-semibold hover:border-brand-gold transition-colors text-brand-textMuted hover:text-white cursor-default">Performance Recognition</div>
+                <div class="glass px-6 py-3 rounded-full border border-white/10 text-sm font-semibold hover:border-brand-gold transition-colors text-brand-textMuted hover:text-white cursor-default">Innovation</div>
+                <div class="glass px-6 py-3 rounded-full border border-white/10 text-sm font-semibold hover:border-brand-gold transition-colors text-brand-textMuted hover:text-white cursor-default">Competitive Environment</div>
+                <div class="glass px-6 py-3 rounded-full border border-white/10 text-sm font-semibold hover:border-brand-gold transition-colors text-brand-textMuted hover:text-white cursor-default">Equal Opportunity</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-24 relative z-10">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-5xl font-serif font-bold mb-4">Frequently Asked Questions</h2>
+            </div>
+
+            <div class="space-y-4 reveal">
+                <!-- FAQ Item 1 -->
+                <div class="accordion-item glass rounded-2xl overflow-hidden">
+                    <button class="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" onclick="toggleAccordion(this)">
+                        <span class="font-bold text-lg">How do I apply?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300 accordion-icon text-brand-gold"></i>
+                    </button>
+                    <div class="accordion-content px-6 bg-white/[0.02]">
+                        <p class="pb-5 text-sm text-brand-textMuted leading-relaxed">
+                            You can apply by filling out the 'Submit Your CV' form on this page. Attach your updated resume and a cover letter detailing the position or department you are interested in.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="accordion-item glass rounded-2xl overflow-hidden">
+                    <button class="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" onclick="toggleAccordion(this)">
+                        <span class="font-bold text-lg">Can I submit my CV without an open role?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300 accordion-icon text-brand-gold"></i>
+                    </button>
+                    <div class="accordion-content px-6 bg-white/[0.02]">
+                        <p class="pb-5 text-sm text-brand-textMuted leading-relaxed">
+                            Yes. We are always looking for exceptional talent. If a specific role is not currently listed, select 'General Application' in the department dropdown. We will keep your CV on file for future opportunities.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="accordion-item glass rounded-2xl overflow-hidden">
+                    <button class="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" onclick="toggleAccordion(this)">
+                        <span class="font-bold text-lg">Do you offer internships?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300 accordion-icon text-brand-gold"></i>
+                    </button>
+                    <div class="accordion-content px-6 bg-white/[0.02]">
+                        <p class="pb-5 text-sm text-brand-textMuted leading-relaxed">
+                            Yes, we periodically offer internship programs for students and recent graduates across our various divisions to foster young talent and provide hands-on corporate experience.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="accordion-item glass rounded-2xl overflow-hidden">
+                    <button class="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" onclick="toggleAccordion(this)">
+                        <span class="font-bold text-lg">Will I receive application updates?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300 accordion-icon text-brand-gold"></i>
+                    </button>
+                    <div class="accordion-content px-6 bg-white/[0.02]">
+                        <p class="pb-5 text-sm text-brand-textMuted leading-relaxed">
+                            Due to the high volume of applications, our HR team will only contact candidates who have been shortlisted for an interview. If selected, you will be notified via email or phone.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 5 -->
+                <div class="accordion-item glass rounded-2xl overflow-hidden">
+                    <button class="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" onclick="toggleAccordion(this)">
+                        <span class="font-bold text-lg">Can experienced professionals apply?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300 accordion-icon text-brand-gold"></i>
+                    </button>
+                    <div class="accordion-content px-6 bg-white/[0.02]">
+                        <p class="pb-5 text-sm text-brand-textMuted leading-relaxed">
+                            Absolutely. We actively recruit senior-level executives and specialists to lead our expanding divisions and drive our strategic objectives forward.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call To Action -->
+    <section id="contact" class="py-24 relative z-10 bg-brand-darker border-t border-white/5">
+        <div class="container mx-auto px-6 max-w-5xl">
+            <div class="glass rounded-[3rem] p-10 md:p-20 text-center relative overflow-hidden group border-brand-gold/20">
+                <div class="absolute inset-0 bg-gradient-to-b from-brand-gold/5 to-transparent z-0"></div>
+                
+                <div class="relative z-10 reveal">
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold mb-6">Your Future <br/><span class="text-brand-gold">Starts Here.</span></h2>
+                    <p class="text-brand-textMuted max-w-2xl mx-auto mb-10 text-lg">
+                        Take the next step. Join a dynamic team and build a rewarding career with one of the fastest-growing business groups.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <a href="#opportunities" class="w-full sm:w-auto px-8 py-4 rounded-full bg-brand-gold text-brand-dark font-bold hover:scale-105 transition-transform duration-300 shadow-[0_0_20px_rgba(212,175,55,0.3)]">
+                            Explore Opportunities
+                        </a>
+                        <a href="#application-form" class="w-full sm:w-auto px-8 py-4 rounded-full glass glass-hover border-white/10 text-white font-semibold flex items-center justify-center gap-2">
+                            <i class="fas fa-file-upload text-brand-gold"></i> Submit Your CV
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-darker border-t border-white/5 pt-20 pb-10 relative z-10">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                
+                <!-- Brand Info -->
+                <div class="lg:col-span-1">
+                    <img src="logo.png" alt="MOH ZANNAH Logo" class="h-12 object-contain mb-6">
+                    <p class="text-sm text-brand-textMuted mb-6 leading-relaxed">
+                        A BRIDGE TO YOUR SATISFACTION.<br>
+                        One Group. Multiple Sectors. Shared Standards. Lasting Value.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-brand-gold hover:text-brand-dark transition-colors"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-brand-gold hover:text-brand-dark transition-colors"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-brand-gold hover:text-brand-dark transition-colors"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-white font-bold mb-6">Company</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html#about" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">Corporate Identity</a></li>
+                        <li><a href="index.html#philosophy" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">Operating Philosophy</a></li>
+                        <li><a href="investments.html" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">Investor Relations</a></li>
+                        <li><a href="careers.html" class="text-sm text-brand-gold transition-colors">Careers & Jobs</a></li>
+                    </ul>
+                </div>
+
+                <!-- Divisions -->
+                <div>
+                    <h4 class="text-white font-bold mb-6">Key Divisions</h4>
+                    <ul class="space-y-3">
+                        <li><a href="real-estate.html" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">Real Estate & Property</a></li>
+                        <li><a href="automobile.html" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">Vehicle Management</a></li>
+                        <li><a href="minerals.html" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">Mineral Resources</a></li>
+                        <li><a href="consultancy.html" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">Consultancy & Dev</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="text-white font-bold mb-6">Headquarters</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-map-marker-alt text-brand-gold mt-1"></i>
+                            <span class="text-sm text-brand-textMuted leading-relaxed">HD Plaza, Near Bauchi Club Roundabout, Old GRA, Bauchi, Bauchi State, Nigeria</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-envelope text-brand-gold"></i>
+                            <a href="mailto:mohzannahgroup@gmail.com" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">mohzannahgroup@gmail.com</a>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-phone-alt text-brand-gold mt-1"></i>
+                            <div class="flex flex-col gap-1">
+                                <a href="tel:+2348067151369" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">+234 806 715 1369</a>
+                                <a href="tel:+2348087518737" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">+234 808 751 8737</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-xs text-brand-textMuted">&copy; <span id="year"></span> MOH ZANNAH GROUP LIMITED. All Rights Reserved.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="text-xs text-brand-textMuted hover:text-brand-gold">Privacy Policy</a>
+                    <a href="#" class="text-xs text-brand-textMuted hover:text-brand-gold">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <script>
+        // Set current year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const closeMenuBtn = document.getElementById('close-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        function toggleMenu() {
+            if (mobileMenu.classList.contains('opacity-0')) {
+                mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
+                document.body.style.overflow = 'hidden';
+            } else {
+                mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMenu);
+        closeMenuBtn.addEventListener('click', toggleMenu);
+        mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-4');
+                navbar.classList.remove('py-6');
+                navbar.querySelector('.max-w-7xl').classList.add('bg-brand-dark/80', 'border-white/10');
+                navbar.querySelector('.max-w-7xl').classList.remove('bg-white/[0.03]');
+            } else {
+                navbar.classList.add('py-6');
+                navbar.classList.remove('py-4');
+                navbar.querySelector('.max-w-7xl').classList.add('bg-white/[0.03]');
+                navbar.querySelector('.max-w-7xl').classList.remove('bg-brand-dark/80', 'border-white/10');
+            }
+        });
+
+        // FAQ Accordion Logic
+        function toggleAccordion(btn) {
+            const item = btn.closest('.accordion-item');
+            
+            // Close all other items
+            const allItems = document.querySelectorAll('.accordion-item');
+            allItems.forEach(otherItem => {
+                if (otherItem !== item && otherItem.classList.contains('active')) {
+                    otherItem.classList.remove('active');
+                }
+            });
+
+            // Toggle current item
+            item.classList.toggle('active');
+        }
+
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero Animations
+        const tl = gsap.timeline();
+        tl.from(".hero-anim", {
+            y: 30,
+            opacity: 0,
+            duration: 1,
+            stagger: 0.15,
+            ease: "power3.out",
+            delay: 0.2
+        });
+
+        // Scroll Reveals for general elements
+        gsap.utils.toArray('.reveal').forEach(function(elem) {
+            ScrollTrigger.create({
+                trigger: elem,
+                start: "top 85%",
+                onEnter: function() { 
+                    gsap.to(elem, {
+                        y: 0, 
+                        opacity: 1, 
+                        duration: 1, 
+                        ease: "power3.out"
+                    }) 
+                },
+                once: true
+            });
+        });
+
+        // Timeline Line Animation
+        ScrollTrigger.create({
+            trigger: ".process-line",
+            start: "top 70%",
+            end: "bottom 30%",
+            onEnter: function() {
+                gsap.to(".process-line", {
+                    scaleY: 1,
+                    duration: 2.5,
+                    ease: "power2.inOut"
+                });
+            },
+            once: true
+        });
+
+        // Counters Animation
+        const counters = document.querySelectorAll('.counter');
+        
+        counters.forEach(counter => {
+            ScrollTrigger.create({
+                trigger: counter,
+                start: "top 90%",
+                once: true,
+                onEnter: () => {
+                    const target = +counter.getAttribute('data-target');
+                    const duration = 2000; // 2 seconds
+                    const increment = target / (duration / 16); // 60fps
+
+                    let current = 0;
+                    const updateCounter = () => {
+                        current += increment;
+                        if (current < target) {
+                            counter.innerText = Math.ceil(current);
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            counter.innerText = target + (target === 100 ? '%' : target === 365 ? 'D' : '+');
+                        }
+                    };
+                    updateCounter();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
