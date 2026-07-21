@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found | MOH ZANNAH GROUP</title>
+    <meta name="description" content="The page you're looking for cannot be found. Navigate back to MOH ZANNAH GROUP LIMITED's premium corporate ecosystem.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#030305',
+                            darker: '#010101',
+                            card: '#0a0a0e',
+                            gold: '#D4AF37',
+                            goldLight: '#F3E5AB',
+                            goldDark: '#997a00',
+                            blue: '#0033A0',
+                            green: '#00805A',
+                            textMuted: '#8a8a93'
+                        }
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                        'hero-glow': 'radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.15), transparent 60%)',
+                        'gold-gradient': 'linear-gradient(135deg, #F3E5AB 0%, #D4AF37 50%, #997a00 100%)',
+                        'blue-gradient': 'linear-gradient(135deg, #4da6ff 0%, #0033A0 50%, #001a4d 100%)',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delayed': 'float 6s ease-in-out 3s infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'spin-slow': 'spin 15s linear infinite',
+                        'compass-swing': 'compass-swing 4s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        'compass-swing': {
+                            '0%': { transform: 'rotate(-15deg)' },
+                            '100%': { transform: 'rotate(15deg)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .glass {
+                @apply bg-white/[0.03] backdrop-blur-xl border border-white/[0.08];
+            }
+            .glass-hover {
+                @apply hover:bg-white/[0.06] hover:border-brand-gold/40 hover:-translate-y-2 transition-all duration-500 ease-out hover:shadow-[0_15px_40px_-10px_rgba(212,175,55,0.15)];
+            }
+            .text-gradient {
+                @apply bg-clip-text text-transparent bg-gold-gradient;
+            }
+            .reveal {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #030305;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D4AF37;
+        }
+
+        body {
+            background-color: #030305;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .noise-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Hover Particles */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 20;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-gold selection:text-brand-dark">
+
+    <div class="noise-bg"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6 px-6 lg:px-12">
+        <div class="max-w-7xl mx-auto flex items-center justify-between glass rounded-full px-6 py-3">
+            <div class="flex items-center gap-3 cursor-pointer">
+                <!-- Logo -->
+                <a href="index.html" class="h-10 flex items-center">
+                    <img src="logo.png" alt="MOH ZANNAH GROUP LIMITED Logo" class="h-full object-contain">
+                </a>
+            </div>
+
+            <!-- Desktop Menu -->
+            <div class="hidden xl:flex items-center gap-6">
+                <a href="index.html" class="text-sm font-medium text-white/80 hover:text-brand-gold transition-colors">Home</a>
+                <a href="business-divisions.html" class="text-sm font-medium text-white/80 hover:text-brand-gold transition-colors">Divisions</a>
+                <a href="partnership.html" class="text-sm font-medium text-white/80 hover:text-brand-gold transition-colors">Partnership</a>
+                <a href="investments.html" class="text-sm font-medium text-white/80 hover:text-brand-gold transition-colors">Investments</a>
+                <a href="news.html" class="text-sm font-medium text-white/80 hover:text-brand-gold transition-colors">News</a>
+                <a href="careers.html" class="text-sm font-medium text-white/80 hover:text-brand-gold transition-colors">Careers</a>
+                <a href="contact.html" class="text-sm font-medium text-white/80 hover:text-brand-gold transition-colors">Contact</a>
+            </div>
+
+            <!-- CTA -->
+            <div class="hidden lg:flex">
+                <a href="client-portal.html" class="group relative px-6 py-2.5 rounded-full bg-white/5 border border-white/10 hover:border-brand-gold/50 overflow-hidden transition-all duration-300">
+                    <div class="absolute inset-0 bg-brand-gold opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+                    <span class="relative text-sm font-semibold tracking-wide text-brand-gold"><i class="fas fa-lock text-xs mr-2"></i> Client Portal</span>
+                </a>
+            </div>
+
+            <!-- Mobile Toggle -->
+            <button id="mobile-menu-btn" class="xl:hidden text-white focus:outline-none">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="fixed inset-0 bg-brand-dark/95 backdrop-blur-xl z-40 flex flex-col items-center justify-center gap-6 opacity-0 pointer-events-none transition-all duration-500 overflow-y-auto py-10">
+            <button id="close-menu-btn" class="absolute top-8 right-8 text-white focus:outline-none">
+                <i class="fas fa-times text-3xl hover:text-brand-gold transition-colors"></i>
+            </button>
+            <a href="index.html" class="mobile-link text-2xl font-serif text-white hover:text-brand-gold">Home</a>
+            <a href="business-divisions.html" class="mobile-link text-2xl font-serif text-white hover:text-brand-gold">Divisions</a>
+            <a href="partnership.html" class="mobile-link text-2xl font-serif text-white hover:text-brand-gold">Partnership</a>
+            <a href="investments.html" class="mobile-link text-2xl font-serif text-white hover:text-brand-gold">Investments</a>
+            <a href="news.html" class="mobile-link text-2xl font-serif text-white hover:text-brand-gold">News</a>
+            <a href="careers.html" class="mobile-link text-2xl font-serif text-white hover:text-brand-gold">Careers</a>
+            <a href="contact.html" class="mobile-link text-2xl font-serif text-white hover:text-brand-gold">Contact</a>
+            <a href="client-portal.html" class="mt-4 px-8 py-3 rounded-full bg-brand-gold text-brand-dark font-semibold"><i class="fas fa-lock text-xs mr-2"></i> Client Portal</a>
+        </div>
+    </nav>
+
+    <!-- Error Hero Section -->
+    <section class="relative min-h-[85vh] flex items-center justify-center pt-32 pb-16 overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute inset-0 bg-hero-glow z-0"></div>
+        <div class="absolute top-1/4 -right-40 w-[600px] h-[600px] bg-brand-gold/10 rounded-full blur-[150px] pointer-events-none"></div>
+        <div class="absolute bottom-1/4 -left-40 w-[500px] h-[500px] bg-brand-blue/10 rounded-full blur-[150px] pointer-events-none"></div>
+
+        <!-- Floating Objects (Abstract Navigation) -->
+        <div class="absolute inset-0 z-0 opacity-30 pointer-events-none overflow-hidden flex items-center justify-center">
+            <div class="absolute w-[800px] h-[800px] border-[0.5px] border-white/10 rounded-full animate-spin-slow"></div>
+            <div class="absolute w-[600px] h-[600px] border-[0.5px] border-brand-gold/20 rounded-full animate-spin-slow" style="animation-direction: reverse; animation-duration: 30s;"></div>
+            
+            <!-- Animated Compass -->
+            <div class="absolute top-[20%] right-[25%] w-24 h-24 glass rounded-full flex items-center justify-center border-brand-gold/30 animate-float shadow-[0_0_30px_rgba(212,175,55,0.2)]">
+                <i class="far fa-compass text-4xl text-brand-gold animate-compass-swing"></i>
+            </div>
+            
+            <div class="absolute bottom-[25%] left-[25%] w-16 h-16 glass rounded-full flex items-center justify-center border-brand-blue/30 animate-float-delayed">
+                <i class="fas fa-map-marker-alt text-2xl text-brand-blue"></i>
+            </div>
+            
+            <div class="absolute top-[40%] left-[15%] w-12 h-12 rounded-full bg-brand-gold/5 border border-brand-gold/20 animate-pulse-slow"></div>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10 text-center flex flex-col items-center">
+            
+            <!-- Interactive 404 Text -->
+            <div id="error-code-container" class="relative cursor-crosshair">
+                <h1 id="error-code" class="text-[8rem] md:text-[12rem] lg:text-[15rem] font-serif font-bold tracking-tighter leading-none text-gradient drop-shadow-[0_10px_30px_rgba(212,175,55,0.3)] hero-anim select-none">
+                    404
+                </h1>
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-brand-gold/20 rounded-full blur-[80px] -z-10 animate-pulse-slow"></div>
+            </div>
+            
+            <div class="hero-anim mt-4">
+                <span class="inline-block px-4 py-1.5 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm text-xs font-bold tracking-widest uppercase text-white/80 mb-6">
+                    <i class="fas fa-exclamation-circle text-brand-gold mr-2"></i> Error Encountered
+                </span>
+            </div>
+
+            <h2 class="hero-anim text-2xl md:text-4xl font-serif font-bold mb-4">
+                Oops! The Page You're Looking For Can't Be Found.
+            </h2>
+            
+            <p class="hero-anim text-base md:text-lg text-brand-textMuted max-w-2xl mx-auto mb-10 leading-relaxed">
+                The link may be broken, or the page may have been moved, renamed, or no longer exists. Let's get you back on track within our corporate ecosystem.
+            </p>
+            
+            <div class="hero-anim flex flex-wrap items-center justify-center gap-4 max-w-3xl">
+                <a href="index.html" class="px-6 py-3 rounded-full bg-brand-gold text-brand-dark font-bold hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:-translate-y-1 transition-all duration-300">
+                    <i class="fas fa-home mr-2"></i> Go Home
+                </a>
+                <a href="business-divisions.html" class="px-6 py-3 rounded-full glass hover:border-brand-gold/40 text-white font-semibold hover:-translate-y-1 transition-all duration-300">
+                    Business Divisions
+                </a>
+                <a href="contact.html" class="px-6 py-3 rounded-full glass hover:border-brand-gold/40 text-white font-semibold hover:-translate-y-1 transition-all duration-300">
+                    Contact Us
+                </a>
+                <a href="client-portal.html" class="px-6 py-3 rounded-full glass hover:border-brand-gold/40 text-brand-gold font-semibold hover:-translate-y-1 transition-all duration-300 border-brand-gold/20">
+                    <i class="fas fa-lock text-xs mr-2"></i> Client Portal
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Smart Search Section -->
+    <section class="py-12 relative z-20">
+        <div class="container mx-auto px-6 max-w-3xl reveal">
+            <div class="glass p-2 pl-6 rounded-full flex items-center justify-between shadow-2xl border-white/20 group hover:border-brand-gold/50 transition-colors duration-300">
+                <i class="fas fa-search text-brand-gold text-lg"></i>
+                <input type="text" placeholder="What are you looking for?" class="w-full bg-transparent border-none text-white px-4 py-3 focus:outline-none placeholder-white/40">
+                <button class="bg-brand-gold text-brand-dark px-6 py-3 rounded-full font-bold hover:shadow-[0_0_15px_rgba(212,175,55,0.4)] transition-all">
+                    Search Website
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Destinations & Quick Links -->
+    <section class="py-16 relative z-10">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                
+                <!-- Popular Destinations -->
+                <div class="reveal">
+                    <h3 class="text-xl font-serif font-bold mb-8 flex items-center gap-3">
+                        <i class="fas fa-map text-brand-gold"></i> Popular Destinations
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <a href="index.html" class="glass glass-hover p-5 rounded-2xl flex items-center gap-4 group">
+                            <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/50 group-hover:bg-brand-gold/10 group-hover:text-brand-gold transition-colors"><i class="fas fa-home"></i></div>
+                            <div>
+                                <h4 class="font-bold text-sm text-white group-hover:text-brand-gold transition-colors">Homepage</h4>
+                                <p class="text-xs text-brand-textMuted">Corporate Overview</p>
+                            </div>
+                        </a>
+                        <a href="business-divisions.html" class="glass glass-hover p-5 rounded-2xl flex items-center gap-4 group">
+                            <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/50 group-hover:bg-brand-gold/10 group-hover:text-brand-gold transition-colors"><i class="fas fa-layer-group"></i></div>
+                            <div>
+                                <h4 class="font-bold text-sm text-white group-hover:text-brand-gold transition-colors">Business Divisions</h4>
+                                <p class="text-xs text-brand-textMuted">Explore Sectors</p>
+                            </div>
+                        </a>
+                        <a href="partnership.html" class="glass glass-hover p-5 rounded-2xl flex items-center gap-4 group">
+                            <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/50 group-hover:bg-brand-gold/10 group-hover:text-brand-gold transition-colors"><i class="fas fa-handshake"></i></div>
+                            <div>
+                                <h4 class="font-bold text-sm text-white group-hover:text-brand-gold transition-colors">Partnerships</h4>
+                                <p class="text-xs text-brand-textMuted">Strategic Alliances</p>
+                            </div>
+                        </a>
+                        <a href="investments.html" class="glass glass-hover p-5 rounded-2xl flex items-center gap-4 group">
+                            <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/50 group-hover:bg-brand-gold/10 group-hover:text-brand-gold transition-colors"><i class="fas fa-chart-pie"></i></div>
+                            <div>
+                                <h4 class="font-bold text-sm text-white group-hover:text-brand-gold transition-colors">Investments</h4>
+                                <p class="text-xs text-brand-textMuted">Investor Relations</p>
+                            </div>
+                        </a>
+                        <a href="careers.html" class="glass glass-hover p-5 rounded-2xl flex items-center gap-4 group">
+                            <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/50 group-hover:bg-brand-gold/10 group-hover:text-brand-gold transition-colors"><i class="fas fa-users"></i></div>
+                            <div>
+                                <h4 class="font-bold text-sm text-white group-hover:text-brand-gold transition-colors">Careers</h4>
+                                <p class="text-xs text-brand-textMuted">Job Opportunities</p>
+                            </div>
+                        </a>
+                        <a href="news.html" class="glass glass-hover p-5 rounded-2xl flex items-center gap-4 group">
+                            <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/50 group-hover:bg-brand-gold/10 group-hover:text-brand-gold transition-colors"><i class="fas fa-newspaper"></i></div>
+                            <div>
+                                <h4 class="font-bold text-sm text-white group-hover:text-brand-gold transition-colors">Newsroom</h4>
+                                <p class="text-xs text-brand-textMuted">Media Center</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links & Help -->
+                <div class="reveal" style="transition-delay: 100ms;">
+                    <h3 class="text-xl font-serif font-bold mb-8 flex items-center gap-3">
+                        <i class="fas fa-bolt text-brand-gold"></i> Sector Quick Links
+                    </h3>
+                    
+                    <div class="flex flex-wrap gap-3 mb-12">
+                        <a href="real-estate.html" class="glass px-5 py-2.5 rounded-full text-xs font-bold hover:bg-brand-gold hover:text-brand-dark transition-colors border-white/10 hover:border-brand-gold">Real Estate</a>
+                        <a href="automobile.html" class="glass px-5 py-2.5 rounded-full text-xs font-bold hover:bg-brand-blue hover:text-white transition-colors border-white/10 hover:border-brand-blue">Automobile</a>
+                        <a href="cleaning.html" class="glass px-5 py-2.5 rounded-full text-xs font-bold hover:bg-gray-300 hover:text-brand-dark transition-colors border-white/10 hover:border-gray-300">Cleaning</a>
+                        <a href="minerals.html" class="glass px-5 py-2.5 rounded-full text-xs font-bold hover:bg-brand-gold hover:text-brand-dark transition-colors border-white/10 hover:border-brand-gold">Minerals</a>
+                        <a href="consultancy.html" class="glass px-5 py-2.5 rounded-full text-xs font-bold hover:bg-purple-500 hover:text-white transition-colors border-white/10 hover:border-purple-500">Consultancy</a>
+                        <a href="agriculture.html" class="glass px-5 py-2.5 rounded-full text-xs font-bold hover:bg-brand-green hover:text-white transition-colors border-white/10 hover:border-brand-green">Agriculture</a>
+                        <a href="water.html" class="glass px-5 py-2.5 rounded-full text-xs font-bold hover:bg-[#00a8e8] hover:text-white transition-colors border-white/10 hover:border-[#00a8e8]">Water</a>
+                        <a href="logistics.html" class="glass px-5 py-2.5 rounded-full text-xs font-bold hover:bg-orange-500 hover:text-white transition-colors border-white/10 hover:border-orange-500">Logistics</a>
+                    </div>
+
+                    <h3 class="text-xl font-serif font-bold mb-6 flex items-center gap-3 border-t border-white/10 pt-8">
+                        <i class="fas fa-life-ring text-brand-gold"></i> Need Assistance?
+                    </h3>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <a href="tel:+2348067151369" class="glass p-4 rounded-xl flex items-center gap-3 hover:bg-white/5 transition-colors border-white/10 group">
+                            <i class="fas fa-phone-alt text-white/50 group-hover:text-brand-gold"></i>
+                            <span class="text-sm font-semibold text-white/80 group-hover:text-white">Call Us</span>
+                        </a>
+                        <a href="mailto:mohzannahgroup@gmail.com" class="glass p-4 rounded-xl flex items-center gap-3 hover:bg-white/5 transition-colors border-white/10 group">
+                            <i class="fas fa-envelope text-white/50 group-hover:text-brand-gold"></i>
+                            <span class="text-sm font-semibold text-white/80 group-hover:text-white">Email Us</span>
+                        </a>
+                        <a href="#" class="glass p-4 rounded-xl flex items-center gap-3 hover:bg-white/5 transition-colors border-white/10 group">
+                            <i class="fab fa-whatsapp text-white/50 group-hover:text-[#25D366]"></i>
+                            <span class="text-sm font-semibold text-white/80 group-hover:text-white">WhatsApp</span>
+                        </a>
+                        <a href="contact.html#meeting" class="glass p-4 rounded-xl flex items-center gap-3 hover:bg-white/5 transition-colors border-white/10 group">
+                            <i class="fas fa-calendar-alt text-white/50 group-hover:text-brand-gold"></i>
+                            <span class="text-sm font-semibold text-white/80 group-hover:text-white">Book Meeting</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-darker border-t border-white/5 pt-20 pb-10 relative z-10 mt-16">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                
+                <!-- Brand Info -->
+                <div class="lg:col-span-1">
+                    <img src="logo.png" alt="MOH ZANNAH Logo" class="h-12 object-contain mb-6">
+                    <p class="text-sm text-brand-textMuted mb-6 leading-relaxed">
+                        A BRIDGE TO YOUR SATISFACTION.<br>
+                        One Group. Multiple Sectors. Shared Standards. Lasting Value.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-brand-gold hover:text-brand-dark transition-colors"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-brand-gold hover:text-brand-dark transition-colors"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-brand-gold hover:text-brand-dark transition-colors"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-white font-bold mb-6">Company</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html#about" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">Corporate Identity</a></li>
+                        <li><a href="index.html#philosophy" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">Operating Philosophy</a></li>
+                        <li><a href="investments.html" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">Investor Relations</a></li>
+                        <li><a href="careers.html" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">Careers & Jobs</a></li>
+                    </ul>
+                </div>
+
+                <!-- Divisions -->
+                <div>
+                    <h4 class="text-white font-bold mb-6">Key Divisions</h4>
+                    <ul class="space-y-3">
+                        <li><a href="real-estate.html" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">Real Estate & Property</a></li>
+                        <li><a href="automobile.html" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">Vehicle Management</a></li>
+                        <li><a href="minerals.html" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">Mineral Resources</a></li>
+                        <li><a href="consultancy.html" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">Consultancy & Dev</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="text-white font-bold mb-6">Headquarters</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-map-marker-alt text-brand-gold mt-1"></i>
+                            <span class="text-sm text-brand-textMuted leading-relaxed">HD Plaza, Near Bauchi Club Roundabout, Old GRA, Bauchi, Bauchi State, Nigeria</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-envelope text-brand-gold"></i>
+                            <a href="mailto:mohzannahgroup@gmail.com" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">mohzannahgroup@gmail.com</a>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-phone-alt text-brand-gold mt-1"></i>
+                            <div class="flex flex-col gap-1">
+                                <a href="tel:+2348067151369" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">+234 806 715 1369</a>
+                                <a href="tel:+2348087518737" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">+234 808 751 8737</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-xs text-brand-textMuted">&copy; <span id="year"></span> MOH ZANNAH GROUP LIMITED. All Rights Reserved.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="text-xs text-brand-textMuted hover:text-brand-gold">Privacy Policy</a>
+                    <a href="#" class="text-xs text-brand-textMuted hover:text-brand-gold">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <script>
+        // Set current year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const closeMenuBtn = document.getElementById('close-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        function toggleMenu() {
+            if (mobileMenu.classList.contains('opacity-0')) {
+                mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
+                document.body.style.overflow = 'hidden';
+            } else {
+                mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMenu);
+        closeMenuBtn.addEventListener('click', toggleMenu);
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-4');
+                navbar.classList.remove('py-6');
+                navbar.querySelector('.max-w-7xl').classList.add('bg-brand-dark/80', 'border-white/10');
+                navbar.querySelector('.max-w-7xl').classList.remove('bg-white/[0.03]');
+            } else {
+                navbar.classList.add('py-6');
+                navbar.classList.remove('py-4');
+                navbar.querySelector('.max-w-7xl').classList.add('bg-white/[0.03]');
+                navbar.querySelector('.max-w-7xl').classList.remove('bg-brand-dark/80', 'border-white/10');
+            }
+        });
+
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero Animations
+        const tl = gsap.timeline();
+        tl.from(".hero-anim", {
+            y: 30,
+            opacity: 0,
+            duration: 1,
+            stagger: 0.15,
+            ease: "power3.out",
+            delay: 0.2
+        });
+
+        // Scroll Reveals
+        gsap.utils.toArray('.reveal').forEach(function(elem) {
+            ScrollTrigger.create({
+                trigger: elem,
+                start: "top 85%",
+                onEnter: function() { 
+                    gsap.to(elem, {
+                        y: 0, 
+                        opacity: 1, 
+                        duration: 1, 
+                        ease: "power3.out"
+                    }) 
+                },
+                once: true
+            });
+        });
+
+        // Fun Interaction: 404 Hover Particles
+        const errorCodeContainer = document.getElementById('error-code-container');
+        
+        // Throttling variable
+        let lastParticleTime = 0;
+        
+        errorCodeContainer.addEventListener('mousemove', (e) => {
+            const now = Date.now();
+            if (now - lastParticleTime < 50) return; // Limit particle generation rate
+            lastParticleTime = now;
+
+            const rect = errorCodeContainer.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            createParticle(x, y);
+        });
+
+        function createParticle(x, y) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            
+            // Randomize size, color, and behavior
+            const size = Math.random() * 8 + 2;
+            const isGold = Math.random() > 0.5;
+            
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.background = isGold ? '#D4AF37' : '#0033A0';
+            particle.style.boxShadow = `0 0 ${size*2}px ${isGold ? '#D4AF37' : '#0033A0'}`;
+            particle.style.left = `${x}px`;
+            particle.style.top = `${y}px`;
+            
+            errorCodeContainer.appendChild(particle);
+
+            // Animate outward and fade
+            gsap.to(particle, {
+                x: (Math.random() - 0.5) * 200,
+                y: (Math.random() - 0.5) * 200 - 50, // Bias upwards
+                opacity: 0,
+                duration: Math.random() * 1 + 0.5,
+                ease: "power2.out",
+                onComplete: () => {
+                    particle.remove();
+                }
+            });
+        }
+    </script>
+</body>
+</html>
+
