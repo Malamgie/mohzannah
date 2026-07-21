@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Management & Dealership | MOH ZANNAH GROUP</title>
+    <meta name="description" content="Connect with reliable vehicle solutions through professionalism, strategic sourcing, and trusted partnerships with MOH ZANNAH GROUP LIMITED.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#030305',
+                            darker: '#010101',
+                            card: '#0a0a0e',
+                            gold: '#D4AF37',
+                            goldLight: '#F3E5AB',
+                            goldDark: '#997a00',
+                            blue: '#0033A0',
+                            green: '#00805A',
+                            textMuted: '#8a8a93'
+                        }
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                        'hero-glow': 'radial-gradient(circle at 50% 0%, rgba(0, 51, 160, 0.15), transparent 60%)',
+                        'gold-gradient': 'linear-gradient(135deg, #F3E5AB 0%, #D4AF37 50%, #997a00 100%)',
+                        'blue-gradient': 'linear-gradient(135deg, #4da6ff 0%, #0033A0 50%, #001a4d 100%)',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delayed': 'float 6s ease-in-out 3s infinite',
+                        'float-slow': 'float 8s ease-in-out 1s infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'spin-slow': 'spin 20s linear infinite',
+                        'dash': 'dash 3s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        dash: {
+                            'to': {
+                                strokeDashoffset: -100
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .glass {
+                @apply bg-white/[0.03] backdrop-blur-xl border border-white/[0.08];
+            }
+            .glass-hover {
+                @apply hover:bg-white/[0.06] hover:border-brand-blue/40 hover:-translate-y-2 transition-all duration-500 ease-out hover:shadow-[0_15px_40px_-10px_rgba(0,51,160,0.15)];
+            }
+            .text-gradient {
+                @apply bg-clip-text text-transparent bg-gold-gradient;
+            }
+            .reveal {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #030305;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D4AF37;
+        }
+
+        body {
+            background-color: #030305;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .noise-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Form Inputs */
+        input[type="text"], input[type="email"], input[type="tel"], select, textarea {
+            @apply w-full bg-white/5 border border-white/10 rounded-xl px-4 pt-6 pb-2 text-white focus:outline-none focus:border-brand-blue focus:ring-1 focus:ring-brand-blue transition-colors duration-300;
+        }
+        
+        .floating-label {
+            @apply absolute left-4 top-4 text-brand-textMuted text-sm transition-all duration-300 pointer-events-none;
+        }
+        
+        input:focus ~ .floating-label,
+        input:not(:placeholder-shown) ~ .floating-label,
+        select:focus ~ .floating-label,
+        select:not([value=""]) ~ .floating-label,
+        textarea:focus ~ .floating-label,
+        textarea:not(:placeholder-shown) ~ .floating-label {
+            @apply text-xs top-2 text-brand-blue;
+        }
+
+        /* Accordion transition */
+        .accordion-content {
+            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        .accordion-item.active .accordion-content {
+            max-height: 200px;
+            opacity: 1;
+        }
+        .accordion-item.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+        
+        /* Speed Lines for Hero */
+        .speed-line {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-blue selection:text-white">
+
+    <div class="noise-bg"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6 px-6 lg:px-12">
+        <div class="max-w-7xl mx-auto flex items-center justify-between glass rounded-full px-6 py-3">
+            <div class="flex items-center gap-3 cursor-pointer">
+                <!-- Logo -->
+                <div class="h-10 flex items-center">
+                    <img src="logo.png" alt="MOH ZANNAH GROUP LIMITED Logo" class="h-full object-contain">
+                </div>
+            </div>
+
+            <!-- Desktop Menu -->
+            <div class="hidden xl:flex items-center gap-6">
+                <a href="index.html" class="text-sm font-medium text-white/80 hover:text-brand-gold transition-colors">Home</a>
+                <a href="business-divisions.html" class="text-sm font-medium text-white/80 hover:text-brand-gold transition-colors">Business Divisions</a>
+                <a href="automobile.html" class="text-sm font-medium text-brand-gold transition-colors">Automobile</a>
+                <a href="#services" class="text-sm font-medium text-white/80 hover:text-brand-gold transition-colors">Services</a>
+                <a href="#fleet" class="text-sm font-medium text-white/80 hover:text-brand-gold transition-colors">Corporate Fleet</a>
+                <a href="#contact" class="text-sm font-medium text-white/80 hover:text-brand-gold transition-colors">Contact</a>
+            </div>
+
+            <!-- CTA -->
+            <div class="hidden lg:flex">
+                <a href="#request-form" class="group relative px-6 py-2.5 rounded-full bg-white/5 border border-white/10 hover:border-brand-blue/50 overflow-hidden transition-all duration-300">
+                    <div class="absolute inset-0 bg-brand-blue opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+                    <span class="relative text-sm font-semibold tracking-wide text-white group-hover:text-brand-blue transition-colors">Request Vehicle</span>
+                </a>
+            </div>
+
+            <!-- Mobile Toggle -->
+            <button id="mobile-menu-btn" class="xl:hidden text-white focus:outline-none">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="fixed inset-0 bg-brand-dark/95 backdrop-blur-xl z-40 flex flex-col items-center justify-center gap-6 opacity-0 pointer-events-none transition-all duration-500 overflow-y-auto py-10">
+            <button id="close-menu-btn" class="absolute top-8 right-8 text-white focus:outline-none">
+                <i class="fas fa-times text-3xl hover:text-brand-gold transition-colors"></i>
+            </button>
+            <a href="index.html" class="mobile-link text-2xl font-serif text-white hover:text-brand-gold">Home</a>
+            <a href="business-divisions.html" class="mobile-link text-2xl font-serif text-white hover:text-brand-gold">Business Divisions</a>
+            <a href="automobile.html" class="mobile-link text-2xl font-serif text-brand-gold">Automobile</a>
+            <a href="#services" class="mobile-link text-2xl font-serif text-white hover:text-brand-gold">Services</a>
+            <a href="#fleet" class="mobile-link text-2xl font-serif text-white hover:text-brand-gold">Corporate Fleet</a>
+            <a href="#contact" class="mobile-link text-2xl font-serif text-white hover:text-brand-gold">Contact</a>
+            <a href="#request-form" class="mt-4 px-8 py-3 rounded-full bg-brand-blue text-white font-semibold">Request Vehicle</a>
+        </div>
+    </nav>
+
+    <!-- Premium Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center pt-28 pb-20 overflow-hidden">
+        <!-- Background Elements & Abstract Automotive Motif -->
+        <div class="absolute inset-0 bg-hero-glow z-0"></div>
+        <div class="absolute top-1/4 -left-40 w-[600px] h-[600px] bg-brand-blue/10 rounded-full blur-[150px] pointer-events-none"></div>
+        <div class="absolute bottom-1/4 -right-40 w-[500px] h-[500px] bg-brand-gold/5 rounded-full blur-[150px] pointer-events-none"></div>
+        
+        <!-- Abstract Speed/Road Lines -->
+        <div class="absolute inset-0 z-0 opacity-20 pointer-events-none overflow-hidden flex flex-col justify-center gap-8 -skew-y-12 scale-150">
+            <div class="w-full h-[1px] speed-line translate-x-[-20%]"></div>
+            <div class="w-full h-[2px] speed-line translate-x-[-10%] opacity-50"></div>
+            <div class="w-full h-[1px] speed-line translate-x-[-30%]"></div>
+            <div class="w-full h-[3px] speed-line translate-x-[-5%] opacity-30"></div>
+            <div class="w-full h-[1px] speed-line translate-x-[-40%]"></div>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10 text-center max-w-5xl">
+            <div class="hero-anim inline-block mb-6 px-5 py-2 rounded-full border border-brand-blue/30 bg-brand-blue/10 backdrop-blur-sm">
+                <span class="text-brand-blue text-xs font-bold tracking-widest uppercase flex items-center gap-2">
+                    <i class="fas fa-car-side"></i> Division 02
+                </span>
+            </div>
+            
+            <h1 class="hero-anim text-5xl md:text-7xl lg:text-8xl font-serif font-bold tracking-tight leading-[1.1] mb-8">
+                Vehicle Management & <br/>
+                <span class="text-gradient">Dealership</span>
+            </h1>
+            
+            <p class="hero-anim text-lg md:text-xl text-brand-textMuted font-light leading-relaxed max-w-3xl mx-auto mb-10">
+                We connect individuals, businesses and organizations with reliable vehicle solutions through professionalism, strategic sourcing and trusted partnerships.
+            </p>
+            
+            <div class="hero-anim flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#request-form" class="w-full sm:w-auto px-8 py-4 rounded-full bg-brand-gold text-brand-dark font-bold hover:shadow-[0_0_30px_rgba(212,175,55,0.3)] hover:scale-105 transition-all duration-300">
+                    Request Vehicle
+                </a>
+                <a href="#contact" class="w-full sm:w-auto px-8 py-4 rounded-full glass glass-hover border-white/10 text-white font-semibold flex items-center justify-center gap-2 group">
+                    Speak With Consultant <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Floating Glass Cards -->
+        <div class="absolute hidden xl:flex flex-col gap-2 top-1/3 left-[5%] glass p-5 rounded-2xl animate-float opacity-80 backdrop-blur-2xl border-brand-blue/20">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-brand-blue to-[#001a4d] flex items-center justify-center text-white">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <div>
+                    <div class="text-sm font-bold text-white">Corporate Fleet</div>
+                    <div class="text-xs text-brand-textMuted">Optimized Mobility</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute hidden xl:flex flex-col gap-2 bottom-1/4 right-[5%] glass p-5 rounded-2xl animate-float-delayed opacity-80 backdrop-blur-2xl border-brand-gold/20">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-brand-gold border border-brand-gold/30">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div>
+                    <div class="text-sm font-bold text-white">Premium Sourcing</div>
+                    <div class="text-xs text-brand-textMuted">Verified Networks</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Services -->
+    <section id="services" class="py-24 relative z-10 bg-brand-darker border-t border-white/5">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="text-center mb-16 reveal">
+                <span class="text-brand-gold text-xs font-bold tracking-widest uppercase mb-4 block">Our Expertise</span>
+                <h2 class="text-3xl md:text-5xl font-serif font-bold">Our Services</h2>
+            </div>
+
+            <!-- 10 Cards Grid (3-4-3 layout on large screens) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-10 gap-6">
+                
+                <!-- Row 1 (3 items, col-span-3 or 4) -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal group xl:col-span-3">
+                    <div class="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-brand-blue text-xl mb-6 group-hover:scale-110 group-hover:bg-brand-blue group-hover:text-white transition-all duration-300">
+                        <i class="fas fa-search-dollar"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Vehicle Sourcing</h3>
+                    <p class="text-sm text-brand-textMuted leading-relaxed">Locating exact vehicle specifications through our extensive local and international networks.</p>
+                </div>
+
+                <div class="glass glass-hover p-8 rounded-3xl reveal group xl:col-span-4" style="transition-delay: 50ms;">
+                    <div class="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-brand-blue text-xl mb-6 group-hover:scale-110 group-hover:bg-brand-blue group-hover:text-white transition-all duration-300">
+                        <i class="fas fa-key"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Vehicle Acquisition</h3>
+                    <p class="text-sm text-brand-textMuted leading-relaxed">Facilitating secure, transparent purchasing protocols for both single units and volume orders.</p>
+                </div>
+
+                <div class="glass glass-hover p-8 rounded-3xl reveal group xl:col-span-3" style="transition-delay: 100ms;">
+                    <div class="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-brand-blue text-xl mb-6 group-hover:scale-110 group-hover:bg-brand-blue group-hover:text-white transition-all duration-300">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Sales Facilitation</h3>
+                    <p class="text-sm text-brand-textMuted leading-relaxed">Professional mediation linking sellers with serious buyers under strict corporate guidelines.</p>
+                </div>
+
+                <!-- Row 2 (4 items, col-span-2 or 3) -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal group xl:col-span-2 xl:col-start-1">
+                    <div class="text-brand-blue text-2xl mb-4"><i class="fas fa-tasks"></i></div>
+                    <h3 class="text-lg font-bold mb-2">Fleet Mgt.</h3>
+                    <p class="text-xs text-brand-textMuted">End-to-end operational management for vehicular assets.</p>
+                </div>
+
+                <div class="glass glass-hover p-8 rounded-3xl reveal group xl:col-span-3">
+                    <div class="text-brand-blue text-2xl mb-4"><i class="fas fa-building"></i></div>
+                    <h3 class="text-lg font-bold mb-2">Corporate Solutions</h3>
+                    <p class="text-xs text-brand-textMuted">Tailored mobility strategies designed for business logistics.</p>
+                </div>
+
+                <div class="glass glass-hover p-8 rounded-3xl reveal group xl:col-span-3">
+                    <div class="text-brand-blue text-2xl mb-4"><i class="fas fa-comments"></i></div>
+                    <h3 class="text-lg font-bold mb-2">Consultancy</h3>
+                    <p class="text-xs text-brand-textMuted">Expert advisory on vehicle lifecycles, ROI, and procurement.</p>
+                </div>
+
+                <div class="glass glass-hover p-8 rounded-3xl reveal group xl:col-span-2">
+                    <div class="text-brand-blue text-2xl mb-4"><i class="fas fa-clipboard-check"></i></div>
+                    <h3 class="text-lg font-bold mb-2">Inspection</h3>
+                    <p class="text-xs text-brand-textMuted">Rigorous mechanical and physical quality assurance.</p>
+                </div>
+
+                <!-- Row 3 (3 items) -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal group xl:col-span-3 xl:col-start-2">
+                    <div class="text-brand-blue text-2xl mb-4"><i class="fas fa-file-signature"></i></div>
+                    <h3 class="text-lg font-bold mb-2">Documentation</h3>
+                    <p class="text-sm text-brand-textMuted">Seamless handling of registration, licensing, and legal ownership transfers.</p>
+                </div>
+
+                <div class="glass glass-hover p-8 rounded-3xl reveal group xl:col-span-4">
+                    <div class="text-brand-blue text-2xl mb-4"><i class="fas fa-ship"></i></div>
+                    <h3 class="text-lg font-bold mb-2">Import Advisory</h3>
+                    <p class="text-sm text-brand-textMuted">Navigating customs, duties, and international shipping logistics for foreign vehicles.</p>
+                </div>
+
+                <div class="glass glass-hover p-8 rounded-3xl reveal group xl:col-span-2">
+                    <div class="text-brand-blue text-2xl mb-4"><i class="fas fa-users-cog"></i></div>
+                    <h3 class="text-lg font-bold mb-2">Dealer Partners</h3>
+                    <p class="text-sm text-brand-textMuted">Strategic alliances with verified, high-tier dealerships.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Vehicle Categories -->
+    <section id="categories" class="py-24 relative z-10 overflow-hidden">
+        <div class="absolute inset-0 bg-brand-blue/5 skew-y-[-2deg] origin-top-left -z-10"></div>
+        
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 reveal">
+                <div class="max-w-2xl">
+                    <span class="text-brand-gold text-xs font-bold tracking-widest uppercase mb-2 block">Portfolio Focus</span>
+                    <h2 class="text-3xl md:text-5xl font-serif font-bold">Vehicle Categories</h2>
+                </div>
+                <div class="mt-6 md:mt-0">
+                    <a href="#request-form" class="text-brand-gold hover:text-white transition-colors flex items-center gap-2 text-sm font-semibold uppercase tracking-wider">
+                        Request Specific Type <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+                <!-- Category Cards -->
+                <div class="glass glass-hover p-6 md:p-8 rounded-2xl reveal group text-center cursor-pointer">
+                    <i class="fas fa-car text-4xl text-white/30 group-hover:text-brand-blue mb-4 transition-colors"></i>
+                    <h4 class="font-bold text-sm md:text-lg">Sedans</h4>
+                </div>
+                <div class="glass glass-hover p-6 md:p-8 rounded-2xl reveal group text-center cursor-pointer" style="transition-delay: 50ms;">
+                    <i class="fas fa-car-side text-4xl text-white/30 group-hover:text-brand-blue mb-4 transition-colors"></i>
+                    <h4 class="font-bold text-sm md:text-lg">SUVs</h4>
+                </div>
+                <div class="glass glass-hover p-6 md:p-8 rounded-2xl reveal group text-center cursor-pointer" style="transition-delay: 100ms;">
+                    <i class="fas fa-crown text-4xl text-white/30 group-hover:text-brand-gold mb-4 transition-colors"></i>
+                    <h4 class="font-bold text-sm md:text-lg group-hover:text-brand-gold transition-colors">Luxury Vehicles</h4>
+                </div>
+                <div class="glass glass-hover p-6 md:p-8 rounded-2xl reveal group text-center cursor-pointer" style="transition-delay: 150ms;">
+                    <i class="fas fa-truck text-4xl text-white/30 group-hover:text-brand-blue mb-4 transition-colors"></i>
+                    <h4 class="font-bold text-sm md:text-lg">Commercial Vehicles</h4>
+                </div>
+                <div class="glass glass-hover p-6 md:p-8 rounded-2xl reveal group text-center cursor-pointer" style="transition-delay: 200ms;">
+                    <i class="fas fa-truck-pickup text-4xl text-white/30 group-hover:text-brand-blue mb-4 transition-colors"></i>
+                    <h4 class="font-bold text-sm md:text-lg">Pickup Trucks</h4>
+                </div>
+                <div class="glass glass-hover p-6 md:p-8 rounded-2xl reveal group text-center cursor-pointer" style="transition-delay: 250ms;">
+                    <i class="fas fa-truck-moving text-4xl text-white/30 group-hover:text-brand-blue mb-4 transition-colors"></i>
+                    <h4 class="font-bold text-sm md:text-lg">Heavy Duty Vehicles</h4>
+                </div>
+                <div class="glass glass-hover p-6 md:p-8 rounded-2xl reveal group text-center cursor-pointer" style="transition-delay: 300ms;">
+                    <i class="fas fa-building text-4xl text-white/30 group-hover:text-brand-blue mb-4 transition-colors"></i>
+                    <h4 class="font-bold text-sm md:text-lg">Fleet Vehicles</h4>
+                </div>
+                <div class="glass glass-hover p-6 md:p-8 rounded-2xl reveal group text-center cursor-pointer" style="transition-delay: 350ms;">
+                    <i class="fas fa-user-tie text-4xl text-white/30 group-hover:text-brand-blue mb-4 transition-colors"></i>
+                    <h4 class="font-bold text-sm md:text-lg">Executive Vehicles</h4>
+                </div>
+                <div class="glass glass-hover p-6 md:p-8 rounded-2xl reveal group text-center cursor-pointer" style="transition-delay: 400ms;">
+                    <i class="fas fa-ship text-4xl text-white/30 group-hover:text-brand-blue mb-4 transition-colors"></i>
+                    <h4 class="font-bold text-sm md:text-lg">Imported Vehicles</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="py-24 relative z-10 bg-brand-darker">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-5xl font-serif font-bold">Why Choose Us</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal group flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-full bg-brand-blue/10 flex items-center justify-center text-brand-blue shrink-0">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-bold mb-2">Trusted Network</h4>
+                        <p class="text-sm text-brand-textMuted">Access to a vast, vetted network of automotive dealerships, ensuring authentic and premium acquisitions.</p>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal group flex items-start gap-4" style="transition-delay: 50ms;">
+                    <div class="w-10 h-10 rounded-full bg-brand-blue/10 flex items-center justify-center text-brand-blue shrink-0">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-bold mb-2">Professional Advisory</h4>
+                        <p class="text-sm text-brand-textMuted">Data-backed recommendations on vehicle lifecycle, maintenance costs, and residual values.</p>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal group flex items-start gap-4" style="transition-delay: 100ms;">
+                    <div class="w-10 h-10 rounded-full bg-brand-blue/10 flex items-center justify-center text-brand-blue shrink-0">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-bold mb-2">Transparent Process</h4>
+                        <p class="text-sm text-brand-textMuted">Complete visibility into sourcing, pricing, and documentation without hidden intermediary fees.</p>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal group flex items-start gap-4" style="transition-delay: 150ms;">
+                    <div class="w-10 h-10 rounded-full bg-brand-blue/10 flex items-center justify-center text-brand-blue shrink-0">
+                        <i class="fas fa-check-double"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-bold mb-2">Verified Dealers</h4>
+                        <p class="text-sm text-brand-textMuted">We partner strictly with accredited entities to guarantee vehicular history and operational integrity.</p>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal group flex items-start gap-4" style="transition-delay: 200ms;">
+                    <div class="w-10 h-10 rounded-full bg-brand-blue/10 flex items-center justify-center text-brand-blue shrink-0">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-bold mb-2">Corporate Expertise</h4>
+                        <p class="text-sm text-brand-textMuted">Specialized capabilities in structuring and managing comprehensive corporate transport fleets.</p>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal group flex items-start gap-4" style="transition-delay: 250ms;">
+                    <div class="w-10 h-10 rounded-full bg-brand-gold/10 flex items-center justify-center text-brand-gold shrink-0">
+                        <i class="fas fa-infinity"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-bold mb-2">Long-Term Support</h4>
+                        <p class="text-sm text-brand-textMuted">Our commitment extends beyond delivery, encompassing registration and lifecycle management support.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How We Work (Timeline) -->
+    <section class="py-24 relative z-10 border-t border-white/5">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <div class="text-center mb-20 reveal">
+                <span class="text-brand-gold text-xs font-bold tracking-widest uppercase mb-4 block">The Process</span>
+                <h2 class="text-3xl md:text-5xl font-serif font-bold">How We Work</h2>
+            </div>
+
+            <div class="relative wrap overflow-hidden p-4 lg:p-0">
+                <!-- Vertical Line -->
+                <div class="absolute h-full w-[2px] bg-gradient-to-b from-brand-blue via-white/10 to-brand-gold left-8 lg:left-1/2 lg:-translate-x-1/2 rounded-full process-line origin-top transform scale-y-0"></div>
+                
+                <div class="space-y-12 relative z-10">
+                    
+                    <!-- Step 1 -->
+                    <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between w-full reveal pl-16 lg:pl-0">
+                        <div class="hidden lg:block w-5/12"></div>
+                        <div class="absolute left-8 lg:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-brand-dark border-[4px] border-brand-blue z-20 shadow-[0_0_15px_rgba(0,51,160,0.5)] flex items-center justify-center"><span class="absolute text-[10px] font-bold mt-10 text-brand-blue">01</span></div>
+                        <div class="w-full lg:w-5/12 glass p-6 rounded-2xl">
+                            <h4 class="text-lg font-bold text-white mb-2">Consultation</h4>
+                            <p class="text-sm text-brand-textMuted">Discussing your precise automotive needs, brand preferences, and operational objectives.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="flex flex-col lg:flex-row-reverse items-start lg:items-center justify-between w-full reveal pl-16 lg:pl-0">
+                        <div class="hidden lg:block w-5/12"></div>
+                        <div class="absolute left-8 lg:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-brand-dark border-[4px] border-white/40 z-20 flex items-center justify-center"><span class="absolute text-[10px] font-bold mt-10 text-white/50">02</span></div>
+                        <div class="w-full lg:w-5/12 glass p-6 rounded-2xl text-left lg:text-right">
+                            <h4 class="text-lg font-bold text-white mb-2">Requirements Analysis</h4>
+                            <p class="text-sm text-brand-textMuted">Evaluating budget constraints against market realities to establish a viable procurement strategy.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between w-full reveal pl-16 lg:pl-0">
+                        <div class="hidden lg:block w-5/12"></div>
+                        <div class="absolute left-8 lg:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-brand-dark border-[4px] border-white/40 z-20 flex items-center justify-center"><span class="absolute text-[10px] font-bold mt-10 text-white/50">03</span></div>
+                        <div class="w-full lg:w-5/12 glass p-6 rounded-2xl">
+                            <h4 class="text-lg font-bold text-white mb-2">Vehicle Search</h4>
+                            <p class="text-sm text-brand-textMuted">Activating our dealership network and import channels to locate exact matches.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="flex flex-col lg:flex-row-reverse items-start lg:items-center justify-between w-full reveal pl-16 lg:pl-0">
+                        <div class="hidden lg:block w-5/12"></div>
+                        <div class="absolute left-8 lg:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-brand-dark border-[4px] border-white/40 z-20 flex items-center justify-center"><span class="absolute text-[10px] font-bold mt-10 text-white/50">04</span></div>
+                        <div class="w-full lg:w-5/12 glass p-6 rounded-2xl text-left lg:text-right">
+                            <h4 class="text-lg font-bold text-white mb-2">Inspection</h4>
+                            <p class="text-sm text-brand-textMuted">Conducting stringent multi-point physical and mechanical assessments prior to commitment.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 5 -->
+                    <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between w-full reveal pl-16 lg:pl-0">
+                        <div class="hidden lg:block w-5/12"></div>
+                        <div class="absolute left-8 lg:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-brand-dark border-[4px] border-white/40 z-20 flex items-center justify-center"><span class="absolute text-[10px] font-bold mt-10 text-white/50">05</span></div>
+                        <div class="w-full lg:w-5/12 glass p-6 rounded-2xl">
+                            <h4 class="text-lg font-bold text-white mb-2">Negotiation</h4>
+                            <p class="text-sm text-brand-textMuted">Leveraging our industry standing to secure the most advantageous pricing structures.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 6 -->
+                    <div class="flex flex-col lg:flex-row-reverse items-start lg:items-center justify-between w-full reveal pl-16 lg:pl-0">
+                        <div class="hidden lg:block w-5/12"></div>
+                        <div class="absolute left-8 lg:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-brand-dark border-[4px] border-white/40 z-20 flex items-center justify-center"><span class="absolute text-[10px] font-bold mt-10 text-white/50">06</span></div>
+                        <div class="w-full lg:w-5/12 glass p-6 rounded-2xl text-left lg:text-right">
+                            <h4 class="text-lg font-bold text-white mb-2">Documentation</h4>
+                            <p class="text-sm text-brand-textMuted">Finalizing transfer of ownership, corporate registration, and compliance paperwork.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 7 -->
+                    <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between w-full reveal pl-16 lg:pl-0">
+                        <div class="hidden lg:block w-5/12"></div>
+                        <div class="absolute left-8 lg:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-brand-dark border-[4px] border-brand-gold z-20 shadow-[0_0_15px_rgba(212,175,55,0.5)] flex items-center justify-center"><span class="absolute text-[10px] font-bold mt-10 text-brand-gold">07</span></div>
+                        <div class="w-full lg:w-5/12 glass p-6 rounded-2xl border-brand-gold/30 bg-brand-gold/5">
+                            <h4 class="text-lg font-bold text-brand-gold mb-2">Successful Delivery</h4>
+                            <p class="text-sm text-white/90">Formal handover of the vehicle or fleet, ready for immediate operational deployment.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Corporate Fleet Section (Split Layout) -->
+    <section id="fleet" class="py-24 relative z-10 bg-brand-darker border-y border-white/5 overflow-hidden">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-1/2 reveal">
+                    <span class="text-brand-blue text-xs font-bold tracking-widest uppercase mb-4 block">Corporate Solutions</span>
+                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold leading-tight mb-8">
+                        Optimizing <br/><span class="text-transparent bg-clip-text bg-blue-gradient">Corporate Mobility.</span>
+                    </h2>
+                    <p class="text-brand-textMuted text-lg leading-relaxed mb-6">
+                        For modern businesses, reliable transportation is not merely an asset; it is the lifeblood of operational continuity. Our Fleet Management services are engineered to remove the logistical burden of vehicle administration from your core business focus.
+                    </p>
+                    <p class="text-brand-textMuted text-lg leading-relaxed mb-8">
+                        From strategic acquisition and deployment to lifecycle optimization, we ensure your business mobility remains efficient, compliant, and cost-effective, establishing long-term partnerships that drive your corporate success.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-8 border-t border-white/10 pt-8">
+                        <div>
+                            <div class="text-3xl font-serif font-bold text-white mb-1">Scale</div>
+                            <div class="text-xs text-brand-textMuted uppercase tracking-wider">Fleet Optimization</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-serif font-bold text-white mb-1">Support</div>
+                            <div class="text-xs text-brand-textMuted uppercase tracking-wider">Long-term Partnership</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:w-1/2 relative reveal h-[500px] w-full flex items-center justify-center">
+                    <!-- Abstract Fleet Animation -->
+                    <div class="relative w-72 h-72 animate-spin-slow">
+                        <!-- Orbit Rings -->
+                        <svg class="absolute inset-0 w-full h-full text-brand-blue/30" viewBox="0 0 200 200">
+                            <circle cx="100" cy="100" r="95" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="4 4" class="animate-spin-slow"></circle>
+                            <circle cx="100" cy="100" r="70" fill="none" stroke="currentColor" stroke-width="1" opacity="0.5"></circle>
+                            <circle cx="100" cy="100" r="45" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="2 6" class="animate-spin-slow" style="animation-direction: reverse;"></circle>
+                        </svg>
+                        
+                        <!-- Orbiting Nodes (Vehicles) -->
+                        <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 glass rounded-full flex items-center justify-center text-brand-blue shadow-[0_0_20px_rgba(0,51,160,0.3)] bg-brand-card" style="transform: rotate(0deg) translate(0, -95px) rotate(0deg);"><i class="fas fa-truck"></i></div>
+                        <div class="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-12 h-12 glass rounded-full flex items-center justify-center text-white/80 bg-brand-card" style="transform: rotate(90deg) translate(0, -95px) rotate(-90deg);"><i class="fas fa-car-side"></i></div>
+                        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-12 h-12 glass rounded-full flex items-center justify-center text-brand-gold bg-brand-card shadow-[0_0_20px_rgba(212,175,55,0.3)]" style="transform: rotate(180deg) translate(0, -95px) rotate(-180deg);"><i class="fas fa-crown"></i></div>
+                        <div class="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 w-12 h-12 glass rounded-full flex items-center justify-center text-white/80 bg-brand-card" style="transform: rotate(270deg) translate(0, -95px) rotate(-270deg);"><i class="fas fa-truck-pickup"></i></div>
+                    </div>
+                    
+                    <!-- Core Glow & Center Icon -->
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-brand-blue/20 rounded-full blur-[40px] animate-pulse-slow"></div>
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-4xl text-brand-blue drop-shadow-[0_0_15px_rgba(0,51,160,0.8)] bg-brand-darker w-16 h-16 rounded-full border border-brand-blue/30 flex items-center justify-center z-10">
+                        <i class="fas fa-building"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vehicle Request Form -->
+    <section id="request-form" class="py-24 relative z-10">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-brand-blue/5 via-transparent to-transparent pointer-events-none"></div>
+        <div class="container mx-auto px-6 max-w-4xl relative z-10">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-5xl font-serif font-bold mb-4">Vehicle Request Form</h2>
+                <p class="text-brand-textMuted">Submit your specifications to initiate our premium vehicle sourcing process.</p>
+            </div>
+
+            <div class="glass rounded-3xl p-8 md:p-12 reveal shadow-[0_0_40px_rgba(0,51,160,0.05)] border-brand-blue/10">
+                <form onsubmit="event.preventDefault();" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Full Name -->
+                        <div class="relative">
+                            <input type="text" id="name" class="peer placeholder-transparent" placeholder="Full Name" required />
+                            <label for="name" class="floating-label peer-placeholder-shown:top-4 peer-placeholder-shown:text-base">Full Name / Company Name</label>
+                        </div>
+                        <!-- Phone -->
+                        <div class="relative">
+                            <input type="tel" id="phone" class="peer placeholder-transparent" placeholder="Phone Number" required />
+                            <label for="phone" class="floating-label peer-placeholder-shown:top-4 peer-placeholder-shown:text-base">Phone Number</label>
+                        </div>
+                    </div>
+                    
+                    <!-- Email -->
+                    <div class="relative">
+                        <input type="email" id="email" class="peer placeholder-transparent" placeholder="Email Address" required />
+                        <label for="email" class="floating-label peer-placeholder-shown:top-4 peer-placeholder-shown:text-base">Email Address</label>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Vehicle Type -->
+                        <div class="relative">
+                            <select id="type" class="peer appearance-none bg-transparent" required>
+                                <option value="" disabled selected hidden></option>
+                                <option value="sedan" class="bg-brand-dark">Sedan</option>
+                                <option value="suv" class="bg-brand-dark">SUV</option>
+                                <option value="luxury" class="bg-brand-dark">Luxury Vehicle</option>
+                                <option value="commercial" class="bg-brand-dark">Commercial / Fleet</option>
+                                <option value="heavy" class="bg-brand-dark">Heavy Duty / Truck</option>
+                            </select>
+                            <label for="type" class="floating-label">Vehicle Type</label>
+                            <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-white/50">
+                                <i class="fas fa-chevron-down text-xs"></i>
+                            </div>
+                        </div>
+                        
+                        <!-- Brand Preference -->
+                        <div class="relative">
+                            <input type="text" id="brand" class="peer placeholder-transparent" placeholder="Brand / Model Preference" />
+                            <label for="brand" class="floating-label peer-placeholder-shown:top-4 peer-placeholder-shown:text-base">Brand / Model Preference</label>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Budget -->
+                        <div class="relative">
+                            <input type="text" id="budget" class="peer placeholder-transparent" placeholder="Estimated Budget" />
+                            <label for="budget" class="floating-label peer-placeholder-shown:top-4 peer-placeholder-shown:text-base">Estimated Budget</label>
+                        </div>
+                        <!-- Purpose -->
+                        <div class="relative">
+                            <select id="purpose" class="peer appearance-none bg-transparent" required>
+                                <option value="" disabled selected hidden></option>
+                                <option value="personal" class="bg-brand-dark">Personal Use</option>
+                                <option value="executive" class="bg-brand-dark">Executive / VIP</option>
+                                <option value="logistics" class="bg-brand-dark">Logistics / Operations</option>
+                                <option value="corporate" class="bg-brand-dark">Corporate Fleet</option>
+                            </select>
+                            <label for="purpose" class="floating-label">Primary Purpose</label>
+                            <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-white/50">
+                                <i class="fas fa-chevron-down text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Notes -->
+                    <div class="relative">
+                        <textarea id="notes" rows="4" class="peer placeholder-transparent resize-none" placeholder="Additional Notes (e.g. Year, Mileage, Imported/Local)"></textarea>
+                        <label for="notes" class="floating-label peer-placeholder-shown:top-4 peer-placeholder-shown:text-base">Additional Requirements (Year, Condition, etc.)</label>
+                    </div>
+
+                    <button type="submit" class="w-full py-4 rounded-xl bg-brand-blue text-white font-bold hover:shadow-[0_0_30px_rgba(0,51,160,0.4)] transition-shadow duration-300 border border-brand-blue/50">
+                        Submit Request
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Commitment -->
+    <section class="py-16 relative z-10 overflow-hidden bg-brand-darker border-y border-white/5">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="flex flex-wrap justify-center gap-4 reveal">
+                <div class="px-6 py-3 rounded-full border border-white/10 bg-white/5 text-sm font-semibold hover:border-brand-blue transition-colors text-brand-textMuted hover:text-white cursor-default">Integrity</div>
+                <div class="px-6 py-3 rounded-full border border-white/10 bg-white/5 text-sm font-semibold hover:border-brand-blue transition-colors text-brand-textMuted hover:text-white cursor-default">Transparency</div>
+                <div class="px-6 py-3 rounded-full border border-white/10 bg-white/5 text-sm font-semibold hover:border-brand-blue transition-colors text-brand-textMuted hover:text-white cursor-default">Professional Service</div>
+                <div class="px-6 py-3 rounded-full border border-brand-gold/50 bg-brand-gold/10 text-sm font-bold text-brand-gold cursor-default">Reliable Partnerships</div>
+                <div class="px-6 py-3 rounded-full border border-white/10 bg-white/5 text-sm font-semibold hover:border-brand-blue transition-colors text-brand-textMuted hover:text-white cursor-default">Customer Satisfaction</div>
+                <div class="px-6 py-3 rounded-full border border-white/10 bg-white/5 text-sm font-semibold hover:border-brand-blue transition-colors text-brand-textMuted hover:text-white cursor-default">Quality Assurance</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-24 relative z-10">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-5xl font-serif font-bold mb-4">Frequently Asked Questions</h2>
+            </div>
+
+            <div class="space-y-4 reveal">
+                <!-- FAQ Item 1 -->
+                <div class="accordion-item glass rounded-2xl overflow-hidden">
+                    <button class="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" onclick="toggleAccordion(this)">
+                        <span class="font-bold text-lg">Can you source imported vehicles?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300 accordion-icon text-brand-gold"></i>
+                    </button>
+                    <div class="accordion-content px-6 bg-white/[0.02]">
+                        <p class="pb-5 text-sm text-brand-textMuted leading-relaxed">
+                            Yes, our Import Advisory and sourcing network allows us to procure foreign-used and brand-new vehicles from international markets, handling logistics and customs clearance protocols.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="accordion-item glass rounded-2xl overflow-hidden">
+                    <button class="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" onclick="toggleAccordion(this)">
+                        <span class="font-bold text-lg">Do you negotiate prices?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300 accordion-icon text-brand-gold"></i>
+                    </button>
+                    <div class="accordion-content px-6 bg-white/[0.02]">
+                        <p class="pb-5 text-sm text-brand-textMuted leading-relaxed">
+                            Absolutely. We leverage our corporate standing and industry relationships to negotiate competitive pricing on behalf of our clients, ensuring you receive maximum value for your budget.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="accordion-item glass rounded-2xl overflow-hidden">
+                    <button class="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" onclick="toggleAccordion(this)">
+                        <span class="font-bold text-lg">Can businesses request fleets?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300 accordion-icon text-brand-gold"></i>
+                    </button>
+                    <div class="accordion-content px-6 bg-white/[0.02]">
+                        <p class="pb-5 text-sm text-brand-textMuted leading-relaxed">
+                            Yes. Corporate Fleet Solutions is a core component of this division. We assist enterprises in acquiring, registering, and managing multiple vehicles tailored for operational or executive deployment.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="accordion-item glass rounded-2xl overflow-hidden">
+                    <button class="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" onclick="toggleAccordion(this)">
+                        <span class="font-bold text-lg">Do you inspect vehicles?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300 accordion-icon text-brand-gold"></i>
+                    </button>
+                    <div class="accordion-content px-6 bg-white/[0.02]">
+                        <p class="pb-5 text-sm text-brand-textMuted leading-relaxed">
+                            Every vehicle facilitated through our network undergoes rigorous physical and mechanical inspection to guarantee quality assurance and mitigate post-purchase liabilities.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 5 -->
+                <div class="accordion-item glass rounded-2xl overflow-hidden">
+                    <button class="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" onclick="toggleAccordion(this)">
+                        <span class="font-bold text-lg">Can you help with documentation?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300 accordion-icon text-brand-gold"></i>
+                    </button>
+                    <div class="accordion-content px-6 bg-white/[0.02]">
+                        <p class="pb-5 text-sm text-brand-textMuted leading-relaxed">
+                            Yes. Our Documentation Support ensures all necessary registration, licensing, and change-of-ownership paperwork is processed efficiently and compliantly.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call To Action -->
+    <section id="contact" class="py-24 relative z-10 bg-brand-darker border-t border-white/5">
+        <div class="container mx-auto px-6 max-w-5xl">
+            <div class="glass rounded-[3rem] p-10 md:p-20 text-center relative overflow-hidden group border-brand-blue/20">
+                <div class="absolute inset-0 bg-gradient-to-b from-brand-blue/5 to-transparent z-0"></div>
+                
+                <div class="relative z-10 reveal">
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold mb-6">Looking For The <br/><span class="text-transparent bg-clip-text bg-blue-gradient">Right Vehicle?</span></h2>
+                    <p class="text-brand-textMuted max-w-2xl mx-auto mb-10 text-lg">
+                        Speak with our automobile mediation experts today and let us secure the optimal vehicular solution for your personal or corporate needs.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <a href="#request-form" class="w-full sm:w-auto px-8 py-4 rounded-full bg-brand-blue text-white font-bold hover:scale-105 transition-transform duration-300 shadow-[0_0_20px_rgba(0,51,160,0.3)]">
+                            Request Consultation
+                        </a>
+                        <a href="tel:+2348067151369" class="w-full sm:w-auto px-8 py-4 rounded-full glass glass-hover border-white/10 text-white font-semibold flex items-center justify-center gap-2">
+                            <i class="fas fa-phone-alt text-brand-blue"></i> Contact Our Team
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-darker border-t border-white/5 pt-20 pb-10 relative z-10">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                
+                <!-- Brand Info -->
+                <div class="lg:col-span-1">
+                    <img src="logo.png" alt="MOH ZANNAH Logo" class="h-12 object-contain mb-6">
+                    <p class="text-sm text-brand-textMuted mb-6 leading-relaxed">
+                        A BRIDGE TO YOUR SATISFACTION.<br>
+                        One Group. Multiple Sectors. Shared Standards. Lasting Value.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-brand-gold hover:text-brand-dark transition-colors"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-brand-gold hover:text-brand-dark transition-colors"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-brand-gold hover:text-brand-dark transition-colors"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-white font-bold mb-6">Company</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html#about" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">Corporate Identity</a></li>
+                        <li><a href="index.html#philosophy" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">Operating Philosophy</a></li>
+                        <li><a href="#" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">Leadership</a></li>
+                        <li><a href="#" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">Corporate Responsibility</a></li>
+                    </ul>
+                </div>
+
+                <!-- Divisions -->
+                <div>
+                    <h4 class="text-white font-bold mb-6">Key Divisions</h4>
+                    <ul class="space-y-3">
+                        <li><a href="real-estate.html" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">Real Estate & Property</a></li>
+                        <li><a href="automobile.html" class="text-sm text-brand-gold transition-colors">Vehicle Management</a></li>
+                        <li><a href="minerals.html" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">Mineral Resources</a></li>
+                        <li><a href="consultancy.html" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">Consultancy & Dev</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="text-white font-bold mb-6">Headquarters</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-map-marker-alt text-brand-gold mt-1"></i>
+                            <span class="text-sm text-brand-textMuted leading-relaxed">HD Plaza, Near Bauchi Club Roundabout, Old GRA, Bauchi, Bauchi State, Nigeria</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-envelope text-brand-gold"></i>
+                            <a href="mailto:mohzannahgroup@gmail.com" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">mohzannahgroup@gmail.com</a>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-phone-alt text-brand-gold mt-1"></i>
+                            <div class="flex flex-col gap-1">
+                                <a href="tel:+2348067151369" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">+234 806 715 1369</a>
+                                <a href="tel:+2348087518737" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">+234 808 751 8737</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-xs text-brand-textMuted">&copy; <span id="year"></span> MOH ZANNAH GROUP LIMITED. All Rights Reserved.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="text-xs text-brand-textMuted hover:text-brand-gold">Privacy Policy</a>
+                    <a href="#" class="text-xs text-brand-textMuted hover:text-brand-gold">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <script>
+        // Set current year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const closeMenuBtn = document.getElementById('close-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        function toggleMenu() {
+            if (mobileMenu.classList.contains('opacity-0')) {
+                mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
+                document.body.style.overflow = 'hidden';
+            } else {
+                mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMenu);
+        closeMenuBtn.addEventListener('click', toggleMenu);
+        mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-4');
+                navbar.classList.remove('py-6');
+                navbar.querySelector('.max-w-7xl').classList.add('bg-brand-dark/80', 'border-white/10');
+                navbar.querySelector('.max-w-7xl').classList.remove('bg-white/[0.03]');
+            } else {
+                navbar.classList.add('py-6');
+                navbar.classList.remove('py-4');
+                navbar.querySelector('.max-w-7xl').classList.add('bg-white/[0.03]');
+                navbar.querySelector('.max-w-7xl').classList.remove('bg-brand-dark/80', 'border-white/10');
+            }
+        });
+
+        // FAQ Accordion Logic
+        function toggleAccordion(btn) {
+            const item = btn.closest('.accordion-item');
+            
+            // Close all other items
+            const allItems = document.querySelectorAll('.accordion-item');
+            allItems.forEach(otherItem => {
+                if (otherItem !== item && otherItem.classList.contains('active')) {
+                    otherItem.classList.remove('active');
+                }
+            });
+
+            // Toggle current item
+            item.classList.toggle('active');
+        }
+
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero Animations
+        const tl = gsap.timeline();
+        tl.from(".hero-anim", {
+            y: 30,
+            opacity: 0,
+            duration: 1,
+            stagger: 0.15,
+            ease: "power3.out",
+            delay: 0.2
+        });
+
+        // Scroll Reveals for general elements
+        gsap.utils.toArray('.reveal').forEach(function(elem) {
+            ScrollTrigger.create({
+                trigger: elem,
+                start: "top 85%",
+                onEnter: function() { 
+                    gsap.to(elem, {
+                        y: 0, 
+                        opacity: 1, 
+                        duration: 1, 
+                        ease: "power3.out"
+                    }) 
+                },
+                once: true
+            });
+        });
+
+        // Timeline Line Animation
+        ScrollTrigger.create({
+            trigger: ".process-line",
+            start: "top 70%",
+            end: "bottom 30%",
+            onEnter: function() {
+                gsap.to(".process-line", {
+                    scaleY: 1,
+                    duration: 2.5,
+                    ease: "power2.inOut"
+                });
+            },
+            once: true
+        });
+    </script>
+</body>
+</html>
+
