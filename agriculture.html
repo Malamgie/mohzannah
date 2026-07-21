@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agriculture & Animal Production | MOH ZANNAH GROUP</title>
+    <meta name="description" content="Delivering sustainable agricultural solutions through modern farming, livestock production, agribusiness development, and strategic partnerships.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#030305',
+                            darker: '#010101',
+                            card: '#0a0a0e',
+                            gold: '#D4AF37',
+                            goldLight: '#F3E5AB',
+                            goldDark: '#997a00',
+                            blue: '#0033A0',
+                            green: '#00805A',
+                            greenLight: '#00b37e',
+                            textMuted: '#8a8a93'
+                        }
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                        'hero-glow': 'radial-gradient(circle at 50% 0%, rgba(0, 128, 90, 0.15), transparent 60%)',
+                        'gold-gradient': 'linear-gradient(135deg, #F3E5AB 0%, #D4AF37 50%, #997a00 100%)',
+                        'green-gradient': 'linear-gradient(135deg, #00b37e 0%, #00805A 50%, #004d36 100%)',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delayed': 'float 6s ease-in-out 3s infinite',
+                        'float-slow': 'float 8s ease-in-out 1s infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'spin-slow': 'spin 20s linear infinite',
+                        'grow-leaf': 'grow-leaf 4s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        'grow-leaf': {
+                            '0%, 100%': { transform: 'scale(1) rotate(0deg)' },
+                            '50%': { transform: 'scale(1.05) rotate(2deg)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .glass {
+                @apply bg-white/[0.03] backdrop-blur-xl border border-white/[0.08];
+            }
+            .glass-hover {
+                @apply hover:bg-white/[0.06] hover:border-brand-green/40 hover:-translate-y-2 transition-all duration-500 ease-out hover:shadow-[0_15px_40px_-10px_rgba(0,128,90,0.15)];
+            }
+            .text-gradient {
+                @apply bg-clip-text text-transparent bg-gold-gradient;
+            }
+            .text-gradient-green {
+                @apply bg-clip-text text-transparent bg-green-gradient;
+            }
+            .reveal {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #030305;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00805A;
+        }
+
+        body {
+            background-color: #030305;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .noise-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Form Inputs */
+        input[type="text"], input[type="email"], input[type="tel"], input[type="date"], select, textarea {
+            @apply w-full bg-white/5 border border-white/10 rounded-xl px-4 pt-6 pb-2 text-white focus:outline-none focus:border-brand-green focus:ring-1 focus:ring-brand-green transition-colors duration-300;
+        }
+        
+        .floating-label {
+            @apply absolute left-4 top-4 text-brand-textMuted text-sm transition-all duration-300 pointer-events-none;
+        }
+        
+        input:focus ~ .floating-label,
+        input:not(:placeholder-shown) ~ .floating-label,
+        select:focus ~ .floating-label,
+        select:not([value=""]) ~ .floating-label,
+        textarea:focus ~ .floating-label,
+        textarea:not(:placeholder-shown) ~ .floating-label {
+            @apply text-xs top-2 text-brand-green;
+        }
+
+        /* Accordion transition */
+        .accordion-content {
+            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        .accordion-item.active .accordion-content {
+            max-height: 200px;
+            opacity: 1;
+        }
+        .accordion-item.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-green selection:text-white">
+
+    <div class="noise-bg"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6 px-6 lg:px-12">
+        <div class="max-w-7xl mx-auto flex items-center justify-between glass rounded-full px-6 py-3">
+            <div class="flex items-center gap-3 cursor-pointer">
+                <!-- Logo -->
+                <div class="h-10 flex items-center">
+                    <img src="logo.png" alt="MOH ZANNAH GROUP LIMITED Logo" class="h-full object-contain">
+                </div>
+            </div>
+
+            <!-- Desktop Menu -->
+            <div class="hidden xl:flex items-center gap-6">
+                <a href="index.html" class="text-sm font-medium text-white/80 hover:text-brand-gold transition-colors">Home</a>
+                <a href="business-divisions.html" class="text-sm font-medium text-white/80 hover:text-brand-gold transition-colors">Business Divisions</a>
+                <a href="agriculture.html" class="text-sm font-medium text-brand-green transition-colors">Agriculture</a>
+                <a href="#services" class="text-sm font-medium text-white/80 hover:text-brand-gold transition-colors">Services</a>
+                <a href="#sectors" class="text-sm font-medium text-white/80 hover:text-brand-gold transition-colors">Sectors</a>
+                <a href="#sustainability" class="text-sm font-medium text-white/80 hover:text-brand-gold transition-colors">Sustainability</a>
+                <a href="#contact" class="text-sm font-medium text-white/80 hover:text-brand-gold transition-colors">Contact</a>
+            </div>
+
+            <!-- CTA -->
+            <div class="hidden lg:flex">
+                <a href="#request-form" class="group relative px-6 py-2.5 rounded-full bg-white/5 border border-white/10 hover:border-brand-green/50 overflow-hidden transition-all duration-300">
+                    <div class="absolute inset-0 bg-brand-green opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+                    <span class="relative text-sm font-semibold tracking-wide text-white group-hover:text-brand-greenLight transition-colors">Request Consultation</span>
+                </a>
+            </div>
+
+            <!-- Mobile Toggle -->
+            <button id="mobile-menu-btn" class="xl:hidden text-white focus:outline-none">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="fixed inset-0 bg-brand-dark/95 backdrop-blur-xl z-40 flex flex-col items-center justify-center gap-6 opacity-0 pointer-events-none transition-all duration-500 overflow-y-auto py-10">
+            <button id="close-menu-btn" class="absolute top-8 right-8 text-white focus:outline-none">
+                <i class="fas fa-times text-3xl hover:text-brand-gold transition-colors"></i>
+            </button>
+            <a href="index.html" class="mobile-link text-2xl font-serif text-white hover:text-brand-gold">Home</a>
+            <a href="business-divisions.html" class="mobile-link text-2xl font-serif text-white hover:text-brand-gold">Business Divisions</a>
+            <a href="agriculture.html" class="mobile-link text-2xl font-serif text-brand-green">Agriculture</a>
+            <a href="#services" class="mobile-link text-2xl font-serif text-white hover:text-brand-gold">Services</a>
+            <a href="#sectors" class="mobile-link text-2xl font-serif text-white hover:text-brand-gold">Sectors</a>
+            <a href="#sustainability" class="mobile-link text-2xl font-serif text-white hover:text-brand-gold">Sustainability</a>
+            <a href="#contact" class="mobile-link text-2xl font-serif text-white hover:text-brand-gold">Contact</a>
+            <a href="#request-form" class="mt-4 px-8 py-3 rounded-full bg-brand-green text-white font-semibold">Request Consultation</a>
+        </div>
+    </nav>
+
+    <!-- Premium Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center pt-28 pb-20 overflow-hidden">
+        <!-- Background Elements & Abstract Agricultural Motif -->
+        <div class="absolute inset-0 bg-hero-glow z-0"></div>
+        <div class="absolute top-1/4 -right-40 w-[600px] h-[600px] bg-brand-green/10 rounded-full blur-[150px] pointer-events-none"></div>
+        <div class="absolute bottom-1/4 -left-40 w-[500px] h-[500px] bg-brand-gold/5 rounded-full blur-[150px] pointer-events-none"></div>
+        
+        <!-- Abstract Terraced Fields / Leaf Graphic -->
+        <div class="absolute inset-0 z-0 opacity-[0.15] pointer-events-none overflow-hidden flex items-center justify-center">
+            <!-- Layers representing terraced farming and growth -->
+            <div class="absolute w-[800px] h-[800px] border border-brand-green/30 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] animate-spin-slow"></div>
+            <div class="absolute w-[600px] h-[600px] border border-white/20 rounded-[50%_50%_30%_70%/50%_50%_50%_50%] animate-spin-slow" style="animation-direction: reverse; animation-duration: 25s;"></div>
+            <div class="absolute w-[400px] h-[400px] border-2 border-brand-greenLight/20 rounded-[60%_40%_50%_50%/40%_60%_50%_50%] animate-grow-leaf"></div>
+            <div class="absolute w-[200px] h-[200px] bg-brand-green/5 rounded-full blur-[20px]"></div>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10 text-center max-w-5xl">
+            <div class="hero-anim inline-block mb-6 px-5 py-2 rounded-full border border-brand-green/30 bg-brand-green/10 backdrop-blur-sm">
+                <span class="text-brand-greenLight text-xs font-bold tracking-widest uppercase flex items-center gap-2">
+                    <i class="fas fa-seedling"></i> Division 06
+                </span>
+            </div>
+            
+            <h1 class="hero-anim text-5xl md:text-7xl lg:text-8xl font-serif font-bold tracking-tight leading-[1.1] mb-8">
+                Agriculture & <br/>
+                <span class="text-gradient-green drop-shadow-sm">Animal Production</span>
+            </h1>
+            
+            <p class="hero-anim text-lg md:text-xl text-brand-textMuted font-light leading-relaxed max-w-3xl mx-auto mb-10">
+                Delivering sustainable agricultural solutions through modern farming, livestock production, agribusiness development, and strategic partnerships.
+            </p>
+            
+            <div class="hero-anim flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#services" class="w-full sm:w-auto px-8 py-4 rounded-full bg-brand-green text-white font-bold hover:shadow-[0_0_30px_rgba(0,128,90,0.4)] hover:scale-105 transition-all duration-300">
+                    Explore Agribusiness
+                </a>
+                <a href="#request-form" class="w-full sm:w-auto px-8 py-4 rounded-full glass glass-hover border-white/10 text-white font-semibold flex items-center justify-center gap-2 group">
+                    Request Consultation <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Floating Glass Cards -->
+        <div class="absolute hidden xl:flex flex-col gap-2 top-1/3 left-[5%] glass p-5 rounded-2xl animate-float opacity-90 backdrop-blur-2xl border-brand-green/20">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-brand-green to-[#004d36] flex items-center justify-center text-white">
+                    <i class="fas fa-tractor"></i>
+                </div>
+                <div>
+                    <div class="text-sm font-bold text-white">Modern Farming</div>
+                    <div class="text-xs text-brand-textMuted">Precision & Scale</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute hidden xl:flex flex-col gap-2 bottom-1/4 right-[5%] glass p-5 rounded-2xl animate-float-delayed opacity-90 backdrop-blur-2xl border-brand-gold/20">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-brand-gold border border-brand-gold/30">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <div>
+                    <div class="text-sm font-bold text-white">Sustainability</div>
+                    <div class="text-xs text-brand-textMuted">Eco-Conscious</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Services -->
+    <section id="services" class="py-24 relative z-10 bg-brand-darker border-t border-white/5">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="text-center mb-16 reveal">
+                <span class="text-brand-greenLight text-xs font-bold tracking-widest uppercase mb-4 block">Core Operations</span>
+                <h2 class="text-3xl md:text-5xl font-serif font-bold">Our Services</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+                <!-- Service 1 -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal group flex flex-col h-full xl:col-span-2">
+                    <div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-brand-green mb-6 group-hover:scale-110 group-hover:bg-brand-green group-hover:text-white transition-all duration-300">
+                        <i class="fas fa-wheat-awn text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3">Commercial Crop Farming</h3>
+                    <p class="text-sm text-brand-textMuted leading-relaxed flex-grow">Large-scale cultivation of cash crops and staples utilizing precision agriculture and optimized resource management.</p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal group flex flex-col h-full xl:col-span-2" style="transition-delay: 50ms;">
+                    <div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-brand-green mb-6 group-hover:scale-110 group-hover:bg-brand-green group-hover:text-white transition-all duration-300">
+                        <i class="fas fa-cow text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3">Livestock Production</h3>
+                    <p class="text-sm text-brand-textMuted leading-relaxed flex-grow">Ethical breeding, rearing, and management of livestock to meet commercial demands for meat and dairy.</p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal group flex flex-col h-full xl:col-span-1" style="transition-delay: 100ms;">
+                    <div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-brand-green mb-6 group-hover:scale-110 group-hover:bg-brand-green group-hover:text-white transition-all duration-300">
+                        <i class="fas fa-egg text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3">Poultry Farming</h3>
+                    <p class="text-sm text-brand-textMuted leading-relaxed flex-grow">High-yield commercial poultry operations focused on health and quality.</p>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal group flex flex-col h-full xl:col-span-1" style="transition-delay: 150ms;">
+                    <div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-brand-gold mb-6 group-hover:scale-110 group-hover:bg-brand-gold group-hover:text-brand-dark transition-all duration-300">
+                        <i class="fas fa-paw text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3">Animal Husbandry</h3>
+                    <p class="text-sm text-brand-textMuted leading-relaxed flex-grow">Specialized care and genetic optimization of diverse animal populations.</p>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal group flex flex-col h-full xl:col-span-2">
+                    <div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-brand-gold mb-6 group-hover:scale-110 group-hover:bg-brand-gold group-hover:text-brand-dark transition-all duration-300">
+                        <i class="fas fa-chart-line text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3">Agribusiness Development</h3>
+                    <p class="text-sm text-brand-textMuted leading-relaxed flex-grow">Transforming raw agricultural potential into structured, highly profitable, and scalable commercial enterprises.</p>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal group flex flex-col h-full xl:col-span-2" style="transition-delay: 50ms;">
+                    <div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-brand-gold mb-6 group-hover:scale-110 group-hover:bg-brand-gold group-hover:text-brand-dark transition-all duration-300">
+                        <i class="fas fa-comments-dollar text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3">Agricultural Consultancy</h3>
+                    <p class="text-sm text-brand-textMuted leading-relaxed flex-grow">Expert advisory on farm setup, operational efficiency, crop selection, and strategic market positioning.</p>
+                </div>
+
+                <!-- Service 7 -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal group flex flex-col h-full xl:col-span-2" style="transition-delay: 100ms;">
+                    <div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white mb-6 group-hover:scale-110 group-hover:bg-white group-hover:text-brand-dark transition-all duration-300">
+                        <i class="fas fa-box-open text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3">Food Production</h3>
+                    <p class="text-sm text-brand-textMuted leading-relaxed flex-grow">Processing raw agricultural outputs into safe, packaged, and market-ready consumer food products.</p>
+                </div>
+
+                <!-- Service 8 -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal group flex flex-col h-full xl:col-span-1" style="transition-delay: 150ms;">
+                    <div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white mb-6 group-hover:scale-110 group-hover:bg-white group-hover:text-brand-dark transition-all duration-300">
+                        <i class="fas fa-clipboard-list text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3">Farm Management</h3>
+                    <p class="text-sm text-brand-textMuted leading-relaxed flex-grow">Comprehensive oversight of day-to-day farming operations.</p>
+                </div>
+
+                <!-- Service 9 -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal group flex flex-col h-full xl:col-span-1" style="transition-delay: 200ms;">
+                    <div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white mb-6 group-hover:scale-110 group-hover:bg-white group-hover:text-brand-dark transition-all duration-300">
+                        <i class="fas fa-hand-holding-usd text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3">Agricultural Investment</h3>
+                    <p class="text-sm text-brand-textMuted leading-relaxed flex-grow">Structuring secure, high-yield agribusiness portfolios.</p>
+                </div>
+
+                <!-- Service 10 -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal group flex flex-col h-full xl:col-span-1" style="transition-delay: 250ms;">
+                    <div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white mb-6 group-hover:scale-110 group-hover:bg-white group-hover:text-brand-dark transition-all duration-300">
+                        <i class="fas fa-network-wired text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3">Supply Chain</h3>
+                    <p class="text-sm text-brand-textMuted leading-relaxed flex-grow">Seamless farm-to-market logistics and distribution.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Agricultural Sectors -->
+    <section id="sectors" class="py-24 relative z-10 overflow-hidden">
+        <div class="absolute inset-0 bg-brand-green/5 skew-y-[-2deg] origin-top-left -z-10"></div>
+        
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 reveal">
+                <div class="max-w-2xl">
+                    <span class="text-brand-gold text-xs font-bold tracking-widest uppercase mb-2 block">Value Chains</span>
+                    <h2 class="text-3xl md:text-5xl font-serif font-bold">Agricultural Sectors</h2>
+                </div>
+                <div class="mt-6 md:mt-0">
+                    <a href="#request-form" class="text-brand-greenLight hover:text-white transition-colors flex items-center gap-2 text-sm font-semibold uppercase tracking-wider">
+                        Discuss Opportunities <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+                <!-- Sector Cards -->
+                <div class="glass glass-hover p-6 md:p-8 rounded-2xl reveal group text-center cursor-pointer">
+                    <i class="fas fa-seedling text-4xl text-white/30 group-hover:text-brand-green mb-4 transition-colors"></i>
+                    <h4 class="font-bold text-sm md:text-lg">Crop Production</h4>
+                </div>
+                <div class="glass glass-hover p-6 md:p-8 rounded-2xl reveal group text-center cursor-pointer" style="transition-delay: 50ms;">
+                    <i class="fas fa-cow text-4xl text-white/30 group-hover:text-brand-green mb-4 transition-colors"></i>
+                    <h4 class="font-bold text-sm md:text-lg">Livestock</h4>
+                </div>
+                <div class="glass glass-hover p-6 md:p-8 rounded-2xl reveal group text-center cursor-pointer" style="transition-delay: 100ms;">
+                    <i class="fas fa-egg text-4xl text-white/30 group-hover:text-brand-gold mb-4 transition-colors"></i>
+                    <h4 class="font-bold text-sm md:text-lg group-hover:text-brand-gold transition-colors">Poultry</h4>
+                </div>
+                <div class="glass glass-hover p-6 md:p-8 rounded-2xl reveal group text-center cursor-pointer" style="transition-delay: 150ms;">
+                    <i class="fas fa-boxes text-4xl text-white/30 group-hover:text-brand-green mb-4 transition-colors"></i>
+                    <h4 class="font-bold text-sm md:text-lg">Feed Production</h4>
+                </div>
+                <div class="glass glass-hover p-6 md:p-8 rounded-2xl reveal group text-center cursor-pointer" style="transition-delay: 200ms;">
+                    <i class="fas fa-chart-bar text-4xl text-white/30 group-hover:text-brand-green mb-4 transition-colors"></i>
+                    <h4 class="font-bold text-sm md:text-lg">Agribusiness</h4>
+                </div>
+                <div class="glass glass-hover p-6 md:p-8 rounded-2xl reveal group text-center cursor-pointer" style="transition-delay: 250ms;">
+                    <i class="fas fa-industry text-4xl text-white/30 group-hover:text-brand-green mb-4 transition-colors"></i>
+                    <h4 class="font-bold text-sm md:text-lg">Food Processing</h4>
+                </div>
+                <div class="glass glass-hover p-6 md:p-8 rounded-2xl reveal group text-center cursor-pointer" style="transition-delay: 300ms;">
+                    <i class="fas fa-microchip text-4xl text-white/30 group-hover:text-brand-green mb-4 transition-colors"></i>
+                    <h4 class="font-bold text-sm md:text-lg">Agricultural Tech</h4>
+                </div>
+                <div class="glass glass-hover p-6 md:p-8 rounded-2xl reveal group text-center cursor-pointer" style="transition-delay: 350ms;">
+                    <i class="fas fa-wallet text-4xl text-white/30 group-hover:text-brand-green mb-4 transition-colors"></i>
+                    <h4 class="font-bold text-sm md:text-lg">Agri-Investments</h4>
+                </div>
+                <div class="glass glass-hover p-6 md:p-8 rounded-2xl reveal group text-center cursor-pointer" style="transition-delay: 400ms;">
+                    <i class="fas fa-leaf text-4xl text-white/30 group-hover:text-brand-green mb-4 transition-colors"></i>
+                    <h4 class="font-bold text-sm md:text-lg">Sustainable Farming</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="py-24 relative z-10 bg-brand-darker">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-5xl font-serif font-bold">Why Choose Us</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal group flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-full bg-brand-green/10 flex items-center justify-center text-brand-green shrink-0">
+                        <i class="fas fa-tractor"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-bold mb-2">Modern Farming</h4>
+                        <p class="text-sm text-brand-textMuted">Leveraging mechanization and precision agriculture to maximize yield and resource efficiency.</p>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal group flex items-start gap-4" style="transition-delay: 50ms;">
+                    <div class="w-10 h-10 rounded-full bg-brand-green/10 flex items-center justify-center text-brand-green shrink-0">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-bold mb-2">Professional Management</h4>
+                        <p class="text-sm text-brand-textMuted">Expert agronomists and business managers executing highly structured operational protocols.</p>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal group flex items-start gap-4" style="transition-delay: 100ms;">
+                    <div class="w-10 h-10 rounded-full bg-brand-green/10 flex items-center justify-center text-brand-green shrink-0">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-bold mb-2">Quality Assurance</h4>
+                        <p class="text-sm text-brand-textMuted">Strict adherence to health, safety, and nutritional standards across all production lines.</p>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal group flex items-start gap-4" style="transition-delay: 150ms;">
+                    <div class="w-10 h-10 rounded-full bg-brand-green/10 flex items-center justify-center text-brand-green shrink-0">
+                        <i class="fas fa-globe-americas"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-bold mb-2">Sustainability</h4>
+                        <p class="text-sm text-brand-textMuted">Commitment to climate-smart practices that protect ecosystems and ensure long-term soil viability.</p>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal group flex items-start gap-4" style="transition-delay: 200ms;">
+                    <div class="w-10 h-10 rounded-full bg-brand-green/10 flex items-center justify-center text-brand-green shrink-0">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-bold mb-2">Innovation</h4>
+                        <p class="text-sm text-brand-textMuted">Integrating new methodologies, specialized inputs, and tech-driven analytics to improve harvests.</p>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal group flex items-start gap-4" style="transition-delay: 250ms;">
+                    <div class="w-10 h-10 rounded-full bg-brand-gold/10 flex items-center justify-center text-brand-gold shrink-0">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-bold mb-2">Strategic Partnerships</h4>
+                        <p class="text-sm text-brand-textMuted">Collaborating with off-takers, institutional buyers, and tech providers to secure entire value chains.</p>
+                    </div>
+                </div>
+                
+                <!-- Card 7 -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal group flex items-start gap-4" style="transition-delay: 300ms;">
+                    <div class="w-10 h-10 rounded-full bg-brand-green/10 flex items-center justify-center text-brand-green shrink-0">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-bold mb-2">Reliable Operations</h4>
+                        <p class="text-sm text-brand-textMuted">Consistent, scalable production cycles designed to meet commercial supply demands predictably.</p>
+                    </div>
+                </div>
+                
+                <!-- Card 8 -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal group flex items-start gap-4" style="transition-delay: 350ms;">
+                    <div class="w-10 h-10 rounded-full bg-brand-green/10 flex items-center justify-center text-brand-green shrink-0">
+                        <i class="fas fa-chart-area"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-bold mb-2">Long-Term Growth</h4>
+                        <p class="text-sm text-brand-textMuted">Focusing on enterprise scalability, reinvestment, and generational agricultural wealth creation.</p>
+                    </div>
+                </div>
+
+                <!-- Card 9 -->
+                <div class="glass glass-hover p-8 rounded-3xl reveal group flex items-start gap-4" style="transition-delay: 400ms;">
+                    <div class="w-10 h-10 rounded-full bg-brand-green/10 flex items-center justify-center text-brand-green shrink-0">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-bold mb-2">Food Security</h4>
+                        <p class="text-sm text-brand-textMuted">Directly contributing to national and regional food availability through high-volume production.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Approach (Timeline) -->
+    <section class="py-24 relative z-10 border-y border-white/5">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <div class="text-center mb-20 reveal">
+                <span class="text-brand-gold text-xs font-bold tracking-widest uppercase mb-4 block">The Value Chain</span>
+                <h2 class="text-3xl md:text-5xl font-serif font-bold">Our Approach</h2>
+            </div>
+
+            <div class="relative wrap overflow-hidden p-4 lg:p-0">
+                <!-- Vertical Line -->
+                <div class="absolute h-full w-[2px] bg-gradient-to-b from-brand-green via-white/10 to-brand-green left-8 lg:left-1/2 lg:-translate-x-1/2 rounded-full process-line origin-top transform scale-y-0"></div>
+                
+                <div class="space-y-12 relative z-10">
+                    
+                    <!-- Step 1 -->
+                    <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between w-full reveal pl-16 lg:pl-0">
+                        <div class="hidden lg:block w-5/12"></div>
+                        <div class="absolute left-8 lg:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-brand-dark border-[4px] border-brand-green z-20 shadow-[0_0_15px_rgba(0,128,90,0.5)] flex items-center justify-center"><span class="absolute text-[10px] font-bold mt-10 text-brand-green">01</span></div>
+                        <div class="w-full lg:w-5/12 glass p-6 rounded-2xl">
+                            <h4 class="text-lg font-bold text-white mb-2">Planning</h4>
+                            <p class="text-sm text-brand-textMuted">Data-driven analysis of soil, climate, market demand, and resource allocation before project initiation.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="flex flex-col lg:flex-row-reverse items-start lg:items-center justify-between w-full reveal pl-16 lg:pl-0">
+                        <div class="hidden lg:block w-5/12"></div>
+                        <div class="absolute left-8 lg:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-brand-dark border-[4px] border-white/40 z-20 flex items-center justify-center"><span class="absolute text-[10px] font-bold mt-10 text-white/50">02</span></div>
+                        <div class="w-full lg:w-5/12 glass p-6 rounded-2xl text-left lg:text-right">
+                            <h4 class="text-lg font-bold text-white mb-2">Land Preparation</h4>
+                            <p class="text-sm text-brand-textMuted">Deploying modern mechanization and sustainable clearing techniques to optimize arable land.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between w-full reveal pl-16 lg:pl-0">
+                        <div class="hidden lg:block w-5/12"></div>
+                        <div class="absolute left-8 lg:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-brand-dark border-[4px] border-white/40 z-20 flex items-center justify-center"><span class="absolute text-[10px] font-bold mt-10 text-white/50">03</span></div>
+                        <div class="w-full lg:w-5/12 glass p-6 rounded-2xl">
+                            <h4 class="text-lg font-bold text-white mb-2">Production</h4>
+                            <p class="text-sm text-brand-textMuted">Executing expert crop cultivation and ethical animal breeding under rigorous scientific supervision.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="flex flex-col lg:flex-row-reverse items-start lg:items-center justify-between w-full reveal pl-16 lg:pl-0">
+                        <div class="hidden lg:block w-5/12"></div>
+                        <div class="absolute left-8 lg:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-brand-dark border-[4px] border-white/40 z-20 flex items-center justify-center"><span class="absolute text-[10px] font-bold mt-10 text-white/50">04</span></div>
+                        <div class="w-full lg:w-5/12 glass p-6 rounded-2xl text-left lg:text-right">
+                            <h4 class="text-lg font-bold text-white mb-2">Quality Management</h4>
+                            <p class="text-sm text-brand-textMuted">Continuous monitoring of crop health, veterinary care, and adherence to food safety protocols.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 5 -->
+                    <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between w-full reveal pl-16 lg:pl-0">
+                        <div class="hidden lg:block w-5/12"></div>
+                        <div class="absolute left-8 lg:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-brand-dark border-[4px] border-white/40 z-20 flex items-center justify-center"><span class="absolute text-[10px] font-bold mt-10 text-white/50">05</span></div>
+                        <div class="w-full lg:w-5/12 glass p-6 rounded-2xl">
+                            <h4 class="text-lg font-bold text-white mb-2">Harvest / Processing</h4>
+                            <p class="text-sm text-brand-textMuted">Efficient extraction and hygienic processing to minimize post-harvest loss and maximize value.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 6 -->
+                    <div class="flex flex-col lg:flex-row-reverse items-start lg:items-center justify-between w-full reveal pl-16 lg:pl-0">
+                        <div class="hidden lg:block w-5/12"></div>
+                        <div class="absolute left-8 lg:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-brand-dark border-[4px] border-white/40 z-20 flex items-center justify-center"><span class="absolute text-[10px] font-bold mt-10 text-white/50">06</span></div>
+                        <div class="w-full lg:w-5/12 glass p-6 rounded-2xl text-left lg:text-right">
+                            <h4 class="text-lg font-bold text-white mb-2">Distribution</h4>
+                            <p class="text-sm text-brand-textMuted">Executing structured supply chain logistics to deliver fresh, quality produce to diverse markets.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 7 -->
+                    <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between w-full reveal pl-16 lg:pl-0">
+                        <div class="hidden lg:block w-5/12"></div>
+                        <div class="absolute left-8 lg:left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-brand-dark border-[4px] border-brand-greenLight z-20 shadow-[0_0_15px_rgba(0,179,126,0.5)] flex items-center justify-center"><span class="absolute text-[10px] font-bold mt-10 text-brand-greenLight">07</span></div>
+                        <div class="w-full lg:w-5/12 glass p-6 rounded-2xl border-brand-green/30 bg-brand-green/5">
+                            <h4 class="text-lg font-bold text-brand-greenLight mb-2">Long-Term Sustainability</h4>
+                            <p class="text-sm text-white/90">Soil rehabilitation, waste recycling, and securing future production cycles through reinvestment.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sustainable Agriculture (Split Layout) -->
+    <section id="sustainability" class="py-24 relative z-10 bg-brand-darker overflow-hidden">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-1/2 reveal">
+                    <span class="text-brand-greenLight text-xs font-bold tracking-widest uppercase mb-4 block">Our Philosophy</span>
+                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold leading-tight mb-8">
+                        Sustainable <br/><span class="text-gradient-green">Agriculture.</span>
+                    </h2>
+                    <p class="text-brand-textMuted text-lg leading-relaxed mb-6">
+                        We view agriculture not merely as resource extraction, but as responsible stewardship. Our operations are engineered to enhance food security while preserving the ecological balance for future generations.
+                    </p>
+                    
+                    <div class="space-y-4 mt-8">
+                        <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-green/30 transition-colors">
+                            <i class="fas fa-globe-africa text-brand-greenLight text-xl w-6"></i>
+                            <span class="text-sm font-bold text-white">Food Security enhancement through scale.</span>
+                        </div>
+                        <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-green/30 transition-colors">
+                            <i class="fas fa-tree text-brand-greenLight text-xl w-6"></i>
+                            <span class="text-sm font-bold text-white">Environmental Responsibility and conservation.</span>
+                        </div>
+                        <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-green/30 transition-colors">
+                            <i class="fas fa-cloud-sun-rain text-brand-greenLight text-xl w-6"></i>
+                            <span class="text-sm font-bold text-white">Climate-Smart Agriculture practices.</span>
+                        </div>
+                        <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-green/30 transition-colors">
+                            <i class="fas fa-microscope text-brand-greenLight text-xl w-6"></i>
+                            <span class="text-sm font-bold text-white">Innovation in genetics and agronomy.</span>
+                        </div>
+                        <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-green/30 transition-colors">
+                            <i class="fas fa-water text-brand-greenLight text-xl w-6"></i>
+                            <span class="text-sm font-bold text-white">Efficient Resource Management (water/soil).</span>
+                        </div>
+                        <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-green/30 transition-colors">
+                            <i class="fas fa-link text-brand-greenLight text-xl w-6"></i>
+                            <span class="text-sm font-bold text-white">Strengthening Agricultural Value Chains.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:w-1/2 relative reveal h-[500px] w-full flex items-center justify-center">
+                    <!-- Elegant Agricultural Abstract/Illustration -->
+                    <div class="relative w-full max-w-md h-full">
+                        <!-- Abstract Sun/Growth Glow -->
+                        <div class="absolute top-[20%] right-[10%] w-40 h-40 bg-brand-gold/20 rounded-full blur-[40px] animate-pulse-slow"></div>
+                        <div class="absolute bottom-[20%] left-[20%] w-64 h-64 bg-brand-green/20 rounded-full blur-[60px] animate-pulse-slow" style="animation-delay: 1s;"></div>
+                        
+                        <!-- Floating Nature Elements -->
+                        <div class="absolute top-[30%] left-[15%] w-24 h-32 glass rounded-full border-brand-green/30 animate-float" style="border-radius: 50% 0 50% 50%;"></div>
+                        <div class="absolute bottom-[30%] right-[15%] w-32 h-24 glass rounded-full border-brand-gold/30 animate-float-delayed" style="border-radius: 50% 50% 0 50%;"></div>
+                        <div class="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-48 h-48 glass border-brand-greenLight/20 rounded-full flex items-center justify-center animate-spin-slow">
+                            <div class="w-40 h-40 border border-dashed border-white/20 rounded-full"></div>
+                        </div>
+
+                        <!-- Core Icon -->
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-5xl text-brand-greenLight drop-shadow-[0_0_20px_rgba(0,179,126,0.6)] z-20">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        
+                        <!-- Mini Stat Cards -->
+                        <div class="absolute bottom-[15%] left-[5%] glass px-4 py-2 rounded-xl border-white/10 backdrop-blur-md animate-float z-20 flex items-center gap-2">
+                            <i class="fas fa-check-circle text-brand-greenLight text-sm"></i>
+                            <span class="text-xs font-bold text-white uppercase tracking-wider">Zero Waste</span>
+                        </div>
+                        <div class="absolute top-[25%] right-[0%] glass px-4 py-2 rounded-xl border-white/10 backdrop-blur-md animate-float-delayed z-20 flex items-center gap-2">
+                            <i class="fas fa-leaf text-brand-gold text-sm"></i>
+                            <span class="text-xs font-bold text-white uppercase tracking-wider">Eco-Smart</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Request Consultation Form -->
+    <section id="request-form" class="py-24 relative z-10 border-t border-white/5">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-brand-green/5 via-transparent to-transparent pointer-events-none"></div>
+        <div class="container mx-auto px-6 max-w-4xl relative z-10">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-5xl font-serif font-bold mb-4">Request Consultation</h2>
+                <p class="text-brand-textMuted">Connect with our agribusiness experts to discuss partnerships, investments, or supply opportunities.</p>
+            </div>
+
+            <div class="glass rounded-3xl p-8 md:p-12 reveal shadow-[0_0_40px_rgba(0,128,90,0.05)] border-brand-green/10">
+                <form onsubmit="event.preventDefault();" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Full Name -->
+                        <div class="relative">
+                            <input type="text" id="name" class="peer placeholder-transparent" placeholder="Full Name" required />
+                            <label for="name" class="floating-label peer-placeholder-shown:top-4 peer-placeholder-shown:text-base">Full Name</label>
+                        </div>
+                        <!-- Company -->
+                        <div class="relative">
+                            <input type="text" id="company" class="peer placeholder-transparent" placeholder="Company / Organization" />
+                            <label for="company" class="floating-label peer-placeholder-shown:top-4 peer-placeholder-shown:text-base">Company / Organization (Optional)</label>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Email -->
+                        <div class="relative">
+                            <input type="email" id="email" class="peer placeholder-transparent" placeholder="Email Address" required />
+                            <label for="email" class="floating-label peer-placeholder-shown:top-4 peer-placeholder-shown:text-base">Email Address</label>
+                        </div>
+                        <!-- Phone -->
+                        <div class="relative">
+                            <input type="tel" id="phone" class="peer placeholder-transparent" placeholder="Phone Number" required />
+                            <label for="phone" class="floating-label peer-placeholder-shown:top-4 peer-placeholder-shown:text-base">Phone Number</label>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Area of Interest -->
+                        <div class="relative">
+                            <select id="interest" class="peer appearance-none bg-transparent" required>
+                                <option value="" disabled selected hidden></option>
+                                <option value="crops" class="bg-brand-dark">Crop Production / Off-take</option>
+                                <option value="livestock" class="bg-brand-dark">Livestock / Poultry</option>
+                                <option value="consultancy" class="bg-brand-dark">Agribusiness Consultancy</option>
+                                <option value="supply" class="bg-brand-dark">Supply Chain / Distribution</option>
+                                <option value="food" class="bg-brand-dark">Food Processing</option>
+                            </select>
+                            <label for="interest" class="floating-label">Area of Interest</label>
+                            <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-white/50">
+                                <i class="fas fa-chevron-down text-xs"></i>
+                            </div>
+                        </div>
+                        
+                        <!-- Investment Interest -->
+                        <div class="relative">
+                            <select id="investment" class="peer appearance-none bg-transparent" required>
+                                <option value="" disabled selected hidden></option>
+                                <option value="partnership" class="bg-brand-dark">Strategic Partnership</option>
+                                <option value="buyer" class="bg-brand-dark">Corporate Buyer / Off-taker</option>
+                                <option value="investor" class="bg-brand-dark">Agricultural Investor</option>
+                                <option value="supplier" class="bg-brand-dark">Equipment / Input Supplier</option>
+                                <option value="advisory" class="bg-brand-dark">Seeking Advisory</option>
+                            </select>
+                            <label for="investment" class="floating-label">Nature of Inquiry</label>
+                            <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-white/50">
+                                <i class="fas fa-chevron-down text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <input type="text" id="farm-type" class="peer placeholder-transparent" placeholder="Specific Crop/Animal Focus" />
+                        <label for="farm-type" class="floating-label peer-placeholder-shown:top-4 peer-placeholder-shown:text-base">Specific Crop/Animal Focus (e.g., Maize, Poultry)</label>
+                    </div>
+
+                    <!-- Message -->
+                    <div class="relative">
+                        <textarea id="message" rows="4" class="peer placeholder-transparent resize-none" placeholder="Details of your request"></textarea>
+                        <label for="message" class="floating-label peer-placeholder-shown:top-4 peer-placeholder-shown:text-base">Details of your request or proposal</label>
+                    </div>
+
+                    <button type="submit" class="w-full py-4 rounded-xl bg-brand-green text-white font-bold hover:shadow-[0_0_30px_rgba(0,128,90,0.4)] transition-shadow duration-300">
+                        Submit Request
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Commitment -->
+    <section class="py-16 relative z-10 overflow-hidden bg-brand-darker border-y border-white/5">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="text-center mb-10 reveal">
+                <p class="text-xs tracking-widest uppercase text-brand-gold border border-brand-gold/30 inline-block px-4 py-2 rounded-full mb-4">Our Commitment</p>
+            </div>
+            
+            <div class="flex flex-wrap justify-center gap-4 reveal">
+                <div class="px-6 py-3 rounded-full border border-white/10 bg-white/5 text-sm font-semibold hover:border-brand-green transition-colors text-brand-textMuted hover:text-white cursor-default">Sustainability</div>
+                <div class="px-6 py-3 rounded-full border border-white/10 bg-white/5 text-sm font-semibold hover:border-brand-green transition-colors text-brand-textMuted hover:text-white cursor-default">Quality</div>
+                <div class="px-6 py-3 rounded-full border border-white/10 bg-white/5 text-sm font-semibold hover:border-brand-green transition-colors text-brand-textMuted hover:text-white cursor-default">Innovation</div>
+                <div class="px-6 py-3 rounded-full border border-brand-green/50 bg-brand-green/10 text-sm font-bold text-white cursor-default">Professionalism</div>
+                <div class="px-6 py-3 rounded-full border border-white/10 bg-white/5 text-sm font-semibold hover:border-brand-green transition-colors text-brand-textMuted hover:text-white cursor-default">Food Safety</div>
+                <div class="px-6 py-3 rounded-full border border-white/10 bg-white/5 text-sm font-semibold hover:border-brand-green transition-colors text-brand-textMuted hover:text-white cursor-default">Responsible Agriculture</div>
+                <div class="px-6 py-3 rounded-full border border-white/10 bg-white/5 text-sm font-semibold hover:border-brand-green transition-colors text-brand-textMuted hover:text-white cursor-default">Customer Satisfaction</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-24 relative z-10">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-5xl font-serif font-bold mb-4">Frequently Asked Questions</h2>
+            </div>
+
+            <div class="space-y-4 reveal">
+                <!-- FAQ Item 1 -->
+                <div class="accordion-item glass rounded-2xl overflow-hidden">
+                    <button class="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" onclick="toggleAccordion(this)">
+                        <span class="font-bold text-lg">Do you support agricultural investors?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300 accordion-icon text-brand-greenLight"></i>
+                    </button>
+                    <div class="accordion-content px-6 bg-white/[0.02]">
+                        <p class="pb-5 text-sm text-brand-textMuted leading-relaxed">
+                            Yes. We provide strategic agribusiness development and investment advisory services to help investors allocate capital efficiently into high-yield farming and livestock operations.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="accordion-item glass rounded-2xl overflow-hidden">
+                    <button class="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" onclick="toggleAccordion(this)">
+                        <span class="font-bold text-lg">Do you provide consultancy for existing farms?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300 accordion-icon text-brand-greenLight"></i>
+                    </button>
+                    <div class="accordion-content px-6 bg-white/[0.02]">
+                        <p class="pb-5 text-sm text-brand-textMuted leading-relaxed">
+                            Absolutely. Our agricultural consultants evaluate existing operations, introduce modern mechanization, improve yield strategies, and restructure management to increase profitability.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="accordion-item glass rounded-2xl overflow-hidden">
+                    <button class="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" onclick="toggleAccordion(this)">
+                        <span class="font-bold text-lg">Can businesses partner with you for supply?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300 accordion-icon text-brand-greenLight"></i>
+                    </button>
+                    <div class="accordion-content px-6 bg-white/[0.02]">
+                        <p class="pb-5 text-sm text-brand-textMuted leading-relaxed">
+                            Yes. We welcome off-take agreements and corporate supply partnerships with food processors, retail chains, and institutional buyers seeking reliable, quality agricultural produce.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="accordion-item glass rounded-2xl overflow-hidden">
+                    <button class="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" onclick="toggleAccordion(this)">
+                        <span class="font-bold text-lg">Do you manage agricultural projects?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300 accordion-icon text-brand-greenLight"></i>
+                    </button>
+                    <div class="accordion-content px-6 bg-white/[0.02]">
+                        <p class="pb-5 text-sm text-brand-textMuted leading-relaxed">
+                            Yes, Farm Management is one of our core services. We provide end-to-end oversight, deploying professional agronomists and managers to execute daily operations and ensure harvest success.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 5 -->
+                <div class="accordion-item glass rounded-2xl overflow-hidden">
+                    <button class="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none" onclick="toggleAccordion(this)">
+                        <span class="font-bold text-lg">Do you support livestock and poultry farming?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300 accordion-icon text-brand-greenLight"></i>
+                    </button>
+                    <div class="accordion-content px-6 bg-white/[0.02]">
+                        <p class="pb-5 text-sm text-brand-textMuted leading-relaxed">
+                            Yes. Our Animal Production division specializes in ethical, commercial-scale livestock and poultry operations, focusing on genetics, veterinary care, and high-quality outputs.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call To Action -->
+    <section id="contact" class="py-24 relative z-10 bg-brand-darker border-t border-white/5">
+        <div class="container mx-auto px-6 max-w-5xl">
+            <div class="glass rounded-[3rem] p-10 md:p-20 text-center relative overflow-hidden group border-brand-green/20">
+                <div class="absolute inset-0 bg-gradient-to-b from-brand-green/5 to-transparent z-0"></div>
+                
+                <div class="relative z-10 reveal">
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold mb-6">Growing Opportunities. <br/><span class="text-brand-greenLight">Building the Future.</span></h2>
+                    <p class="text-brand-textMuted max-w-2xl mx-auto mb-10 text-lg">
+                        Partner with our agricultural experts to drive innovation, sustainability, and profitability in the agribusiness sector.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <a href="#request-form" class="w-full sm:w-auto px-8 py-4 rounded-full bg-brand-green text-white font-bold hover:scale-105 transition-transform duration-300 shadow-[0_0_20px_rgba(0,128,90,0.3)]">
+                            Request Consultation
+                        </a>
+                        <a href="mailto:mohzannahgroup@gmail.com" class="w-full sm:w-auto px-8 py-4 rounded-full glass glass-hover border-white/10 text-white font-semibold flex items-center justify-center gap-2">
+                            <i class="fas fa-handshake text-brand-greenLight"></i> Partner With Us
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-darker border-t border-white/5 pt-20 pb-10 relative z-10">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                
+                <!-- Brand Info -->
+                <div class="lg:col-span-1">
+                    <img src="logo.png" alt="MOH ZANNAH Logo" class="h-12 object-contain mb-6">
+                    <p class="text-sm text-brand-textMuted mb-6 leading-relaxed">
+                        A BRIDGE TO YOUR SATISFACTION.<br>
+                        One Group. Multiple Sectors. Shared Standards. Lasting Value.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-brand-gold hover:text-brand-dark transition-colors"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-brand-gold hover:text-brand-dark transition-colors"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-brand-gold hover:text-brand-dark transition-colors"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-white font-bold mb-6">Company</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html#about" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">Corporate Identity</a></li>
+                        <li><a href="index.html#philosophy" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">Operating Philosophy</a></li>
+                        <li><a href="#" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">Leadership</a></li>
+                        <li><a href="#" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">Corporate Responsibility</a></li>
+                    </ul>
+                </div>
+
+                <!-- Divisions -->
+                <div>
+                    <h4 class="text-white font-bold mb-6">Key Divisions</h4>
+                    <ul class="space-y-3">
+                        <li><a href="real-estate.html" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">Real Estate & Property</a></li>
+                        <li><a href="automobile.html" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">Vehicle Management</a></li>
+                        <li><a href="agriculture.html" class="text-sm text-brand-green transition-colors">Agriculture & Farming</a></li>
+                        <li><a href="consultancy.html" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">Consultancy & Dev</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="text-white font-bold mb-6">Headquarters</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-map-marker-alt text-brand-gold mt-1"></i>
+                            <span class="text-sm text-brand-textMuted leading-relaxed">HD Plaza, Near Bauchi Club Roundabout, Old GRA, Bauchi, Bauchi State, Nigeria</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-envelope text-brand-gold"></i>
+                            <a href="mailto:mohzannahgroup@gmail.com" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">mohzannahgroup@gmail.com</a>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-phone-alt text-brand-gold mt-1"></i>
+                            <div class="flex flex-col gap-1">
+                                <a href="tel:+2348067151369" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">+234 806 715 1369</a>
+                                <a href="tel:+2348087518737" class="text-sm text-brand-textMuted hover:text-brand-gold transition-colors">+234 808 751 8737</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-xs text-brand-textMuted">&copy; <span id="year"></span> MOH ZANNAH GROUP LIMITED. All Rights Reserved.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="text-xs text-brand-textMuted hover:text-brand-gold">Privacy Policy</a>
+                    <a href="#" class="text-xs text-brand-textMuted hover:text-brand-gold">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <script>
+        // Set current year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const closeMenuBtn = document.getElementById('close-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        function toggleMenu() {
+            if (mobileMenu.classList.contains('opacity-0')) {
+                mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
+                document.body.style.overflow = 'hidden';
+            } else {
+                mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMenu);
+        closeMenuBtn.addEventListener('click', toggleMenu);
+        mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-4');
+                navbar.classList.remove('py-6');
+                navbar.querySelector('.max-w-7xl').classList.add('bg-brand-dark/80', 'border-white/10');
+                navbar.querySelector('.max-w-7xl').classList.remove('bg-white/[0.03]');
+            } else {
+                navbar.classList.add('py-6');
+                navbar.classList.remove('py-4');
+                navbar.querySelector('.max-w-7xl').classList.add('bg-white/[0.03]');
+                navbar.querySelector('.max-w-7xl').classList.remove('bg-brand-dark/80', 'border-white/10');
+            }
+        });
+
+        // FAQ Accordion Logic
+        function toggleAccordion(btn) {
+            const item = btn.closest('.accordion-item');
+            
+            // Close all other items
+            const allItems = document.querySelectorAll('.accordion-item');
+            allItems.forEach(otherItem => {
+                if (otherItem !== item && otherItem.classList.contains('active')) {
+                    otherItem.classList.remove('active');
+                }
+            });
+
+            // Toggle current item
+            item.classList.toggle('active');
+        }
+
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero Animations
+        const tl = gsap.timeline();
+        tl.from(".hero-anim", {
+            y: 30,
+            opacity: 0,
+            duration: 1,
+            stagger: 0.15,
+            ease: "power3.out",
+            delay: 0.2
+        });
+
+        // Scroll Reveals for general elements
+        gsap.utils.toArray('.reveal').forEach(function(elem) {
+            ScrollTrigger.create({
+                trigger: elem,
+                start: "top 85%",
+                onEnter: function() { 
+                    gsap.to(elem, {
+                        y: 0, 
+                        opacity: 1, 
+                        duration: 1, 
+                        ease: "power3.out"
+                    }) 
+                },
+                once: true
+            });
+        });
+
+        // Timeline Line Animation
+        ScrollTrigger.create({
+            trigger: ".process-line",
+            start: "top 70%",
+            end: "bottom 30%",
+            onEnter: function() {
+                gsap.to(".process-line", {
+                    scaleY: 1,
+                    duration: 2.5,
+                    ease: "power2.inOut"
+                });
+            },
+            once: true
+        });
+    </script>
+</body>
+</html>
